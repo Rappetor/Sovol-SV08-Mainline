@@ -7,7 +7,7 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 **TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU's. DONE!_
 
 # Index
-- (STEP 0) PREREQUISITES
+- [(STEP 0) PREREQUISITES](#step-0-prerequisites)
 - (STEP 1) REMOVING THE EMMC FROM THE PRINTER
 - (STEP 2) WRITE eMMC OS IMAGE
   - Method 1
