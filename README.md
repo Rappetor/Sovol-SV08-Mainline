@@ -36,7 +36,7 @@ This is a work in progress, still some work needs to be done..
 - You need a 'Makerbase MKS EMMC-ADAPTER V2 USB 3.0' USB adapter to be able to read/write the eMMC.
   - It is recommended to get yourself a seperate eMMC module (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
 - If you go for the '*method 2*' you need a big enough SD card.
-- You will need an ST-Link (mini) with the STM32CubeProgrammer software installed to be able to update/flash the MCU firmwares.
+- You will need an ST-Link V2 (Mini) with the STM32CubeProgrammer software installed to be able to update/flash the MCU firmwares.
 
 
 # (STEP 1) REMOVING THE eMMC FROM THE PRINTER
