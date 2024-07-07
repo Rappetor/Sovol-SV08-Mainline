@@ -26,6 +26,7 @@ This is a work in progress, still some work needs to be done..
 - [(STEP 5) CONFIGURE PRINTER/KLIPPER & ADDONS](#step-5-configure-printerklipper--addons)
 - [(STEP 6) FLASH TOOLHEAD MCU](#step-6-flash-toolhead-mcu)
 - [(STEP 7) FLASH BOARD MCU](#step-7-flash-board-mcu)
+- [BIG THANKS!](#big-thanks)
 
 
 # (STEP 0) PREREQUISITES
@@ -170,6 +171,6 @@ Now it's time to update the board MCU
 2. 
 
 
-# BIG THANKS
+# BIG THANKS!
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
 Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel  - *you guys rock!*
