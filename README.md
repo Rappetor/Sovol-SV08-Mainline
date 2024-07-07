@@ -114,7 +114,8 @@ rootfstype=ext4
 ```
 
 <sub>(**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same)</sub><br>
-<sub>(**NOTE 2**: fdtfile=sun50i-h616-biqu-emmc is needed so your eMMC is supported and available)</sub>
+<sub>(**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available)</sub><br>
+<sub>(**NOTE 3**: you want to run everything from the SD card, then keep it like this: `fdtfile=sun50i-h616-biqu-sd`)</sub><br>
   - Save your changed BoardEnv.txt!
 
 4. Change the WiFi credentials in the 'system.cfg'
