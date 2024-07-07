@@ -76,15 +76,17 @@ Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMM
   - Open Balena Etcher -> choose Flash from file, browse and choose the downloaded CB1 image -> Select the **SD card** -> Flash! (this will erase everything on the SD card!)
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
 4. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!):
-  - In Windows open the command prompt (Win-R -> cmd) and run 'diskpart' (be careful with diskpart, we don't want to erase the wrong disk here!)
-  - In diskpart do 'list disk' and see what disk is your eMMC
-  - In diskpart run 'select disk <nr>' where <nr> is the number of your eMMC. Please make sure this is the correct disk before you continue!
-  - In diskpart run 'clean' and it will erase everything/all partitions from the eMMC disk.
-  - In diskpart run 'exit' to exit
+  - In Windows open the command prompt (Win-R -> cmd) and run `diskpart` (be careful with diskpart, we don't want to erase the wrong disk here!)
+  - In diskpart do `list disk` and see what disk is your eMMC
+  - In diskpart run `select disk <nr>` where <nr> is the number of your eMMC. Please make sure this is the correct disk before you continue!
+  - In diskpart run `clean` and it will erase everything/all partitions from the eMMC disk.
+  - In diskpart run `exit` to exit
 5. *You can now continue to **STEP 3** and then come back here!*
 6. If everything is ok you should have booted from the SD card and it's time to copy all the contents to the eMMC and make it bootable.
-  - Run the command 'sudo nand-sata-install'
-  - Choose the option 'Boot from eMMC - system on eMMC'
+  - First check if the eMMC is recognized and available:
+    - Run the command `fdisk -l` and you should see some storage devices including the eMMC (*e.g. /dev/mmcblk1 for the SD card and /dev/mmcblk2 your eMMC*)
+  - Run the command `sudo nand-sata-install`
+    - Choose the option 'Boot from eMMC - system on eMMC'
   - It will now create and format a partition (ext4) on the eMMC and it will copy all it's contents from the SD card to the eMMC
   - When it's done poweroff the SV08, remove the SD card and boot from the eMMC. If everything has gone correctly you should now boot from the eMMC and can continue with **STEP 4**.
 
