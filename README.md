@@ -123,7 +123,7 @@ rootfstype=ext4
   - Save changes to the system.cfg
 
 5. Eject the USB adapter from your computer and put that eMMC (and **SD card** in case of *method 2*) back into the printer and boot that thang!
-  - SSH into the printer (find ip on your router or use previous configured hostname), username/password: biqu/biqu
+  - SSH into the printer (find ip on your router or use the configured hostname), username/password: biqu/biqu
   - If everything is ok your printer will boot nicely, you can SSH into the printer and you are done with this step and ready to install mainline klipper or continue ***method 2**, point 6, and finalize the write to eMMC*!
 
 
