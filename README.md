@@ -174,3 +174,7 @@ Now it's time to update the board MCU
 # BIG THANKS!
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
 Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel  - *you guys rock!*
+
+
+## Disclaimer
+This guide and all changes have been made with best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributers or Sovol is responsible if things go bad, break, catch fire or start WW3.
