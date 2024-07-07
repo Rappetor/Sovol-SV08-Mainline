@@ -30,12 +30,12 @@ This is a work in progress, still some work needs to be done..
 
 
 # PREREQUISITES
-1. First create a backup of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download
+- First create a backup of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download
   - Optionally you can also SSH or FTP into your machine (username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
 - You WILL need the printer.cfg later in this proces (for the /dev/serial/by-id/usb-Klipper_stm32f103xe_ serials).
-
-2. You need a 'Makerbase MKS EMMC-ADAPTER V2 USB 3.0' USB adapter to be able to read/write the eMMC.
+- You need a 'Makerbase MKS EMMC-ADAPTER V2 USB 3.0' USB adapter to be able to read/write the eMMC.
   - It is recommended to get yourself a seperate eMMC module (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
+- If you go for the '*method 2*' you need a big enough SD card.
 
 
 # (STEP 1) REMOVING THE eMMC FROM THE PRINTER
