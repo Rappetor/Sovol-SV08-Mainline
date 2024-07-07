@@ -1,5 +1,6 @@
 # SV08 BASIC CONFIGS
-Here you can find some slightly modified but almost stock configs for the SV08. Since we went mainline Klipper some changes had to be made. 
+Here you can find some slightly modified but almost stock configs for the SV08. Since we went mainline Klipper some changes had to be made.
+It will restore as many as the stock Sovol functions as possible and will give you a good starting point.
 
 ## Printer cfg
 - Please make sure you add the correct serials under the [mcu] and [mcu extra_mcu] configs (check your Sovol printer.cfg backup for this!).
