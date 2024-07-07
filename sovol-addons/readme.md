@@ -11,3 +11,6 @@ Other than that the script is unchanged from how Sovol made it..
 ***Warning:***
 - This script calculates a new Z-Offset value and overrides/overwrites the one you might currently have! So any babystepping you have done and saved in e.g. the Mainsail webinterface will be gone.
 -  It uses the 'offsetadjust' for small adjustments. So if you always require a certain offset change to obtain a good first layer (after doing a Z_OFFSET_CALIBRATION), apply this change to the 'offsetadjust' so it will use this adjustment in the calulation
+
+## INSTALL
+To install these addons you need to copy them to your 'klipper/klippy/extras/' folder and restart Klipper.
