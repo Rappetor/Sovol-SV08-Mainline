@@ -16,7 +16,7 @@ This is a work in progress, still some work needs to be done..
 
 
 # INDEX
-- [(STEP 0) PREREQUISITES](#step-0-prerequisites)
+- [PREREQUISITES](#prerequisites)
 - [(STEP 1) REMOVING THE EMMC FROM THE PRINTER](#step-1-removing-the-emmc-from-the-printer)
 - [(STEP 2) WRITE eMMC OS IMAGE](#step-2-write-emmc-os-image)
   - [METHOD 1: WRITE IMAGE DIRECTLY TO eMMC](#method-1-write-image-directly-to-emmc)
@@ -29,7 +29,7 @@ This is a work in progress, still some work needs to be done..
 - [BIG THANKS!](#big-thanks)
 
 
-# (STEP 0) PREREQUISITES
+# PREREQUISITES
 1. First create a backup of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download
   - Optionally you can also SSH or FTP into your machine (username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
 - You WILL need the printer.cfg later in this proces (for the /dev/serial/by-id/usb-Klipper_stm32f103xe_ serials).
