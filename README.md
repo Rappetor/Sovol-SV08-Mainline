@@ -9,10 +9,10 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 
 ## WORK IN PROGRESS
 This is a work in progress, still some work needs to be done.. You are the guinea pig ;)
-- write and finish up the MCU flashing parts in the HowTo
-- add some images (something about a thousand words)
-- finalize & test the basic printer.cfg, sovol-macros.cfg and sovol-menu.cfg
-- testing the whole how-to in general
+- [ ] write and finish up the MCU flashing parts in the HowTo
+- [ ] add some images (something about a thousand words)
+- [ ] finalize & test the basic printer.cfg, sovol-macros.cfg and sovol-menu.cfg
+- [ ] testing the whole how-to in general
 
 
 # INDEX
