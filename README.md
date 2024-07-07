@@ -145,7 +145,7 @@ Please SSH into your printer and then do the following steps.
 Next we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
 
 1. RESTORE THE SOVOL ADDONS (from the /sovol-addons/ directory); use an FTP program to connect to the printer (ip-address or hostname, username/password: biqu/biqu) and put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.
-2. CONFIGURE PRINTER (from the /sovol-printer-cfg/ directory): now copy the printer.cfg, sovol-macros.cfg, sovol-menu.cfg, saved_variables.cfg and crowsnest.conf to the '/home/biqu/printer_data/config' folder.
+2. CONFIGURE PRINTER (from the /config/ directory): now copy the printer.cfg, sovol-macros.cfg, sovol-menu.cfg, saved_variables.cfg and crowsnest.conf to the '/home/biqu/printer_data/config' folder.
 - **IMPORTANT**: open your backed up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_) to your new printer.cfg.
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
