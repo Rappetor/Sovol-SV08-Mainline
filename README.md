@@ -132,20 +132,20 @@ rootfstype=ext4
 Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker etc.
 Please SSH into your printer and then do the following steps.
 
-1. First we will update the OS, do a 'sudo apt update && sudo apt upgrade'
+1. First we will update the OS, do a `sudo apt update && sudo apt upgrade`
 2. Then install git (might already be installed) and KIAUH with the following commands:
-  - sudo apt-get update && sudo apt-get install git -y
-  - cd ~ && git clone https://github.com/dw-0/kiauh.git
+  - `sudo apt-get update && sudo apt-get install git -y`
+  - `cd ~ && git clone https://github.com/dw-0/kiauh.git`
 
 3. Start KIAUH with the following command:
-  - ./kiauh/kiauh.sh
+  - `./kiauh/kiauh.sh`
 
 4. Install Klipper, Moonraker, Mainsail and Crowsnest (in this order) via KIAUH.
   - So run KIAUH and choose option '1) [Install]' and install those items (using default options, download recommended macro's; Yes).
   - Crowsnest install asks to reboot printer, please do so.
 
 5. You have now installed mainline klipper with the mainsail web-interface!
-  - If not rebooted after Crowsnest install: sudo reboot
+  - If not rebooted after Crowsnest install: `sudo reboot`
   - After the board has rebooted, in your browser go to mainsail web-interface (via the ip-address or hostname) and check if it's running.
   - Obviously it will give an error since we still have to put our backupped printer.cfg back.
 
@@ -153,13 +153,13 @@ Please SSH into your printer and then do the following steps.
 # (STEP 5) CONFIGURE PRINTER/KLIPPER & ADDONS
 Next we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
 
-1. RESTORE THE SOVOL ADDONS (from the /sovol-addons/ directory); use an FTP program to connect to the printer (ip-address or hostname, username/password: biqu/biqu) and put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.
-2. CONFIGURE PRINTER (from the /config/ directory): now copy the printer.cfg, sovol-macros.cfg, sovol-menu.cfg, saved_variables.cfg and crowsnest.conf to the '/home/biqu/printer_data/config' folder.
+1. RESTORE THE SOVOL ADDONS (from the `/sovol-addons/` directory); use an FTP program to connect to the printer (ip-address or hostname, username/password: biqu/biqu) and put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.
+2. CONFIGURE PRINTER (from the `/config/` directory): now copy the printer.cfg, sovol-macros.cfg, sovol-menu.cfg, saved_variables.cfg and crowsnest.conf to the '~/printer_data/config' folder.
 - **IMPORTANT**: open your backed up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_) to your new printer.cfg.
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 4. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc, does a QGL with home Z, does a Z_OFFSET_CALIBRATION before each print.
-  - Go to OrcaSlicer -> Edit the printer settings -> Machine G-code -> change your 'START_PRINT' line to this: START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
+  - Go to OrcaSlicer -> Edit the printer settings -> Machine G-code -> change your 'START_PRINT' line to this: `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]`
   - Now you can print and use the sovol presets like before!
 
 <sub>(**NOTE 1**: all the .sh scripts in the macro's and have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.)</sub><br>
