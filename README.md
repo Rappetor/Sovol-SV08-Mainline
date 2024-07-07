@@ -32,14 +32,14 @@ This is a work in progress, still some work needs to be done.. You are the guine
 
 
 # PREREQUISITES
-- First create a backup of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download
+- First create a **backup** of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download
   - Optionally you can also SSH or FTP into your machine (username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
 - You WILL need the printer.cfg later in this proces (for the /dev/serial/by-id/usb-Klipper_stm32f103xe_ serials).
-- You need a 'Makerbase MKS EMMC-ADAPTER V2 USB 3.0' USB adapter to be able to read/write the eMMC.
-  - It is recommended to get yourself a seperate eMMC module (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
+- You need a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter to be able to read/write the eMMC.
+  - It is recommended to get yourself a seperate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
     - 8GB eMMC have been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.
-- If you go for the '*method 2*' you need a big enough SD card (it's also possible to run everything from the SD card by the way).
-- You will need an ST-Link V2 (Mini) with the STM32CubeProgrammer software installed to be able to update/flash the MCU firmwares.
+- If you go for the '*method 2*' you need a big enough **SD card** (it's also possible to run everything from the SD card by the way).
+- You will need an **ST-Link V2** (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmwares.
 
 
 # (STEP 1) REMOVING THE eMMC FROM THE PRINTER
