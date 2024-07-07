@@ -14,7 +14,7 @@ All the .sh scripts have been commented out (if you want that functionality plea
 - If you want an Auto Z Offset before each print, please uncomment the Z_OFFSET_CALIBRATION in the START_PRINT macro.
 - To pass along those temperatures: go to OrcaSlicer -> Edit the printer settings -> Machine G-code -> change your 'START_PRINT' line to this: `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]` (in theory it should still work without changing this, but it's better when you do change it)
 - Added a global variable caled 'heat_soak_time' (default 0), please change accordingly. You can also pass along a variable to skip the heatsoak from the slicer, the same as above but add e.g. `HEATSOAK=0` <sub>(0 as in false, not 0 minutes, you pass along you want heatsoak or not. The heatsoak time is configured as a global var in your macros.cfg)</sub>
-- Changed the script so it does a 'Home Z' after the QGL (which in theory can change your z-offset)
+- Changed the START_PRINT so it does a 'Home Z' after the QGL (which in theory can change your z-offset) to get more consistent results.
 
 ## Menu
 The menu has been changed in such a way it's a reduced and somewhat more basic menu based on the Sovol menu. Some things might not work or are removed. *Still a work in progress.*
