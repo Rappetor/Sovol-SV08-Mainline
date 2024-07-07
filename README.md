@@ -179,7 +179,7 @@ Now it's time to update the board MCU
 
 # BIG THANKS!
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
-Special thanks go out to: ss1gohan13, michrech, Zappes, clueless, Haagel  - *you guys rock!*
+Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel, Froh  - *you guys rock!*
 
 
 ## Disclaimer
