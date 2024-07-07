@@ -60,8 +60,8 @@ Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMM
 
 
 # METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
-1. First get yourself de latest image from: https://github.com/bigtreetech/CB1/releases
-    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz'
+1. Download the **MINIMAL** bigtreetech image. Careful, there's also a full image wich has an unknown version of klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases
+    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
 3. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the eMMC
     - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
@@ -96,9 +96,9 @@ Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMM
 # (STEP 3) NECESSARY CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
 To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
-1. Go to the 'BOOT' drive and open 'BoardEnv.txt' in your favourite text editor.
-
-2. You need the following settings, and only those settings (taken from the Sovol image, please change/add/adapt where necessary):
+1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your harddisk.
+2. Open 'BoardEnv.txt' in your favourite text editor.
+3. You need the following settings, and only those settings (taken from the Sovol image, please change/add/adapt where necessary):
     ```
     bootlogo=true
     overlay_prefix=sun50i-h616
@@ -108,7 +108,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     overlays=ws2812
     overlays=spidev1_1
     #------------------------------------------------#
-    rootdev=UUID=795df55f-3e45-4625-a9cb-f6706b356274
+    rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
     rootfstype=ext4
     ```
     <sub>(**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same)</sub><br>
@@ -116,11 +116,11 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     <sub>(**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`)</sub><br>
     - Save your changed BoardEnv.txt!
 
-3. Change the Wi-Fi credentials in the 'system.cfg'
+4. Change the Wi-Fi credentials in the 'system.cfg'
     - optional: uncomment the hostname and set the hostname to e.g. "SV08"
     - Save changes to the system.cfg
 
-4. Eject the USB adapter from your computer and put that eMMC (and **SD card** in case of *method 2*) back into the printer and boot that thang!
+5. Eject the USB adapter from your computer and put that eMMC (and **SD card** in case of *method 2*) back into the printer and boot that thang!
     - SSH into the printer (find ip on your router or use the configured hostname), username/password: biqu/biqu
     - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline klipper. You can also continue ***method 2**, point 6, and finalize writing the system to eMMC*!
 
