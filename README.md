@@ -47,7 +47,7 @@ This is a work in progress, still some work needs to be done. You are the guinea
 2. Put the printer on it's back, so you have access to the underside of the printer.
 3. Remove the metal plate by removing the 6 screws.
 4. You can now see the eMMC module on the board, remove the 2 screws that are holding it in and carefully remove the eMMC module.
-  - Take note of the direction of the eMMC module (*hint; you can also see an arrow on the board which way the module goes*)
+   - Take note of the direction of the eMMC module (*hint; you can also see an arrow on the board which way the module goes*)
 
 
 # (STEP 2) WRITE eMMC OS IMAGE
