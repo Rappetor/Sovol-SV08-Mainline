@@ -37,7 +37,7 @@ This is a work in progress, still some work needs to be done.. You are the guine
 - You need a 'Makerbase MKS EMMC-ADAPTER V2 USB 3.0' USB adapter to be able to read/write the eMMC.
   - It is recommended to get yourself a seperate eMMC module (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
     - 8GB eMMC have been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.
-- If you go for the '*method 2*' you need a big enough SD card.
+- If you go for the '*method 2*' you need a big enough SD card (it's also possible to run everything from the SD card by the way).
 - You will need an ST-Link V2 (Mini) with the STM32CubeProgrammer software installed to be able to update/flash the MCU firmwares.
 
 
@@ -52,7 +52,8 @@ This is a work in progress, still some work needs to be done.. You are the guine
 # (STEP 2) WRITE eMMC OS IMAGE
 Ok, first we need to setup our new eMMC module with the correct OS/Linux build. And for this we are going to use the bigtreetech CB1 Linux image (the original Sovol SV08 image was also based on this).
 
-Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMMC and use it that way, **Method 2**; write the CB1 image to an SD card and use that to get the CB1 image on the eMMC.
+Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMMC and use it that way, **Method 2**; write the CB1 image to an SD card and use that to get the CB1 image on the eMMC.<br>
+<sub>**Method 3**: choose to run everything from the SD card and stop at Method 2.2</sub>
 
 *Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more succesful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly.*
 
@@ -74,6 +75,7 @@ Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMM
 2. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
   - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
   - Open Balena Etcher -> choose Flash from file, browse and choose the downloaded CB1 image -> Select the **SD card** -> Flash! (this will erase everything on the SD card!)
+    - *Sidenote here: you could, if you choose here, run the printer from the SD card and skip the whole eMMC.. Just so you know ;-)*
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
 4. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!):
   - In Windows open the command prompt (Win-R -> cmd) and run `diskpart` (be careful with diskpart, we don't want to erase the wrong disk here!)
