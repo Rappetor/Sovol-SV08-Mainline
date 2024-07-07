@@ -27,6 +27,7 @@ This is a work in progress, still some work needs to be done..
 - [(STEP 6) FLASH TOOLHEAD MCU](#step-6-flash-toolhead-mcu)
 - [(STEP 7) FLASH BOARD MCU](#step-7-flash-board-mcu)
 - [BIG THANKS!](#big-thanks)
+- [Disclaimer](#disclaimer)
 
 
 # PREREQUISITES
@@ -178,4 +179,4 @@ Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel  - *you 
 
 
 ## Disclaimer
-This guide and all changes have been made with best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributers or Sovol is responsible if things go bad, break, catch fire or start WW3.
+This guide and all changes have been made with best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributers or Sovol is responsible if things go bad, break, catch fire or start WW3. You do this on your own risk!
