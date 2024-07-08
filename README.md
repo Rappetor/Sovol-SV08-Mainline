@@ -204,7 +204,7 @@ It's time to create and flash the Klipper firmware! In the future you only have 
 <sub>(because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset)</sub>
 3. Press Q to quit and save changes.
 4. Run the command `make clean` and `make` to create the Klipper firmware (`klipper.bin`)
-5. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU (without the ST Link):
+5. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU from SSH (without the ST Link):
     - Find the correct serial name for the MCU with the command `ls /dev/serial/by-id/*` copy the last part where the * is in the command, after the / for later use
     - Put the Katapult bootloader in DFU mode with this command `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
     - Execute the flash with the following command `cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx` (again replace xxxxx with the correct serial)
