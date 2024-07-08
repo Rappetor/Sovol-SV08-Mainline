@@ -72,7 +72,7 @@ Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMM
 
 # METHOD 2: WRITE IMAGE TO SD -> eMMC
 1. First get yourself de latest image from: https://github.com/bigtreetech/CB1/releases
-    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz'
+    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz
 2. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
     - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
     - Open Balena Etcher -> choose Flash from file, browse and choose the downloaded CB1 image -> Select the **SD card** -> Flash! (this will erase everything on the SD card!)
