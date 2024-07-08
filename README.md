@@ -11,7 +11,6 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 ## WORK IN PROGRESS
 This is a work in progress, still some work needs to be done. You are the guinea pig ;)
 - [ ] write and finish up the MCU flashing parts in the HowTo
-- [ ] add some images (something about a thousand words)
 - [ ] finalize & test the basic printer.cfg, sovol-macros.cfg and sovol-menu.cfg
 - [ ] testing the whole how-to in general
 
@@ -22,11 +21,12 @@ This is a work in progress, still some work needs to be done. You are the guinea
 - [(STEP 2) WRITE eMMC OS IMAGE](#step-2-write-emmc-os-image)
     - [METHOD 1: WRITE IMAGE DIRECTLY TO eMMC](#method-1-write-image-directly-to-emmc)
     - [METHOD 2: WRITE IMAGE TO SD -> eMMC](#method-2-write-image-to-sd---emmc)
-- [(STEP 3) NECESSARY CHANGES TO THE BOARDENV.TXT & SETUP WI-FI](#step-3-necessary-changes-to-the-boardenvtxt--setup-wifi)
+- [(STEP 3) CHANGES TO THE BOARDENV.TXT & SETUP WI-FI](#step-3-changes-to-the-boardenvtxt--setup-wi-fi)
 - [(STEP 4) INSTALL MAINLINE KLIPPER](#step-4-install-mainline-klipper)
 - [(STEP 5) CONFIGURE PRINTER/KLIPPER & ADDONS](#step-5-configure-printerklipper--addons)
-- [(STEP 6) FLASH TOOLHEAD MCU](#step-6-flash-toolhead-mcu)
-- [(STEP 7) FLASH BOARD MCU](#step-7-flash-board-mcu)
+- [(STEP 6) STOCK FIRMWARE BACKUP](#step-6-stock-firmware-backup)
+- [(STEP 7) FLASH KATAPULT BOOTLOADER](#step-7-flash-katapult-bootloader)
+- [(STEP 8) FLASH KLIPPER)](#step-8-flash-klipper)
 - [BIG THANKS!](#big-thanks)
 - [Disclaimer](#disclaimer)
 
@@ -93,7 +93,7 @@ Here we can use 2 methods: **Method 1**; write the CB1 image directly to the eMM
     - It will now create and format a partition (ext4) on the eMMC, and it will copy all it's contents from the SD card to the eMMC
     - When it's done power off the SV08, remove the SD card and boot from the eMMC. If everything has gone correctly you should now boot from the eMMC and can continue with **STEP 4**.
 
-# (STEP 3) NECESSARY CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
+# (STEP 3) CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
 To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your harddisk.
@@ -164,23 +164,57 @@ Next we have to configure our printer and put back some addons Sovol has added (
 
 
 
-# (STEP 6) FLASH TOOLHEAD MCU
-Next we need to update our toolhead MCU's with a new klipper firmware. For this we need the ST Link USB Adapter and STM32CubeProgrammer installed and ready to go. This will ensure our MCU's are also flashed with mainline klipper and everything can communicate with each other like it's supposed to.
-We start with the toolhead MCU
-1.
-2.
+# (STEP 6) STOCK FIRMWARE BACKUP
+It's important to make a backup of the current (stock) firmware. This way you can always revert back to this stock configuration. These steps are applicable to both the toolhead and mainboard MCU.
+1. First make sure you have a properly installed ST Link with the STM32CubeProgrammer software.
+    - Download the STM32CubeProgrammer software here: https://www.st.com/en/development-tools/stm32cubeprog.html#st-get-software
+    - Install the software and make sure the ST Link is also properly installed; the software should show a serial of your ST Link just below the CONNECT button (if not you can click on the little refresh button)
+2. Turn the printer OFF and remove the ST Link from your computer, next connect the ST Link to your board (either toolhead or mainboard).
+    - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND
+3. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
+4. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *sovol_original_firmware.bin*). DONE!
 
+# (STEP 7) FLASH KATAPULT BOOTLOADER
+> [!CAUTION]
+> This step is still for TOOLHEAD only! Mainboard being tested, coming soon!<sup>tm</sup>
+To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
+1. Switch the printer on, SSH into the printer and install Katapult:
+    - Run the command `cd ~ && git clone https://github.com/Arksine/katapult` to install Katapult
+    - Install pyserial with `pip3 install pyserial` (we need this later to flash the firmware)
+2. When it's done, do `cd ~/katapult` and `make menuconfig` and in menuconfig select the following options:
+![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
+3. Press Q to quit and save changes.
+4. Run the command `make clean` and `make` to build the firmware (*katapult.bin*)
+5. Please use e.g. an FTP program to grab this file `~/katapult/out/katapult.bin` and store it on the computer, rename it to e.g. `katapult-toolhead.bin` or `katapult-mainboard.bin`.
+6. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
+7. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
+8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
 
-# (STEP 7) FLASH BOARD MCU
-Now it's time to update the board MCU
-1. 
-2. 
+Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer. Do this for both the toolhead and the mainboard MCU.
 
+# (STEP 8) FLASH KLIPPER 
+> [!CAUTION]
+> This step is still for TOOLHEAD only! Mainboard being tested, coming soon!<sup>tm</sup>
+It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware.
+1. Switch on the printer and SSH into the printer.
+2. We are now going to create the klipper firmware, first do `cd ~/klipper` and then `make menuconfig` and select the following options:
+![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)<br>
+<sub>(because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset)</sub>
+3. Press Q to quit and save changes.
+4. Run the command `make clean` and `make` to create the Klipper firmware (`klipper.bin`)
+5. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU (without the ST Link):
+    - Find the correct serial name for the MCU with the command `ls /dev/serial/by-id/*` copy the last part where the * is in the command, after the / for later use
+    - Put the Katapult bootloader in DFU mode with this command `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
+    - Execute the flash with the following command `cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx` (again replace xxxxx with the correct serial)
+        - This will take the default klipper.bin from the `/klipper/out` folder and flash it.
+6. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
+
+Done! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
 
 # BIG THANKS!
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
 Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel, Froh  - *you guys rock!*
 
 
-## Disclaimer
+# Disclaimer
 This guide and all changes have been made with the best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributors nor Sovol is responsible if things go bad, break, catch fire or start WW3. You do this on your own risk!
