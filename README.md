@@ -100,7 +100,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 2. Open 'BoardEnv.txt' in your favourite text editor.
 3. You need the following settings, and only those settings (taken from the Sovol image, please change/add/adapt where necessary):
     ```
-    bootlogo=true
+    bootlogo=false
     overlay_prefix=sun50i-h616
     fdtfile=sun50i-h616-biqu-emmc
     console=display
@@ -114,6 +114,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     <sub>(**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same)</sub><br>
     <sub>(**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available)</sub><br>
     <sub>(**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`)</sub><br>
+    <sub>(**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.)</sub><br>
     - Save your changed BoardEnv.txt!
 
 4. Change the Wi-Fi credentials in the 'system.cfg'
@@ -170,7 +171,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
     - Download the STM32CubeProgrammer software here: https://www.st.com/en/development-tools/stm32cubeprog.html#st-get-software
     - Install the software and make sure the ST Link is also properly installed; the software should show a serial of your ST Link just below the CONNECT button (if not you can click on the little refresh button)
 2. Turn the printer OFF and remove the ST Link from your computer, next connect the ST Link to your board (either toolhead or mainboard).
-    - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND
+    - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND ![STLINK cabling](/images/stlink-cables.jpg)
 3. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
 4. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *sovol_original_firmware.bin*). DONE!
 
