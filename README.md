@@ -27,7 +27,7 @@ This is a work in progress, still some work needs to be done. You are the guinea
 - [(STEP 6) STOCK FIRMWARE BACKUP](#step-6-stock-firmware-backup)
 - [(STEP 7) FLASH KATAPULT BOOTLOADER](#step-7-flash-katapult-bootloader)
 - [(STEP 8) FLASH KLIPPER](#step-8-flash-klipper)
-- [BIG THANKS!](#big-thanks)
+- [BIG THANKS & CONTRIBUTE](#big-thanks--contribute)
 - [DISCLAIMER](#disclaimer)
 
 
@@ -215,9 +215,11 @@ It's time to create and flash the Klipper firmware! In the future you only have 
 
 Done! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
 
-# BIG THANKS!
+# BIG THANKS & CONTRIBUTE
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
 Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel, Froh  - *you guys rock!*
+
+You feel like contributing to this project/guide? That would be awesome! Please make a pull request or issue and then it can be added to the guide!
 
 
 # Disclaimer
