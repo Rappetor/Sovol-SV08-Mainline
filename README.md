@@ -197,7 +197,7 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 > [!CAUTION]
 > This step is still for TOOLHEAD only! Mainboard being tested, coming soon!<sup>tm</sup>
 
-It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have Katapult flashed.*
+It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have Katapult flashed and pyserial installed.*
 1. Switch on the printer and SSH into the printer.
 2. We are now going to create the klipper firmware, first do `cd ~/klipper` and then `make menuconfig` and select the following options:
 ![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)<br>
