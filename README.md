@@ -100,7 +100,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 2. Open 'BoardEnv.txt' in your favourite text editor.
 3. You need the following settings, and only those settings (taken from the Sovol image, please change/add/adapt where necessary):
     ```
-    bootlogo=true
+    bootlogo=false
     overlay_prefix=sun50i-h616
     fdtfile=sun50i-h616-biqu-emmc
     console=display
@@ -114,6 +114,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     <sub>(**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same)</sub><br>
     <sub>(**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available)</sub><br>
     <sub>(**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`)</sub><br>
+    <sub>(**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.)</sub><br>
     - Save your changed BoardEnv.txt!
 
 4. Change the Wi-Fi credentials in the 'system.cfg'
