@@ -191,13 +191,13 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 7. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
 
-Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer. Do this for both the toolhead and the mainboard MCU.
+Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
 
 # (STEP 8) FLASH KLIPPER 
 > [!CAUTION]
 > This step is still for TOOLHEAD only! Mainboard being tested, coming soon!<sup>tm</sup>
 
-It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware.
+It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have Katapult flashed.*
 1. Switch on the printer and SSH into the printer.
 2. We are now going to create the klipper firmware, first do `cd ~/klipper` and then `make menuconfig` and select the following options:
 ![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)<br>
