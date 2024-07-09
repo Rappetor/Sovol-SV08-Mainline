@@ -26,9 +26,9 @@ This is a work in progress, still some work needs to be done. You are the guinea
 - [(STEP 5) CONFIGURE PRINTER/KLIPPER & ADDONS](#step-5-configure-printerklipper--addons)
 - [(STEP 6) STOCK FIRMWARE BACKUP](#step-6-stock-firmware-backup)
 - [(STEP 7) FLASH KATAPULT BOOTLOADER](#step-7-flash-katapult-bootloader)
-- [(STEP 8) FLASH KLIPPER)](#step-8-flash-klipper)
+- [(STEP 8) FLASH KLIPPER](#step-8-flash-klipper)
 - [BIG THANKS!](#big-thanks)
-- [Disclaimer](#disclaimer)
+- [DISCLAIMER](#disclaimer)
 
 
 # PREREQUISITES
@@ -205,8 +205,9 @@ It's time to create and flash the Klipper firmware! In the future you only have 
 3. Press Q to quit and save changes.
 4. Run the command `make clean` and `make` to create the Klipper firmware (`klipper.bin`)
 5. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU from SSH (without the ST Link):
-    - Find the correct serial name for the MCU with the command `ls /dev/serial/by-id/*` copy the last part where the * is in the command, after the / for later use
+    - Find the correct serial name for the MCU with the command `ls /dev/serial/by-id/*` copy the last part where the * is in the command for the next step. <sub>(hint: not sure what serial to use, check your printer.cfg backup, it shows what serial is for what device)</sub>
     - Put the Katapult bootloader in DFU mode with this command `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
+    - Now Katapult is in DFU mode, again look for the correct serial with `ls /dev/serial/by-id/*` and you should see one that starts with `usb-katapult_` and use that one (if you haven't flashed Klipper yet after Katapult you probably already had one started with `usb-katapult_` :thumbsup:).
     - Execute the flash with the following command `cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx` (again replace xxxxx with the correct serial)
         - This will take the default klipper.bin from the `/klipper/out` folder and flash it.
 6. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
