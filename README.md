@@ -10,9 +10,7 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 
 ## WORK IN PROGRESS
 This is a work in progress, still some work needs to be done. You are the guinea pig ;)
-- [ ] write and finish up the MCU flashing parts in the HowTo
-- [ ] finalize & test the basic printer.cfg, sovol-macros.cfg and sovol-menu.cfg
-- [ ] testing the whole how-to in general
+Found something that doesn't work (properly), please share and contribute!
 
 
 # INDEX
@@ -176,9 +174,6 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 4. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *sovol_original_firmware.bin*). DONE!
 
 # (STEP 7) FLASH KATAPULT BOOTLOADER
-> [!CAUTION]
-> This step is still for TOOLHEAD only! Mainboard being tested, coming soon!<sup>tm</sup>
-
 To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
 1. Switch the printer on, SSH into the printer and install Katapult:
     - Run the command `cd ~ && git clone https://github.com/Arksine/katapult` to install Katapult
@@ -195,8 +190,8 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
 
 # (STEP 8) FLASH KLIPPER 
-> [!CAUTION]
-> This step is still for TOOLHEAD only! Mainboard being tested, coming soon!<sup>tm</sup>
+> [!NOTE]
+> The Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they don't seem to be necessary for a working printer (everything seems to work just fine without those changes). We are still exploring this, so if you run into any issues with features on the board not working or gpio pins missing please let us know!
 
 It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
 1. Switch on the printer and SSH into the printer.
