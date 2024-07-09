@@ -1,10 +1,3 @@
-# This is a modified version of auto_offset_z made by by Marc Hillesheim
-# https://github.com/hawkeyexp/auto_offset_z
-# Copyright (C) 2022 Marc Hillesheim <marc.hillesheim@outlook.de>
-#
-# Modified by Sovol for the SV08, fixed & improved for mainline Klipper by Rappetor
-#
-# This file may be distributed under the terms of the GNU GPLv3 license.
 
 from . import probe
 import math
@@ -30,12 +23,6 @@ class ZoffsetCalibration:
         
         # add reference to the probe for later use
         self.probe = probe
-
-        # Now we are going to try and read the main config and find the filename/location of our saved variables cfg.
-        # This will no longer mean we use a fixed location and filename for this (I'm looking at you Sovol....)
-        # A [save_variables] MUST be defined in the printer.cfg for this to work.. And the e.g. saved_variables.cfg MUST contain a 'offsetadjust' variable.
-        # @TO-DO: Surely there is a better way in doing this, e.g. read the variables from the SaveVariables directly. It's already somewhere in Klipper, but where and how?
-        self.saved_variables_filename = self.printer.lookup_object('configfile').read_main_config().getsection('save_variables').get('filename')
         
         # check if a probe is installed
         if config.has_section("probe"):
@@ -55,7 +42,7 @@ class ZoffsetCalibration:
         
     def read_varibles_cfg_value(self, option):
         _config = configparser.ConfigParser()
-        _config.read(self.saved_variables_filename)
+        _config.read(self.config.getsection('save_variables').get('filename')) # grab the saved_variables cfg path/file from the cfg..
         _value = _config.get('Variables', option)
         return _value
 
