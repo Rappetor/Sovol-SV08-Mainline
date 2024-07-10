@@ -215,32 +215,27 @@ It's important to make a backup of the current (stock) firmware. This way you ca
     - Install the software and make sure the ST Link is also properly installed; the software should show a serial of your ST Link just below the CONNECT button (if not you can click on the little refresh button)
 
 2. Turn the printer OFF and remove the ST Link from your computer, next connect the ST Link to your board (either toolhead or mainboard).
-    - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND <br>
+    - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND
+    - Refer to your ST Link (manual) for the pinout on the adapter!
     
-    ### Toolhead wiring examples:
-    ![STLINK cabling](/images/stlink-cables.jpg)
+    ### Toolhead wiring example:
+   <p><img src="images/stlink-cables.jpg" alt="toolhead cabling" height="400" align="middle"></p>
 
-    An other color code:
+    ### Motherboard wiring example:
+    <p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="400" align="middle"></p><br>
 
-    <p><img src="images/haa/haa-flash-Toolhead.jpg" alt="toolhead cabling" height="600" align="middle"></p>
-
-    ### Motherboard wiring examples:
-
-    <p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="600" align="middle"></p><br>
-    <p><img src="images/haa/haa-flash-mb2.jpg" alt="MB cabling" height="600" align="middle"></p><br>
-
-3. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
-4. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
+4. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
+5. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
 
     ![read all](images/stlink-firmware-read-all.jpg)
 
-5. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *mainboard_original_firmware.bin*).
+6. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *mainboard_original_firmware.bin*).
 
     ![save as](images/stlink-firmware-save-as.jpg)
 
-6. Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
+7. Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
 
-7. In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 toolhead, printer delivered to EU on 2024-06-28.
+8. In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 toolhead, printer delivered to EU on 2024-06-28.
 
 <br>
 
