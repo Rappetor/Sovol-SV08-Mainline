@@ -5,7 +5,7 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 <sub>Run it from either eMMC or SD card, you choose..</sub>
 
 
-**TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU's. DONE!_
+**TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU. DONE!_
 
 
 ## WORK IN PROGRESS
@@ -31,26 +31,13 @@ Found something that doesn't work (properly), please share and contribute!
 
 # PREREQUISITES
 - First create a **backup** of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download
-    - Optionally you can also SSH or FTP into your machine (username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
+    - Optionally you can also SSH or FTP into your machine (ftp port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
 - You WILL need the printer.cfg later in this process (for the /dev/serial/by-id/usb-Klipper_stm32f103xe_ serials).
 - You need a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter to be able to read/write the eMMC.
     - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
         - 8GB eMMC have been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.
 - If you go for the '*method 2*' you need a big enough **SD card** (it's also possible to run everything from the SD card by the way).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmwares.
-
-### Install FTP Server
-```python
-     sudo apt install vsftpd
-     sudo nano /etc/vsftpd.conf
-```
-and uncomment this three lines :
-```python
-    local_enable=YES
-    write_enable=YES
-    local_umask=022
-```
-You should now be able to connect to the FTP server using the IP adress of the printer and the biqu credentials
 
 <br>
 
@@ -72,9 +59,9 @@ Here we can use 2 methods:
 
 **Method 2**; write the CB1 image to an SD card and use that to get the CB1 image on the eMMC.
 
-<sub>**Method 3**: choose to run everything from the SD card and stop at Method 2.2</sub>
+***Method 3**: choose to run everything from the SD card and stop at Method 2.2*
 
-*Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly.*
+> *Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly.*
 
 <br>
 
@@ -145,10 +132,10 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
     rootfstype=ext4
     ```
-    <sub>(**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same)</sub><br>
-    <sub>(**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available)</sub><br>
-    <sub>(**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`)</sub><br>
-    <sub>(**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.)</sub><br>
+    > <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br>
+    > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br>
+    > <sub>**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br>
+    > <sub>**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
     - Save your changed BoardEnv.txt!
 
 4. Change the Wi-Fi credentials in the 'system.cfg'
@@ -190,7 +177,7 @@ Please SSH into your printer and then do the following steps.
 Next we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
 
 1. RESTORE THE SOVOL ADDONS *(from the `/sovol-addons/` directory)* :<br>
-        - use an FTP program to connect to the printer (ip-address or hostname, username/password: biqu/biqu)<br>
+        - use an FTP program to connect to the printer (ip-address or hostname, ftp port: 22, username/password: biqu/biqu)<br>
         - put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.<br>
 
 2. CONFIGURE PRINTER *(from the `/config/` directory)*:<br>
@@ -215,8 +202,8 @@ Next we have to configure our printer and put back some addons Sovol has added (
          `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]`
     - Now you can print and use the sovol presets like before!
 
-<sub>(**NOTE 1**: all the .sh scripts in the macro's and have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.)</sub><br>
-<sub>(**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out, the toolhead mcu needs a new firmware for this, the Sovol MCU firmwares are currently already outdated).</sub>
+> <sub>**NOTE 1**: all the .sh scripts in the macro's and have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br>
+> <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out, the toolhead mcu needs a new firmware for this, the Sovol MCU firmwares are currently already outdated.</sub>
 
 <br>
 
@@ -233,26 +220,26 @@ It's important to make a backup of the current (stock) firmware. This way you ca
     ### Toolhead Wiring :
     ![STLINK cabling](/images/stlink-cables.jpg)
 
-An other color code:
+    An other color code:
 
-<p><img src="images/haa/haa-flash-Toolhead.jpg" alt="toolhead cabling" height="600" align="middle"></p>
+    <p><img src="images/haa/haa-flash-Toolhead.jpg" alt="toolhead cabling" height="600" align="middle"></p>
 
-### Motherboard wiring :
+    ### Motherboard wiring :
 
-<p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="600" align="middle"></p><br>
-<p><img src="images/haa/haa-flash-mb2.jpg" alt="MB cabling" height="600" align="middle"></p><br>
+    <p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="600" align="middle"></p><br>
+    <p><img src="images/haa/haa-flash-mb2.jpg" alt="MB cabling" height="600" align="middle"></p><br>
 
 3. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
 
-![alt text](images/haa/STM32/Etape1.png)
+    ![alt text](images/haa/STM32/Etape1.png)
 
 4. Enter `0x1ffff` (128kb) into the size field and re-read and scroll down to about address 0x...7DC0, roughly there the memory dump should only have "FFFFFFFF" (earlier or later, depending on fw version)
 
-![alt text](images/haa/STM32/Etape2.png)
+    ![alt text](images/haa/STM32/Etape2.png)
 
 5. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *sovol_original_firmware.bin*).
 
-![alt text](images/haa/STM32/Etape3.png)
+    ![alt text](images/haa/STM32/Etape3.png)
 
 6. Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
 
@@ -273,8 +260,8 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 2. When it's done, do <br>
 `cd ~/katapult`<br> 
 `make menuconfig`<br><br>
- and in menuconfig select the following options:<br>
-![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
+ And in menuconfig select the following options:<br>
+    ![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
 3. Press Q to quit and save changes.
 4. Run the command to build the firmware (*katapult.bin*)<br>
 `make clean`<br>
@@ -284,13 +271,13 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 6. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
 7. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 
-![alt text](images/haa/STM32/Etape4.png)
+    ![alt text](images/haa/STM32/Etape4.png)
 
 8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
 
-![alt text](images/haa/STM32/Etape5.png)<br>
+    ![alt text](images/haa/STM32/Etape5.png)<br>
 
-![alt text](images/haa/STM32/Etape6.png)<br>
+    ![alt text](images/haa/STM32/Etape6.png)<br>
 
 Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
 
@@ -338,12 +325,15 @@ and select the following options:<br>
 
 Done! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
 
+<br>
+
 # BIG THANKS & CONTRIBUTE
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
 Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel, Froh  - *you guys rock!*
 
 You feel like contributing to this project/guide? That would be awesome! Please make a pull request or issue and then it can be added to the guide!
 
+<br>
 
 # Disclaimer
 This guide and all changes have been made with the best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributors nor Sovol is responsible if things go bad, break, catch fire or start WW3. You do this on your own risk!
