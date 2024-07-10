@@ -103,7 +103,7 @@ Here we can use 2 methods:
     - In diskpart run `clean` and it will erase everything/all partitions from the eMMC disk.
     - In diskpart run `exit` to exit
 
-![alt text](images/haa/diskpart.png)
+    ![Diskpart](images/haa/diskpart.png)
 
 *You can now continue to **STEP 3** and then come back here!*
 
