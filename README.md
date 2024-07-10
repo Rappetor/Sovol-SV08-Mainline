@@ -217,29 +217,26 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 2. Turn the printer OFF and remove the ST Link from your computer, next connect the ST Link to your board (either toolhead or mainboard).
     - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND <br>
     
-    ### Toolhead Wiring :
+    ### Toolhead wiring examples:
     ![STLINK cabling](/images/stlink-cables.jpg)
 
     An other color code:
 
     <p><img src="images/haa/haa-flash-Toolhead.jpg" alt="toolhead cabling" height="600" align="middle"></p>
 
-    ### Motherboard wiring :
+    ### Motherboard wiring examples:
 
     <p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="600" align="middle"></p><br>
     <p><img src="images/haa/haa-flash-mb2.jpg" alt="MB cabling" height="600" align="middle"></p><br>
 
 3. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
+4. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
 
-    ![alt text](images/haa/STM32/Etape1.png)
+    ![read all](images/stlink-firmware-read-all.jpg)
 
-4. Enter `0x2000` (128kb) into the size field and re-read and scroll down to about address 0x...7DC0, roughly there the memory dump should only have "FFFFFFFF" (earlier or later, depending on fw version)
+5. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *mainboard_original_firmware.bin*).
 
-    ![alt text](images/haa/STM32/Etape2.png)
-
-5. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *sovol_original_firmware.bin*).
-
-    ![alt text](images/haa/STM32/Etape3.png)
+    ![save as](images/stlink-firmware-save-as.jpg)
 
 6. Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
 
@@ -271,13 +268,13 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 6. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
 7. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 
-    ![alt text](images/haa/STM32/Etape4.png)
+    ![Full chip erase](images/haa/STM32/Etape4.png)
 
 8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
 
-    ![alt text](images/haa/STM32/Etape5.png)<br>
+    ![Open file](images/haa/STM32/Etape5.png)<br>
 
-    ![alt text](images/haa/STM32/Etape6.png)<br>
+    ![Download](images/haa/STM32/Etape6.png)<br>
 
 Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
 
