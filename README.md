@@ -309,9 +309,10 @@ and select the following options:<br>
 
     and you should see one that starts with `usb-katapult_` and use that one (if you haven't flashed Klipper yet after Katapult you probably already had one started with `usb-katapult_` :thumbsup:).
 
+    - Stop the klipper service with `sudo service klipper stop`
     - Execute the flash with the following command `cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx` (again replace xxxxx with the correct serial)
-
         - This will take the default klipper.bin from the `/klipper/out` folder and flash it.
+    - Start the klipper service with `sudo service klipper start`
 
 6. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
 
