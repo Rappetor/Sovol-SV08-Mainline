@@ -236,7 +236,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
     ![alt text](images/haa/STM32/Etape1.png)
 
-4. Enter `0x1ffff` (128kb) into the size field and re-read and scroll down to about address 0x...7DC0, roughly there the memory dump should only have "FFFFFFFF" (earlier or later, depending on fw version)
+4. Enter `0x2000` (128kb) into the size field and re-read and scroll down to about address 0x...7DC0, roughly there the memory dump should only have "FFFFFFFF" (earlier or later, depending on fw version)
 
     ![alt text](images/haa/STM32/Etape2.png)
 
