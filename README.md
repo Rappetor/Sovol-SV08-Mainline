@@ -171,11 +171,11 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 2. Turn the printer OFF and remove the ST Link from your computer, next connect the ST Link to your board (either toolhead or mainboard).
     - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND ![STLINK cabling](/images/stlink-cables.jpg)
 3. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
-4. Enter 0x1fff (128kb) into the size field and re-read.
+4. Enter 0x2000 (for 128kb) into the size field and re-read.
 5. Scroll down to about address 0x...7dc0, roughly there the memory dump should only have "0xff" (earlier or later, depending on fw version)
 6. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *sovol_original_firmware.bin*). 
 7. Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
-8. In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 toolhead, printer delivered to EU on 2024-06-28.
+8. In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20240628.bin">toolhead firmware backup</a> and a <a href="firmware-backups/mainboard-0x80000000-sv08-20240628.bin">mainboard firmware backup</a>, printer delivered to EU on 2024-06-28.
 
 # (STEP 7) FLASH KATAPULT BOOTLOADER
 To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
