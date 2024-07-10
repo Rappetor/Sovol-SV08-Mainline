@@ -38,10 +38,11 @@ Found something that doesn't work (properly), please share and contribute!
         - 8GB eMMC have been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.
 - If you go for the '*method 2*' you need a big enough **SD card** (it's also possible to run everything from the SD card by the way).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmwares.
+- You can reach the sFTP server on IP of the printer, port 22
 
 <br>
 
-# (STEP 1) REMOVING THE eMMC FROM THE PRINTER
+# STEP 1 - REMOVING THE eMMC FROM THE PRINTER
 1. Obviously power off and disconnect the printer from mains.
 2. Put the printer on it's back, so you have access to the underside of the printer.
 3. Remove the metal plate by removing the 6 screws.
@@ -50,7 +51,7 @@ Found something that doesn't work (properly), please share and contribute!
 
 <br>
 
-# (STEP 2) WRITE eMMC OS IMAGE
+# STEP 2 - WRITE eMMC OS IMAGE
 Ok, first we need to set up our new eMMC module with the correct OS/Linux build. And for this we are going to use the bigtreetech CB1 Linux image (the original Sovol SV08 image was also based on this).
 
 Here we can use 2 methods: 
@@ -65,7 +66,7 @@ Here we can use 2 methods:
 
 <br>
 
-# METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
+## METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
 1. Download the **MINIMAL** bigtreetech image. Careful, there's also a full image wich has an unknown version of klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases
     - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
@@ -81,7 +82,7 @@ Here we can use 2 methods:
 
 <br>
 
-# METHOD 2: WRITE IMAGE TO SD -> eMMC
+## METHOD 2: WRITE IMAGE TO SD -> eMMC
 1. First get yourself de latest image from: https://github.com/bigtreetech/CB1/releases
     - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz
 2. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
@@ -102,6 +103,8 @@ Here we can use 2 methods:
     - In diskpart run `clean` and it will erase everything/all partitions from the eMMC disk.
     - In diskpart run `exit` to exit
 
+![alt text](images/haa/diskpart.png)
+
 *You can now continue to **STEP 3** and then come back here!*
 
 5. If everything is ok you should have booted from the SD card, and it's time to copy all the contents to the eMMC and make it bootable.
@@ -114,7 +117,7 @@ Here we can use 2 methods:
 
 <br>
 
-# (STEP 3) CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
+# STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
 To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your harddisk.
@@ -148,7 +151,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 
 <br>
 
-# (STEP 4) INSTALL MAINLINE KLIPPER
+# STEP 4 - INSTALL MAINLINE KLIPPER
 Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker etc.
 Please SSH into your printer and then do the following steps.
 
@@ -173,7 +176,7 @@ Please SSH into your printer and then do the following steps.
 
 <br>
 
-# (STEP 5) CONFIGURE PRINTER/KLIPPER & ADDONS
+# STEP 5 - CONFIGURE PRINTER/KLIPPER & ADDONS
 Next we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
 
 1. RESTORE THE SOVOL ADDONS *(from the `/sovol-addons/` directory)* :<br>
@@ -207,7 +210,7 @@ Next we have to configure our printer and put back some addons Sovol has added (
 
 <br>
 
-# (STEP 6) STOCK FIRMWARE BACKUP
+# STEP 6 - STOCK FIRMWARE BACKUP
 It's important to make a backup of the current (stock) firmware. This way you can always revert back to this stock configuration. These steps are applicable to both the toolhead and mainboard MCU.
 
 1. First make sure you have a properly installed ST Link with the STM32CubeProgrammer software.
@@ -239,7 +242,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 <br>
 
-# (STEP 7) FLASH KATAPULT BOOTLOADER
+# STEP 7 - FLASH KATAPULT BOOTLOADER
 To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
 1. Switch the printer on, SSH into the printer and install Katapult:
     - Run the command <br>
@@ -275,7 +278,7 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 
 <br>
 
-# (STEP 8) FLASH KLIPPER 
+# STEP 8 - FLASH KLIPPER 
 > [!NOTE]
 > The Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they don't seem to be necessary for a working printer (everything seems to work just fine without those changes). We are still exploring this, so if you run into any issues with features on the board not working or gpio pins missing please let us know!
 
