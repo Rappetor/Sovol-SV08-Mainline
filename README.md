@@ -206,7 +206,7 @@ Next we have to configure our printer and put back some addons Sovol has added (
     - Now you can print and use the sovol presets like before!
 
 > <sub>**NOTE 1**: all the .sh scripts in the macro's and have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br>
-> <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out, the toolhead mcu needs a new firmware for this, the Sovol MCU firmwares are currently already outdated.</sub>
+> <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out at this point, the toolhead mcu needs a new firmware for this, do the next steps and you can use it again.</sub>
 
 <br>
 
