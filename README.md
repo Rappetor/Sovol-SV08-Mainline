@@ -5,12 +5,12 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 <sub>Run it from either eMMC or SD card, you choose..</sub>
 
 
-**TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU. DONE!_
+**TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU. DONE !_
 
 
 ## WORK IN PROGRESS
 This is a work in progress, still some work needs to be done. You are the guinea pig ;)
-Found something that doesn't work (properly), please share and contribute!
+Found something that doesn't work (properly), please share and contribute !
 
 
 # INDEX
@@ -24,7 +24,7 @@ Found something that doesn't work (properly), please share and contribute!
 - [STEP 5 - CONFIGURE PRINTER/KLIPPER & ADDONS](#step-5-configure-printerklipper--addons)
 - [STEP 6 - STOCK FIRMWARE BACKUP](#step-6-stock-firmware-backup)
 - [STEP 7 - FLASH KATAPULT BOOTLOADER](#step-7-flash-katapult-bootloader)
-- [STEP 8 FLASH KLIPPER](#step-8-flash-klipper)
+- [STEP 8 - FLASH KLIPPER](#step-8-flash-klipper)
 - [BIG THANKS & CONTRIBUTE](#big-thanks--contribute)
 - [DISCLAIMER](#disclaimer)
 
@@ -75,7 +75,7 @@ Here we can use 2 methods:
     - Open Balena Etcher<br>
         -> choose Flash from file, browse and choose the downloaded CB1 image<br> 
         -> Select the eMMC drive (e.g. Generic USB STORAGE DEVICE USB device)<br>
-        -> Flash! (this will erase everything on the eMMC!)
+        -> Flash ! (this will erase everything on the eMMC !)
 4. After the flash is complete you can close BalenaEtcher. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB adapter and put it back in)
 
 *You can now continue to **STEP 3***
@@ -83,20 +83,21 @@ Here we can use 2 methods:
 <br>
 
 ## METHOD 2: WRITE IMAGE TO SD -> eMMC
-1. First get yourself de latest image from: https://github.com/bigtreetech/CB1/releases
-    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz
+1. First get yourself de latest image from : https://github.com/bigtreetech/CB1/releases
+    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz<br>
+
 2. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
-    - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
+    - Used in this example : balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
     - Open Balena Etcher<br>
      -> choose Flash from file, browse and choose the downloaded CB1 image<br>
      -> Select the **SD card** <br>
-     -> Flash! (this will erase everything on the SD card!)<br>
+     -> Flash ! (this will erase everything on the SD card !)<br>
 
-*Sidenote here: you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)*
+*Sidenote here : you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)*
 
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.<br>
 
-4. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!):
+4. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!) :
     - In Windows open the command prompt (Win-R -> cmd) and run `diskpart` (be careful with diskpart, we don't want to erase the wrong disk here!)
     - In diskpart do `list disk` and see what disk is your eMMC
     - In diskpart run `select disk <nr>` where <nr> is the number of your eMMC. Please make sure this is the correct disk before you continue!
@@ -139,20 +140,20 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br>
     > <sub>**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br>
     > <sub>**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
-    - Save your changed BoardEnv.txt!
+    - Save your changed BoardEnv.txt !
 
 4. Change the Wi-Fi credentials in the 'system.cfg'
     - optional: uncomment the hostname and set the hostname to e.g. "SV08"
     - Save changes to the system.cfg
 
-5. Eject the USB adapter from your computer and put that eMMC (and **SD card** in case of *method 2*) back into the printer and boot that thang!
+5. Eject the USB adapter from your computer and put that eMMC (and **SD card** in case of *method 2*) back into the printer and boot that thing !
     - SSH into the printer (find ip on your router or use the configured hostname), username/password: biqu/biqu
-    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline klipper. You can also continue ***method 2**, point 6, and finalize writing the system to eMMC*!
+    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline klipper. You can also continue ***method 2**, point 6, and finalize writing the system to eMMC* !
 
 <br>
 
 # STEP 4 - INSTALL MAINLINE KLIPPER
-Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker etc.
+Time for the fun stuff ! Now we shall install KIAUH, Klipper, Moonraker etc.
 Please SSH into your printer and then do the following steps.
 
 1. First we will update the OS:<br>
@@ -162,15 +163,22 @@ Please SSH into your printer and then do the following steps.
     - `sudo apt-get update && sudo apt-get install git -y`
     - `cd ~ && git clone https://github.com/dw-0/kiauh.git`
 
-3. Start KIAUH with the following command:
+3. Start KIAUH with the following command :
     - `./kiauh/kiauh.sh`
 
 4. Install Klipper, Moonraker, Mainsail and Crowsnest (in this order) via KIAUH.
     - So run KIAUH and choose : option **'1) [Install]'** and install those items (*using default options, download recommended macro's; Yes*).
     - Crowsnest install asks to reboot printer, please do so.
 
-5. You have now installed mainline klipper with the mainsail web-interface!
-    - If not rebooted after Crowsnest install:<br> `sudo reboot`
+5. Install Numpy (needed for input shaping)
+    ```python
+    sudo apt update
+    sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-dev
+    ~/klippy-env/bin/pip install -v numpy
+    ```
+
+6. You have now installed mainline klipper with the mainsail web-interface !
+    - If not rebooted after Crowsnest install :<br> `sudo reboot`
     - After the board has rebooted, in your browser go to mainsail web-interface (via the ip-address or hostname) and check if it's running.
     - Obviously it will give an error since we still have to put our backed up printer.cfg back.
 
@@ -183,7 +191,7 @@ Next we have to configure our printer and put back some addons Sovol has added (
         - use an FTP program to connect to the printer (ip-address or hostname, ftp port: 22, username/password: biqu/biqu)<br>
         - put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.<br>
 
-2. CONFIGURE PRINTER *(from the `/config/` directory)*:<br>
+2. CONFIGURE PRINTER *(from the `/config/` directory)* :<br>
     - copy :<br>
             `printer.cfg`<br> 
             `sovol-macros.cfg`<br>
@@ -193,17 +201,18 @@ Next we have to configure our printer and put back some addons Sovol has added (
 
         to the `~/printer_data/config` folder.<br>
 
-    - **IMPORTANT**: open your backed up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_) to your new printer.cfg<br>
+    - **IMPORTANT** : open your backed up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_) to your new printer.cfg<br>
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 
 4. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc., does a QGL with home Z, does a Z_OFFSET_CALIBRATION before each print.
-    - Go to OrcaSlicer:<br>
-        Edit the printer settings :<br>
-        -> Machine G-code<br>
+    - Go to OrcaSlicer and edit the printer settings :<br>
+        -> Machine<br>
+        -> G-code<br>
         -> change your 'START_PRINT' line to this:<br>
-         `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]`
-    - Now you can print and use the sovol presets like before!
+         `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]`<br>
+
+    - Now you can print and use the sovol presets like before !
 
 > <sub>**NOTE 1**: all the .sh scripts in the macro's and have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br>
 > <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out at this point, the toolhead mcu needs a new firmware for this, do the next steps and you can use it again.</sub>
@@ -219,7 +228,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 2. Turn the printer OFF and remove the ST Link from your computer, next connect the ST Link to your board (either toolhead or mainboard).
     - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND
-    - Refer to your ST Link (manual) for the pinout on the adapter!
+    - Refer to your ST Link (manual) for the pinout on the adapter !
     
     ### Toolhead wiring example:
    <p><img src="images/stlink-cables.jpg" alt="toolhead cabling" height="400" align="middle"></p>
@@ -244,7 +253,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 # STEP 7 - FLASH KATAPULT BOOTLOADER
 To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
-1. Switch the printer on, SSH into the printer and install Katapult:
+1. Switch the printer on, SSH into the printer and install Katapult :
     - Run the command <br>
     `cd ~ && git clone https://github.com/Arksine/katapult` <br>
     to install Katapult<br>
@@ -255,7 +264,7 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 2. When it's done, do <br>
 `cd ~/katapult`<br> 
 `make menuconfig`<br><br>
- And in menuconfig select the following options:<br>
+ And in menuconfig select the following options :<br>
     ![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
 3. Press Q to quit and save changes.
 4. Run the command to build the firmware (*katapult.bin*)<br>
@@ -268,21 +277,21 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 
     ![Full chip erase](images/haa/STM32/Etape4.png)
 
-8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
+8. Time to flash ! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
 
     ![Open file](images/haa/STM32/Etape5.png)<br>
 
     ![Download](images/haa/STM32/Etape6.png)<br>
 
-Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
+Done ! The Katapult bootloader is on the MCU ! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
 
 <br>
 
 # STEP 8 - FLASH KLIPPER 
 > [!NOTE]
-> The Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they don't seem to be necessary for a working printer (everything seems to work just fine without those changes). We are still exploring this, so if you run into any issues with features on the board not working or gpio pins missing please let us know!
+> The Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they don't seem to be necessary for a working printer (everything seems to work just fine without those changes). We are still exploring this, so if you run into any issues with features on the board not working or gpio pins missing please let us know !
 
-It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
+It's time to create and flash the Klipper firmware ! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
 1. Switch on the printer and SSH into the printer.
 2. We are now going to create the klipper firmware, do<br>
 `cd ~/klipper`<br>
@@ -319,17 +328,17 @@ and select the following options:<br>
 
 6. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
 
-Done! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
+Done ! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
 
 <br>
 
 # BIG THANKS & CONTRIBUTE
 Big thanks to all the people on the Sovol discords (both official and unofficial) who have helped or participated in this project in any way.
-Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel, Froh  - *you guys rock!*
+Special thanks go out to: ss1gohan13, michrech, Zappes, cluless, Haagel, Froh  - *you guys rock !*
 
-You feel like contributing to this project/guide? That would be awesome! Please make a pull request or issue and then it can be added to the guide!
+You feel like contributing to this project/guide? That would be awesome ! Please make a pull request or issue and then it can be added to the guide !
 
 <br>
 
 # Disclaimer
-This guide and all changes have been made with the best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributors nor Sovol is responsible if things go bad, break, catch fire or start WW3. You do this on your own risk!
+This guide and all changes have been made with the best intentions but in the end it's your responsibility and *only your responsibility* to apply those changes and modifications to your printer. Neither the author, contributors nor Sovol is responsible if things go bad, break, catch fire or start WW3. You do this on your own risk !
