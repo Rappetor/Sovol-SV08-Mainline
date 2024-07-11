@@ -1,7 +1,7 @@
 
 from . import probe
 import math
-import configparser
+import configparser, os
 
 class ZoffsetCalibration:
     def __init__(self, config):
@@ -20,6 +20,9 @@ class ZoffsetCalibration:
         self.gcode = self.printer.lookup_object('gcode')
         self.gcode_move = self.printer.lookup_object('gcode_move')
         self.gcode.register_command("Z_OFFSET_CALIBRATION", self.cmd_Z_OFFSET_CALIBRATION, desc=self.cmd_Z_OFFSET_CALIBRATION_help)
+
+        # Let's grab the path and filename for the save_variables from the printer.cfg and make sure we also use the userpath ~/ if it's in there.
+        self.saved_variables_filename = os.path.expanduser(self.config.getsection('save_variables').get('filename'))
         
         # add reference to the probe for later use
         self.probe = probe
@@ -42,7 +45,7 @@ class ZoffsetCalibration:
         
     def read_varibles_cfg_value(self, option):
         _config = configparser.ConfigParser()
-        _config.read(self.config.getsection('save_variables').get('filename')) # grab the saved_variables cfg path/file from the cfg..
+        _config.read(self.saved_variables_filename) # grab the saved_variables file..
         _value = _config.get('Variables', option)
         return _value
 
