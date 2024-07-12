@@ -298,8 +298,11 @@ It's time to create and flash the Klipper firmware! In the future you only have 
 `make menuconfig`<br>
 and select the following options:<br>
 
-![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)<br><br>
-<sub>(because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset)</sub><br>
+![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)
+> <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> <sub>**NOTE 2**: want the *mcu fan and light* enabled during boot? Add `PA1,PA3` to the 'GPIO pins to set at micro-controller startup' when making the ***mainboard MCU*** firmware.</sub><br>
+> <sub>**NOTE 3**: want the *toolhead fan* enabled during boot? Add `PA6` to the 'GPIO pins to set at micro-controller startup' when making the ***toolhead MCU*** firmware.</sub><br>
+> <sub>*(Warning: doing note 2 and 3 means you need to compile a seperate/different firmware for each MCU, with the correct GPIO pins, every time want to flash klipper!)*</sub>
 
 3. Press Q to quit and save changes.<br>
 
