@@ -310,8 +310,9 @@ and select the following options:<br>
 5. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU from SSH (without the ST Link):
     - Find the correct serial name for the MCU with the command<br>
     `ls /dev/serial/by-id/*`<br>
-    copy the last part where the * is in the command for the next step.<br>
-    <sub>(hint: not sure what serial to use, check your printer.cfg backup, it shows what serial is for what device)</sub><br>
+    copy the last part where the * is in the command for the next step.<br><br>
+    
+    > Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`
 
     - Put the Katapult bootloader in DFU mode with this command `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
     - Now Katapult is in DFU mode, again look for the correct serial with<br>
@@ -326,7 +327,7 @@ and select the following options:<br>
         - This will take the default klipper.bin from the `/klipper/out` folder and flash it.
     - Start the klipper service with `sudo service klipper start`
 
-6. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
+7. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
 
 Done! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
 
