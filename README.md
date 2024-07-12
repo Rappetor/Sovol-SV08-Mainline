@@ -326,7 +326,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 
 - Press Q to quit and save changes.<br>
 
-- And finally, to create the firmware and flash the host MCU :<br>
+- And finally, to create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`):<br>
 ```python
 cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxx
 ```
@@ -346,7 +346,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 - Press Q to quit and save changes.<br>
 
-- Create the firmware and flash the toolhead MCU:<br>
+- Create the firmware and flash the toolhead MCU (your serial should now start with `usb-katapult_`):<br>
 ```python
 cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxx
 ```
