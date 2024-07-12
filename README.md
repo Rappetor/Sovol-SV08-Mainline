@@ -289,7 +289,7 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 
 # STEP 8 - FLASH KLIPPER 
 > [!NOTE]
-> The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now the printer starts up silently; no fans, no light and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below menuconfig.
+> The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now the printer starts up silently; no fans, no light and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
 It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
 1. Switch on the printer and SSH into the printer.
@@ -302,7 +302,7 @@ and select the following options:<br>
 > <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 > <sub>**NOTE 2**: want the *mcu fan and light* enabled during boot? Add `PA1,PA3` to the 'GPIO pins to set at micro-controller startup' when making the ***mainboard MCU*** firmware.</sub><br>
 > <sub>**NOTE 3**: want the *hotend fan* enabled during boot? Add `PA6` to the 'GPIO pins to set at micro-controller startup' when making the ***toolhead MCU*** firmware.</sub><br>
-> <sub>*(Warning: doing note 2 & 3 means you need to compile a seperate firmware for each MCU, with the correct GPIO pins, every time want to flash klipper!)*</sub>
+> <sub>*(Warning: doing note 2 & 3 means you need to compile a seperate firmware for each MCU, with the correct GPIO pins, every time you want to flash klipper!)*</sub>
 
 3. Press Q to quit and save changes.<br>
 
