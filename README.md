@@ -314,7 +314,7 @@ copy the last part where the * is in the command for the later steps.<br>
 
 ```python
 sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/*")'
+cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxx")'
 cd ~/klipper && make clean KCONFIG_CONFIG=host.mcu
 cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 ```
@@ -328,13 +328,13 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 
 - And finally, to create the firmware and flash the host MCU :<br>
 ```python
-cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/*
+cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxx
 ```
 
 ### For the toolhead MCU:
 ```python
 sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/*")'
+cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxx")'
 cd ~/klipper && make clean KCONFIG_CONFIG=toolhead.mcu
 cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 ```
@@ -348,7 +348,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 - Create the firmware and flash the toolhead MCU:<br>
 ```python
-cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/*
+cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxx
 ```
 
 2. Klipper service can now be restarted:
