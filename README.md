@@ -298,11 +298,11 @@ It's time to create and flash the Klipper firmware! In the future you only have 
 `make menuconfig`<br>
 and select the following options:<br>
 
-![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)
-> <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
-> <sub>**NOTE 2**: want the *mcu fan and light* enabled during boot? Add `PA1,PA3` to the 'GPIO pins to set at micro-controller startup' when making the ***mainboard MCU*** firmware.</sub><br>
-> <sub>**NOTE 3**: want the *hotend fan* enabled during boot? Add `PA6` to the 'GPIO pins to set at micro-controller startup' when making the ***toolhead MCU*** firmware.</sub><br>
-> <sub>*(Warning: doing note 2 & 3 means you need to compile a seperate firmware for each MCU, with the correct GPIO pins, every time you want to flash klipper!)*</sub>
+    ![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)
+    > <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+    > <sub>**NOTE 2**: want the *mcu fan and light* enabled during boot? Add `PA1,PA3` to the 'GPIO pins to set at micro-controller startup' when making the ***mainboard MCU*** firmware.</sub><br>
+    > <sub>**NOTE 3**: want the *hotend fan* enabled during boot? Add `PA6` to the 'GPIO pins to set at micro-controller startup' when making the ***toolhead MCU*** firmware.</sub><br>
+    > <sub>*(Warning: doing note 2 & 3 means you need to compile a seperate firmware for each MCU, with the correct GPIO pins, every time you want to flash klipper!)*</sub>
 
 3. Press Q to quit and save changes.<br>
 
@@ -315,7 +315,7 @@ and select the following options:<br>
     `ls /dev/serial/by-id/*`<br>
     copy the last part where the * is in the command for the next step.<br><br>
     
-    > Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`
+    > Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`. *It's recommended to change the `/dev/ttyACM*` in your printer.cfg to the `/dev/serial/by-id/xxxx` to avoid any issues in the future.*
 
     - Put the Katapult bootloader in DFU mode with this command `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
     - Now Katapult is in DFU mode, again look for the correct serial with<br>
