@@ -315,7 +315,7 @@ and select the following options:<br>
     `ls /dev/serial/by-id/*`<br>
     copy the last part where the * is in the command for the next step.<br><br>
     
-    > Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`. *It's recommended to change the `/dev/ttyACM*` in your printer.cfg to the `/dev/serial/by-id/xxxx` to avoid any issues in the future.*
+    > Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`. ***It's recommended to change the `/dev/ttyACM*` in your printer.cfg to the `/dev/serial/by-id/xxxx` to avoid any issues in the future.***
 
     - Put the Katapult bootloader in DFU mode with this command `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
     - Now Katapult is in DFU mode, again look for the correct serial with<br>
