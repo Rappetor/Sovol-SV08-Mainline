@@ -294,10 +294,13 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
 1. Switch on the printer and SSH into the printer.
 2.  Find the correct serial name for the MCU with the command<br>
-    `ls /dev/serial/by-id/*`<br>
-    copy the last part where the * is in the command for the later steps.<br>
+```python
+ls /dev/serial/by-id/*
+```    
+copy the last part where the * is in the command for the later steps.<br>
 
-    > Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`. ***It's recommended to change the `/dev/ttyACM*` in your printer.cfg to the `/dev/serial/by-id/xxxx` to avoid any issues in the future.***
+
+> Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`. ***It's recommended to change the `/dev/ttyACM*` in your printer.cfg to the `/dev/serial/by-id/xxxx` to avoid any issues in the future.***
 
 ## Two Methods:
 #### Method 1 to have *mcu fan and light* and *hotend fan* enabled during boot
@@ -324,8 +327,9 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 - Press Q to quit and save changes.<br>
 
 - And finally, to create the firmware and flash the host MCU :<br>
-
-`cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/*`
+```python
+cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/*
+```
 
 ### For the toolhead MCU:
 ```python
@@ -343,12 +347,14 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 - Press Q to quit and save changes.<br>
 
 - Create the firmware and flash the toolhead MCU:<br>
+```python
+cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/*
+```
 
-`cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/*`
-<br>
-
-2. Klipper service can now be restarted:<br>
-`sudo service klipper start`
+2. Klipper service can now be restarted:
+```python
+sudo service klipper start
+```
 
 3. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
 
@@ -357,37 +363,60 @@ Done! The Klipper firmware on the both MCU has been updated.
 
 ## Method 2:
 
-1. We are now going to create the klipper firmware, do<br>
-`cd ~/klipper`<br>
-`make menuconfig`<br>
+1. We are now going to create the klipper firmware, do
+```python
+cd ~/klipper
+make menuconfig
+```
 and select the following options:<br>
 
-    ![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)
+![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)
 
-    > <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
 2. Press Q to quit and save changes.<br>
 
-3. Run the command to create the Klipper firmware (`klipper.bin`)<br>
-`make clean`<br>
-`make` <br>
+3. Run the command to create the Klipper firmware (`klipper.bin`)
+```python
+make clean
+make
+```
 
 4. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU from SSH (without the ST Link):
-    - Put the Katapult bootloader in DFU mode with this command<br>
-     `cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'` (replace xxxxx with the serial you just copied)
-    - Now Katapult is in DFU mode, again look for the correct serial with<br>
-    `ls /dev/serial/by-id/*`<br>
+    - Put the Katapult bootloader in DFU mode with this command
+```python
+cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'
+```
+   (replace xxxxx with the serial you just copied)<br>
 
-    ![alt text](<images/haa/klipper firmware.png>)<br>
+- Now Katapult is in DFU mode, again look for the correct serial with
 
-    and you should see one that starts with `usb-katapult_` and use that one (if you haven't flashed Klipper yet after Katapult you probably already had one started with `usb-katapult_` :thumbsup:).
+```python
+ls /dev/serial/by-id/*
+```
 
-    - Stop the klipper service with<br> `sudo service klipper stop`
-    - Execute the flash with the following command<br> `cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx` (again replace xxxxx with the correct serial)
-        - This will take the default klipper.bin from the `/klipper/out` folder and flash it.
-    - Start the klipper service with<br> `sudo service klipper start`
+![alt text](<images/haa/klipper firmware.png>)<br>
 
-5. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
+and you should see one that starts with `usb-katapult_` and use that one (if you haven't flashed Klipper yet after Katapult you probably already had one started with `usb-katapult_` :thumbsup:).
+
+- Stop the klipper service with
+```python
+sudo service klipper stop
+```
+- Execute the flash with the following command
+```python
+cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx
+```
+(again replace xxxxx with the correct serial)
+
+- This will take the default klipper.bin from the `/klipper/out` folder and flash it.
+- Start the klipper service with
+```python
+sudo service klipper start
+```
+
+5. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg<br>
+<br>
 
 Done! The Klipper firmware on the MCU has been updated. Do this for both the toolhead and the mainboard MCU.
 
