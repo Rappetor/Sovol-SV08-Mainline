@@ -304,7 +304,7 @@ copy the last part where the * is in the command for the later steps.<br>
 
 ## Two Methods:
 #### Method 1 to have *mcu fan and light* and *hotend fan* enabled during boot
-#### Method 2 to have noting start at boot<br>
+#### Method 2 to have nothing start at boot<br>
 
 ## Method 1:
 <br>
