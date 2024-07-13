@@ -7,6 +7,20 @@ This repository will describe how to install mainline/regular klipper (via KIAUH
 
 **TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU. DONE!_
 
+<br>
+
+# READ ME FIRST!
+
+This guide uses color codes to showcase important info.
+
+> [!CAUTION]
+> If you see text inside a red box, you NEED to read what is in the box. 
+
+> [!NOTE]
+> If you see text inside a blue box, this info is typically a helpful tip or a useful note.
+
+ok, now you can continue.
+
 
 ## WORK IN PROGRESS
 
@@ -40,6 +54,9 @@ This repository will describe how to install mainline/regular klipper (via KIAUH
 - If you go for the '*method 2*' you need a big enough **SD card** (it's also possible to run everything from the SD card by the way).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmwares.
 - You can reach the sFTP server on IP of the printer, port 22
+
+> [!NOTE]
+> Here is one example listing for the adpter and also a 32gb emmc module <br>https://www.aliexpress.us/item/3256807073480438.html
 
 <br>
 
