@@ -9,8 +9,8 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 
 
 ## WORK IN PROGRESS
-This is a work in progress, still some work needs to be done. You are the guinea pig ;)
-Found something that doesn't work (properly), please share and contribute!
+> [!INFO]
+> This is a work in progress, still some work needs to be done. You are the guinea pig ;) <br> Found something that doesn't work (properly), please share and contribute!
 
 
 # INDEX
@@ -43,7 +43,9 @@ Found something that doesn't work (properly), please share and contribute!
 <br>
 
 # STEP 1 - REMOVING THE eMMC FROM THE PRINTER
-1. Obviously power off and disconnect the printer from mains.
+
+> [!CAUTION]
+> POWER OFF AND UNPLUG THE PRINTER FROM THE OUTLET.
 2. Put the printer on it's back, so you have access to the underside of the printer.
 3. Remove the metal plate by removing the 6 screws.
 4. You can now see the eMMC module on the board, remove the 2 screws that are holding it in and carefully remove the eMMC module.
