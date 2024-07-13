@@ -313,17 +313,29 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 
 It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
 1. Switch on the printer and SSH into the printer.
-2.  Find the correct serial name for the MCU with the command<br>
+2. Open the file printer.cfg. Look at the `[mcu]`and `[extra_mcu]`section, and copy-paste only the section circled in red for each mcu, we will need it later :
+
+![alt text](images/haa/haa_printercfg.jpg)
+
+- If you have this in your printer.cfg: 
+
+![alt text](images/haa/haa_printercfg_tty.jpg)
+
+You have to replace each id to have the same thing than above. To do that, find the correct serial name for the MCU with the command<br>
 ```python
-ls /dev/serial/by-id/*
-```    
-copy the last part where the * is in the command for the later steps.<br>
+ls -la /dev/serial/by-id/
+```
+You will have this :
 
+![alt text](images/haa/haa_lsla.jpg)
 
-> Tip: Don't know what serial to use? Check your printer.cfg backup; [mcu] for the mainboard MCU, [mcu extra_mcu] for the toolhead MCU. Does the printer.cfg only show `/dev/ttyACM*` then use this command to find out `ls -la /dev/serial/by-id/`. ***It's recommended to change the `/dev/ttyACM*` in your printer.cfg to the `/dev/serial/by-id/xxxx` to avoid any issues in the future.***
+Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the end, you should have this (with your own digits) :
+
+![alt text](images/haa/haa_printercfg2.jpg)
+
 
 ## Two Methods:
-#### Method 1 to have *mcu fan and light* and *hotend fan* enabled during boot
+#### Method 1 to have *mcu fan and light* and *hotend fan* enabled during boot, as it is in the original Sovol firmware
 #### Method 2 to have nothing start at boot<br>
 
 ## Method 1:
@@ -332,9 +344,22 @@ copy the last part where the * is in the command for the later steps.<br>
 
 ### For the mainboard MCU:
 
+You have to replace xxxx by what you have copied at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the mcu
+
 ```python
 sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxx")'
+cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
+```
+Now the mcu is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, you will see that it appears as katapult ID :
+
+![alt text](<images/haa/klipper firmware.png>)
+
+It's temporary only during the flash process. After completed the flash, and reboot the printer, it will revert to klipper ID.
+You must never use the Katapult ID in any configuration file.
+
+Now, finish the process :
+
+```python
 cd ~/klipper && make clean KCONFIG_CONFIG=host.mcu
 cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 ```
@@ -346,15 +371,30 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 
 - Press Q to quit and save changes.<br>
 
-- And finally, to create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`):<br>
+- And finally, to create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end by what you have at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the mcu:<br>
 ```python
-cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxx
+cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
 ```
 
 ### For the toolhead MCU:
+
+You have to replace xxxx by what you have copied at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the extra mcu
+
 ```python
 sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxx")'
+cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
+```
+
+Now the mcu is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, you will see that it appears as katapult ID :
+
+![alt text](<images/haa/klipper firmware.png>)
+
+It's temporary only during the flash process. After completed the flash, and reboot the printer, it will revert to klipper ID.
+You must never use the Katapult ID in any configuration file.
+
+Now, finish the process :
+
+```python
 cd ~/klipper && make clean KCONFIG_CONFIG=toolhead.mcu
 cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 ```
@@ -366,17 +406,18 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 - Press Q to quit and save changes.<br>
 
-- Create the firmware and flash the toolhead MCU (your serial should now start with `usb-katapult_`):<br>
+- Create the firmware and flash the toolhead MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end by what you have at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the extra mcu :<br>
+
 ```python
-cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxx
+cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
 ```
 
-2. Klipper service can now be restarted:
+2. Restart the printer with :
 ```python
-sudo service klipper start
+sudo shutdown -r now
 ```
 
-3. Do a firmware restart and you are ready. In case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
+3. After he restart, in case you flashed the toolhead MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
 
 Done! The Klipper firmware on the both MCU has been updated.
 <br>
