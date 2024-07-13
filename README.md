@@ -1,16 +1,31 @@
 # Sovol-SV08-Mainline
 Getting the Sovol SV08 onto mainline Klipper
 
-This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on your Sovol SV08 with the BTT CB1 image.<br>
+This repository will describe how to install mainline/regular klipper (via KIAUH) on your Sovol SV08 with the BTT CB1 image.<br>
 <sub>Run it from either eMMC or SD card, you choose..</sub>
 
 
 **TL;DR**: _make backup of klipper config, remove eMMC from printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put eMMC back in printer, install KIAUH; klipper, moonraker and mainsail (and optional extras), create firmware(s), flash toolhead and board MCU. DONE!_
 
+<br>
+
+# READ ME FIRST!
+
+This guide uses color codes to showcase important info.
+
+> [!CAUTION]
+> If you see text inside a red box, you NEED to read what is in the box. 
+
+> [!NOTE]
+> If you see text inside a blue box, this info is typically a helpful tip or a useful note.
+
+ok, now you can continue.
+
 
 ## WORK IN PROGRESS
-This is a work in progress, still some work needs to be done. You are the guinea pig ;)
-Found something that doesn't work (properly), please share and contribute!
+
+> [!NOTE]
+> This is a work in progress, still some work needs to be done. You are the guinea pig ;) <br> Found something that doesn't work (properly), please share and contribute!
 
 
 # INDEX
@@ -40,10 +55,15 @@ Found something that doesn't work (properly), please share and contribute!
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmwares.
 - You can reach the sFTP server on IP of the printer, port 22
 
+> [!NOTE]
+> Here is one example listing for the adpter and also a 32gb emmc module <br>https://www.aliexpress.us/item/3256807073480438.html
+
 <br>
 
 # STEP 1 - REMOVING THE eMMC FROM THE PRINTER
-1. Obviously power off and disconnect the printer from mains.
+
+> [!CAUTION]
+> POWER OFF AND UNPLUG THE PRINTER FROM THE OUTLET.
 2. Put the printer on it's back, so you have access to the underside of the printer.
 3. Remove the metal plate by removing the 6 screws.
 4. You can now see the eMMC module on the board, remove the 2 screws that are holding it in and carefully remove the eMMC module.
