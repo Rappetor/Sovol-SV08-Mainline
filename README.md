@@ -1,7 +1,7 @@
 # Sovol-SV08-Mainline
 Getting the Sovol SV08 onto mainline Klipper
 
-This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on your Sovol SV08 with the BTT CB1 image.<br>
+This repository will describe how to install mainline/regular klipper (via KIAUH) on your Sovol SV08 with the BTT CB1 image.<br>
 <sub>Run it from either eMMC or SD card, you choose..</sub>
 
 
@@ -9,7 +9,8 @@ This HOWTO will describe how to install mainline/regular klipper (via KIAUH) on 
 
 
 ## WORK IN PROGRESS
-> [!INFO]
+
+> [!NOTE]
 > This is a work in progress, still some work needs to be done. You are the guinea pig ;) <br> Found something that doesn't work (properly), please share and contribute!
 
 
