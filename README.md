@@ -117,7 +117,8 @@ Here we can use 2 methods:
      -> Select the **SD card** <br>
      -> Flash! (this will erase everything on the SD card!)<br>
 
-*Sidenote here : you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)*
+> [!NOTE]
+> *Sidenote here : you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)*
 
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.<br>
 
