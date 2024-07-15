@@ -82,6 +82,7 @@ Here we can use 2 methods:
 
 ***Method 3**: choose to run everything from the SD card and stop at Method 2.2*
 
+> [!NOTE]
 > *Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly.*
 
 <br>
@@ -124,7 +125,7 @@ Here we can use 2 methods:
     - In diskpart run `clean` and it will erase everything/all partitions from the eMMC disk.
     - In diskpart run `exit` to exit
 
-    ![Diskpart](images/haa/diskpart.png)
+![Diskpart](images/haa/diskpart.png)
 
 *You can now continue to **STEP 3** and then come back here!*
 
@@ -156,11 +157,13 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
     rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
     rootfstype=ext4
     ```
-    > <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br>
-    > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br>
-    > <sub>**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br>
-    > <sub>**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
-    - Save your changed BoardEnv.txt!
+> [!NOTE]
+> <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br>
+> <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br>
+> <sub>**NOTE 3**: you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br>
+> <sub>**NOTE 4**: by setting bootlogo=false you get the linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
+
+- Save your changed BoardEnv.txt!
 
 4. Change the Wi-Fi credentials in the 'system.cfg'
     - optional: uncomment the hostname and set the hostname to e.g. "SV08"
@@ -234,6 +237,7 @@ Next we have to configure our printer and put back some addons Sovol has added (
 
     - Now you can print and use the sovol presets like before!
 
+> [!NOTE]
 > <sub>**NOTE 1**: all the .sh scripts in the macro's and have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br>
 > <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out at this point, the toolhead mcu needs a new firmware for this, do the next steps and you can use it again.</sub>
 
@@ -251,7 +255,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
     - Refer to your ST Link (manual) for the pinout on the adapter!
     
     ### Toolhead wiring example:
-   <p><img src="images/stlink-cables.jpg" alt="toolhead cabling" height="400" align="middle"></p>
+    <p><img src="images/stlink-cables.jpg" alt="toolhead cabling" height="400" align="middle"></p>
 
     ### Motherboard wiring example:
     <p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="400" align="middle"></p><br>
@@ -259,15 +263,15 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 4. Insert the ST Link into your computer, open the STM32CubeProgrammer software and press CONNECT. It should now connect an populate the middle screen with memory stuff.
 5. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
 
-    ![read all](images/stlink-firmware-read-all.jpg)
+![read all](images/stlink-firmware-read-all.jpg)
 
 6. Please select `Save As ..` from the `Read` menu and save the current firmware (e.g. *toolhead_original_firmware.bin* or *mainboard_original_firmware.bin*).
 
-    ![save as](images/stlink-firmware-save-as.jpg)
+![save as](images/stlink-firmware-save-as.jpg)
 
-7. Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
-
-8. In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 toolhead, printer delivered to EU on 2024-06-28.
+> [!CAUTION]
+> Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
+> In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 toolhead, printer delivered to EU on 2024-06-28.
 
 <br>
 
@@ -284,8 +288,8 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 2. When it's done, do <br>
 `cd ~/katapult`<br> 
 `make menuconfig`<br><br>
- And in menuconfig select the following options :<br>
-    ![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
+And in menuconfig select the following options :<br>
+![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
 3. Press Q to quit and save changes.
 4. Run the command to build the firmware (*katapult.bin*)<br>
 `make clean`<br>
@@ -295,13 +299,13 @@ To make life more easy in the future we are going to flash Katapult to our MCU's
 6. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
 7. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 
-    ![Full chip erase](images/haa/STM32/Etape4.png)
+![Full chip erase](images/haa/STM32/Etape4.png)
 
 8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
 
-    ![Open file](images/haa/STM32/Etape5.png)<br>
+![Open file](images/haa/STM32/Etape5.png)<br>
 
-    ![Download](images/haa/STM32/Etape6.png)<br>
+![Download](images/haa/STM32/Etape6.png)<br>
 
 Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST Link from the computer and the board. Do this for both the toolhead and the mainboard MCU.
 
@@ -344,7 +348,7 @@ Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the
 
 ### For the mainboard MCU:
 
-You have to replace xxxx by what you have copied at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the mcu
+You have to replace xxxx by what you have copied at [2](#step-8---flash-klipper) for the mcu
 
 ```python
 sudo service klipper stop
@@ -367,11 +371,12 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 
 ![host_menuconfig](images/haa/haa_host_menuconfig.jpg)<br>
 
+> [!NOTE]
 > <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
 - Press Q to quit and save changes.<br>
 
-- And finally, to create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end by what you have at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the mcu:<br>
+- And finally, to create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end by what you have at [2](#step-8---flash-klipper) for the mcu:<br>
 ```python
 cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
 ```
@@ -402,6 +407,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 ![toolhead_menuconfig](images/haa/haa_toolhead_menuconfig.jpg)<br>
 
+> [!NOTE]
 > <sub>**NOTE 1**: because we are using Katapult as bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
 - Press Q to quit and save changes.<br>
