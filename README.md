@@ -180,27 +180,35 @@ Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker etc.
 Please SSH into your printer and then do the following steps.
 
 1. First we will update the OS:<br>
-    - `sudo apt update && sudo apt upgrade`
+    ```python
+   sudo apt update && sudo apt upgrade
+    ```
 
-2. Then install git (might already be installed) and KIAUH with the following commands:
-    - `sudo apt-get update && sudo apt-get install git -y`
-    - `cd ~ && git clone https://github.com/dw-0/kiauh.git`
+3. Then install git (might already be installed) and KIAUH with the following commands:
+   ```python
+   sudo apt-get update && sudo apt-get install git -y
+   ```
+   ```python
+   cd ~ && git clone https://github.com/dw-0/kiauh.git
+   ```
 
-3. Start KIAUH with the following command :
-    - `./kiauh/kiauh.sh`
+4. Start KIAUH with the following command :
+   ```python
+   ./kiauh/kiauh.sh
+   ```
 
-4. Install Klipper, Moonraker, Mainsail and Crowsnest (in this order) via KIAUH.
+6. Install Klipper, Moonraker, Mainsail and Crowsnest (in this order) via KIAUH.
     - So run KIAUH and choose : option **'1) [Install]'** and install those items (*using default options, download recommended macro's; Yes*).
     - Crowsnest install asks to reboot printer, please do so.
 
-5. Install Numpy (needed for input shaping)
+7. Install Numpy (needed for input shaping)
     ```python
     sudo apt update
     sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-dev
     ~/klippy-env/bin/pip install -v numpy
     ```
 
-6. You have now installed mainline klipper with the mainsail web-interface!
+8. You have now installed mainline klipper with the mainsail web-interface!
     - If not rebooted after Crowsnest install :<br> `sudo reboot`
     - After the board has rebooted, in your browser go to mainsail web-interface (via the ip-address or hostname) and check if it's running.
     - Obviously it will give an error since we still have to put our backed up printer.cfg back.
@@ -244,6 +252,9 @@ Next we have to configure our printer and put back some addons Sovol has added (
 <br>
 
 # STEP 6 - STOCK FIRMWARE BACKUP
+> [!IMPORTANT]
+> When connecting the ST Link to the printer, make sure the printer is powered OFF. The MCU will be powered from the ST Link.
+
 It's important to make a backup of the current (stock) firmware. This way you can always revert back to this stock configuration. These steps are applicable to both the toolhead and mainboard MCU.
 
 1. First make sure you have a properly installed ST Link with the STM32CubeProgrammer software.
@@ -276,32 +287,42 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 <br>
 
 # STEP 7 - FLASH KATAPULT BOOTLOADER
+> [!IMPORTANT]
+> When connecting the ST Link to the printer, make sure the printer is powered OFF. The MCU will be powered from the ST Link.
+
 To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
 1. Switch the printer on, SSH into the printer and install Katapult :
-    - Run the command <br>
-    `cd ~ && git clone https://github.com/Arksine/katapult` <br>
-    to install Katapult<br>
+    - Run this command to install Katapult: <br>
+    ```python
+    cd ~ && git clone https://github.com/Arksine/katapult
+    ```
 
     - Install pyserial with *(we need this later to flash the firmware)*<br>
-    `pip3 install pyserial` <br>
+    ```python
+    pip3 install pyserial
+    ```
     
 2. When it's done, do <br>
-`cd ~/katapult`<br> 
-`make menuconfig`<br><br>
+    ```python
+    cd ~/katapult && make menuconfig
+    ```
 And in menuconfig select the following options :<br>
-![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)
-3. Press Q to quit and save changes.
-4. Run the command to build the firmware (*katapult.bin*)<br>
-`make clean`<br>
-`make`<br>
+![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)<br>
 
-5. Please use e.g. an FTP program to grab this file `~/katapult/out/katapult.bin` and store it on the computer. You can use this Katapult firmware for both the toolhead and the mainboard.
-6. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
-7. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
+4. Press Q to quit and save changes.<br>
+5. Run the commands to build the firmware (*katapult.bin*):<br>
+    ```python
+    make clean
+    make
+    ```
+
+6. Grab this file `~/katapult/out/katapult.bin` (e.g. with an FTP program) and store it on the computer. You can use this Katapult firmware for both the toolhead and the mainboard.
+7. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
+8. Once connected on the left side in the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 
 ![Full chip erase](images/haa/STM32/Etape4.png)
 
-8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult-toolhead.bin` or `katapult-mainboard.bin`, next press the 'Download' button to write the firmware.
+8. Time to flash! Go back to the 'Memory & File editing' tab and select 'Open file' and browse/select/open the `katapult.bin`, next press the 'Download' button to write the firmware.
 
 ![Open file](images/haa/STM32/Etape5.png)<br>
 
