@@ -16,6 +16,9 @@ This guide uses color codes to showcase important info.
 > [!CAUTION]
 > If you see text inside a red box, you NEED to read what is in the box. 
 
+> [!IMPORTANT]
+> If you see text inside the purple box, it's an important piece of information.
+
 > [!NOTE]
 > If you see text inside a blue box, this info is typically a helpful tip or a useful note.
 
