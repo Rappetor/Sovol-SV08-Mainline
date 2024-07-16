@@ -251,7 +251,7 @@ max_adjust: 10 #30
 
 [bed_mesh]
 speed: 350 #500                   
-split_delta_z: 0.0075 #0.016
+split_delta_z: 0.0125 #0.016
 ```
 
 ### - References
