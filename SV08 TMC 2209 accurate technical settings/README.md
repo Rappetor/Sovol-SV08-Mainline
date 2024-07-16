@@ -5,6 +5,7 @@
 
 > [!CAUTION]
 > - sense_resistor is based on board specification. Modify its values can lead to catastrophic failure and even burn of the motors
+> - In the [extruder] section, adjust `rotation_distance`to your own values
 > - In the [extruder] section, be careful to uncomment this lines if you haven't done PID calibration :
 ```python
 #control : pid
