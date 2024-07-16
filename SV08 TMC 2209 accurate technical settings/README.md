@@ -19,6 +19,7 @@
 > - Using more than 64 microsteps for X and Y lead to overload the MCU and cause an error
 > - Using more than 64 microsteps for Z lead to an heavier load on the MCU and seems to have no real benefits
 > - Using `stealthchop_threshold: 0` or commenting the line `stealthchop_threshold: 999999` put the stepper in Spreadcycle mode. It's a matter of preference for better readibility
+> - Sovol has slightly OC the TMC 2209 for X, Y and Z at 13 MHz instead of 12. However, the TMC 2209 for the extruder remain at 12 MHz
 > - The X, Y and extruder steppers are set to SpreadCycle mode
 > - Z steppers are set to Stealthchop. Although slightly less accurate, stealthchop is less noisier, and there's no real gain to set Z in SpreadCycle mode.
 > - You can try Z steppers in Spreadcycle mode by using this for the four Z steppers configuration instead of what is below
