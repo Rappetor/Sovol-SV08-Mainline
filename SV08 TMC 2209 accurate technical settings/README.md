@@ -1,6 +1,6 @@
 # TMC 2209 accurate technical settings for Sovol SV08
 
-- Based on the 2209 datasheet and excel configurator from Triaxis, the Klipper recommendation settings for TMC 2209, and the motors datasheets by Sovol, this is the technical accurate settings for the TMC 2209.
+- Based on the 2209 datasheet and excel configurator from Trinamic, the Klipper recommendation settings for TMC 2209, and the motors datasheets by Sovol, this is the technical accurate settings for the TMC 2209.
 - Using this leads to have better accuracy, slightly less noisier motors and better heat dissipation.
 
 > [!CAUTION]
