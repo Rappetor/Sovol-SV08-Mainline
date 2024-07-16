@@ -1,12 +1,12 @@
 # TMC 2209 accurate technical settings for Sovol SV08
 
-- Based on the 2209 datasheet and excel configurator from Trinamic, the Klipper recommendation settings for TMC 2209, and the motors datasheets by Sovol, this is the technical accurate settings for the TMC 2209.
-- Using this leads to have better accuracy, slightly less noisier motors and better heat dissipation.
+- Based on the 2209 datasheet and Excel configurator from Trinamic, the Klipper recommendation settings for TMC 2209, and the motors datasheets by Sovol, these are the technical, accurate settings for the TMC 2209.
+- Using this leads to better accuracy, slightly less noisy motors and better heat dissipation.
 
 > [!CAUTION]
-> - sense_resistor is based on board specification. Modify its values can lead to catastrophic failure and even burn of the motors
-> - In the [extruder] section, adjust `rotation_distance` to your own values
-> - In the [extruder] section, be careful to uncomment this lines if you haven't done PID calibration :
+> - sense_resistor is based on the board specification. Modifying its values can lead to catastrophic failure and even burning the motors.
+> - In the [extruder] section, adjust `rotation_distance` to your own values.
+> - In the [extruder] section, be careful to uncomment these lines if you haven't done PID calibration:
 ```python
 #control : pid
 #pid_kp : 33.838
@@ -16,13 +16,13 @@
 
 > [!NOTE]
 > - You can adjust `microsteps` from 16 to 256. 64 seems to be a safe value.
-> - Using more than 64 microsteps for X and Y lead to overload the MCU and cause an error
-> - Using more than 64 microsteps for Z lead to an heavier load on the MCU and seems to have no real benefits
-> - Using `stealthchop_threshold: 0` or commenting the line `stealthchop_threshold: 999999` put the stepper in Spreadcycle mode. It's a matter of preference for better readibility
-> - Sovol has slightly OC the TMC 2209 for X, Y and Z at 13 MHz instead of 12. However, the TMC 2209 for the extruder remain at 12 MHz
-> - The X, Y and extruder steppers are set to SpreadCycle mode
-> - Z steppers are set to Stealthchop. Although slightly less accurate, stealthchop is less noisier, and there's no real gain to set Z in SpreadCycle mode.
-> - You can try Z steppers in Spreadcycle mode by using this for the four Z steppers configuration instead of what is below
+> - Using more than 64 microsteps for X and Y will lead to overloading the MCU and will cause an error.
+> - Using more than 64 microsteps for Z will lead to a heavier load on the MCU, and seems to have no real benefits.
+> - To put the stepper in Spreadcycle mode, use `stealthchop_threshold: 0` or comment out the line `stealthchop_threshold: 999999`. Which way you find more readable is a matter of preference.
+> - Sovol has slightly OC-ed the TMC 2209 for X, Y and Z at 13 MHz (up from 12). However, the TMC 2209 for the extruder remains at 12 MHz.
+> - The X, Y and extruder steppers are set to SpreadCycle mode.
+> - The Z steppers are set to Stealthchop. Although slightly less accurate, stealthchop is less noisy, and there's no real advantage to setting Z to SpreadCycle mode.
+> - You can try Z steppers in Spreadcycle mode by using this configuration for the four Z steppers, instead of what is below:
 ```python
 #stealthchop_threshold: 999999 
 uart_address:3
@@ -32,7 +32,7 @@ driver_HSTRT: 0
 driver_HEND: 2
 ```
 
-- This is the values that you can copy-paste in your printer.cfg:
+- These are the values to copy and paste into your printer.cfg:
 
 ```python
 [stepper_x]
@@ -225,7 +225,7 @@ driver_HSTRT: 7
 driver_HEND: 8
 ```
 
-- You can also modify this settings to have a better Z probe and bed mesh accuracy :
+- You can also modify these settings to get better accuracy for Z-probing and the bed mesh:
 
 ```python
 [probe]
@@ -251,12 +251,12 @@ max_adjust: 10 #30
 
 [bed_mesh]
 speed: 350 #500                   
-split_delta_z: 0.0075 #0.016
+split_delta_z: 0.0125 #0.016
 ```
 
 ### - References
-- TMC2209 datasheet and configurator : https://www.trinamic.com/products/integrated-circuits/details/tmc2209-la/
-- Sovol SV08 motors datasheet : https://github.com/Sovol3d/SV08/tree/main/PDF/02%E7%94%B5%E6%9C%BA%20shengyang%20motor
-- Klipper TMC2209 recommended settings : https://www.klipper3d.org/Config_Reference.html#tmc2209
-- DrGhetto's TMC Driver Tuning Guide for Klipper : https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
+- TMC2209 datasheet and configurator: https://www.trinamic.com/products/integrated-circuits/details/tmc2209-la/
+- Sovol SV08 motors datasheet: https://github.com/Sovol3d/SV08/tree/main/PDF/02%E7%94%B5%E6%9C%BA%20shengyang%20motor
+- Klipper TMC2209 recommended settings: https://www.klipper3d.org/Config_Reference.html#tmc2209
+- DrGhetto's TMC Driver Tuning Guide for Klipper: https://github.com/MakerBogans/docs/wiki/TMC-Driver-Tuning
 
