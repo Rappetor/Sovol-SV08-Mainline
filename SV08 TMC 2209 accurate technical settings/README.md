@@ -3,8 +3,8 @@
 - Based on the 2209 datasheet and excel configurator from Triaxis, the Klipper recommendation settings for TMC 2209, and the motors datasheets by Sovol, this is the technical accurate settings for the TMC 2209.
 
 > [!CAUTION]
-> sense_resistor is based on board specification. Modify its values can lead to catastrophic failure and even burn of the motors
-> In the [extruder] section, be careful to uncomment this lines if you haven't done PID calibration :
+> - sense_resistor is based on board specification. Modify its values can lead to catastrophic failure and even burn of the motors
+> - In the [extruder] section, be careful to uncomment this lines if you haven't done PID calibration :
 ```python
 #control : pid
 #pid_kp : 33.838
@@ -13,6 +13,10 @@
 ```
 
 > [!NOTE]
+> - You can adjust `microsteps` from 16 to 256. 64 seems to be a safe value.
+> - Using more than 64 microsteps for X and Y lead to overload the MCU and cause an error
+> - Using more than 64 microsteps for Z lead to an heavier load on the MCU and seems to have no real benefits
+> - Using `stealthchop_threshold: 0` or commenting the line `stealthchop_threshold: 999999` put the stepper in Spreadcycle mode. It's a matter of preference for better readibility
 > - The X, Y and extruder steppers are set to SpreadCycle mode
 > - Z steppers are set to Stealthchop. Although slightly less accurate, stealthchop is less noisier, and there's no real gain to set Z in SpreadCycle mode.
 > - You can try Z steppers in Spreadcycle mode by using this for the four Z steppers configuration instead of what is below
@@ -24,10 +28,6 @@ driver_TOFF: 3
 driver_HSTRT: 0
 driver_HEND: 2
 ```
-> - You can adjust `microsteps` from 16 to 256. 64 seems to be a safe value.
-> - Using more than 64 microsteps for X and Y lead to overload the MCU and cause an error
-> - Using more than 64 microsteps for Z lead to an heavier load on the MCU and seems to have no real benefits
-> - Using `stealthchop_threshold: 0` or commenting the line `stealthchop_threshold: 999999` put the stepper in Spreadcycle mode. It's a matter of preference for better readibility
 
 - You can copy-paste this in your printer.cfg:
 
