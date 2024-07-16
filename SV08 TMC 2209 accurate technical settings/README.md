@@ -29,7 +29,7 @@ driver_HSTRT: 0
 driver_HEND: 2
 ```
 
-- You can copy-paste this in your printer.cfg:
+- This is the values that you can copy-paste this in your printer.cfg:
 
 ```python
 [stepper_x]
