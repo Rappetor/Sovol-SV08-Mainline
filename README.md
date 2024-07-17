@@ -412,7 +412,7 @@ You have to replace xxxx by what you have copied at [2](https://github.com/Haage
 
 ```python
 sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
+cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
 ```
 
 Now the mcu is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, you will see that it appears as katapult ID :
