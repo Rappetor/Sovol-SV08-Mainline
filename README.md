@@ -152,17 +152,18 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk.
 2. Open 'BoardEnv.txt' in your favourite text editor.
 3. You need the following settings, and only those settings (taken from the Sovol image, please change/add/adapt where necessary):
-   `    bootlogo=false
-    overlay_prefix=sun50i-h616
-    fdtfile=sun50i-h616-biqu-emmc
-    console=display
-    overlays=uart3
-    overlays=ws2812
-    overlays=spidev1_1
-    #------------------------------------------------#
-    rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
-    rootfstype=ext4
-   `
+   ```
+   bootlogo=false
+   overlay_prefix=sun50i-h616
+   fdtfile=sun50i-h616-biqu-emmc
+   console=display
+   overlays=uart3
+   overlays=ws2812
+   overlays=spidev1_1
+   #------------------------------------------------#
+   rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
+   rootfstype=ext4
+   ```
    > [!NOTE] > <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br> > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br> > <sub>**NOTE 3**: if you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br> > <sub>**NOTE 4**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
 
 - Save your changed BoardEnv.txt!
@@ -325,9 +326,11 @@ To make life easier in the future we are going to flash Katapult to our MCUs. Th
    ```
 
 2. When it's done, do <br>
-   `bash
-    cd ~/katapult && make menuconfig
-    `
+
+   ```bash
+   cd ~/katapult && make menuconfig
+   ```
+
    In menuconfig select the following options :<br>
    ![Katapult makemenu config settings](/images/katapult-firmware-settings.jpg)<br>
 
