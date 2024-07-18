@@ -340,6 +340,9 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 > [!NOTE]
 > The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now the printer starts up silently; no fans, no light and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
+> [!TIP]
+> Create a seperate txt file with the commands (and your serials) for later use. So doing a firmware update is just copy/paste those commands and you are done much faster!
+
 It's time to create and flash the Klipper firmware! In the future you only have to do this step when you need to update your Klipper firmware. *This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed.*
 1. Switch on the printer and SSH into the printer.
 2. Open the file printer.cfg. Look at the `[mcu]`and `[extra_mcu]`section, and copy-paste only the section circled in red for each mcu, we will need it later :
