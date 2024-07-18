@@ -86,7 +86,8 @@ Here we can use 3 methods:
 
 _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
-> [!NOTE] > _Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly._
+> [!NOTE]
+> _Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly._
 
 <br>
 
@@ -120,7 +121,8 @@ _You can now continue to **STEP 3**_
      -> Select the **SD card** <br>
      -> Flash! (this will erase everything on the SD card!)<br>
 
-> [!NOTE] > _Sidenote here: you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)_
+> [!NOTE]
+> _Sidenote here: you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)_
 
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.<br>
 
@@ -164,7 +166,11 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
    rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
    rootfstype=ext4
    ```
-   > [!NOTE] > <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br> > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br> > <sub>**NOTE 3**: if you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br> > <sub>**NOTE 4**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
+   > [!NOTE]
+   > <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br>
+   > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br>
+   > <sub>**NOTE 3**: if you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br>
+   > <sub>**NOTE 4**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
 
 - Save your changed BoardEnv.txt!
 
@@ -260,7 +266,9 @@ Next, we have to configure our printer and put back some addons Sovol has added 
 
    - Now you can print and use the sovol presets like before!
 
-> [!NOTE] > <sub>**NOTE 1**: all the .sh scripts in the macros have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br> > <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out at this point, the tool head MCU needs a new firmware for this, do the next steps and you can use it again.</sub>
+> [!NOTE]
+> <sub>**NOTE 1**: all the .sh scripts in the macros have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br>
+> <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out at this point, the tool head MCU needs a new firmware for this, do the next steps and you can use it again.</sub>
 
 <br>
 
@@ -429,7 +437,8 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 
 ![host_menuconfig](images/haa/haa_host_menuconfig.jpg)<br>
 
-> [!NOTE] > <sub>**NOTE 1**: Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> [!NOTE]
+> <sub>**NOTE 1**: Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
 - Press Q to quit and save changes.<br>
 
@@ -466,7 +475,8 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 ![toolhead_menuconfig](images/haa/haa_toolhead_menuconfig.jpg)<br>
 
-> [!NOTE] > <sub>**NOTE 1**: Because we are using Katapult as a bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> [!NOTE]
+> <sub>**NOTE 1**: Because we are using Katapult as a bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
 - Press Q to quit and save changes.<br>
 
