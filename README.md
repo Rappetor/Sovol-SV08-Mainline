@@ -84,7 +84,7 @@ Here we can use 3 methods:
 
 **Method 2**: Write the CB1 image to an SD card and use that to get the CB1 image on the eMMC.
 
-**\*Method 3**: Choose to run everything from the SD card and stop at Method 2.2\*
+_**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
 > [!NOTE] > _Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly._
 
@@ -103,7 +103,7 @@ Here we can use 3 methods:
      -> Flash! (this will erase everything on the eMMC!)
 4. After the flash is complete you can close BalenaEtcher. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB adapter and put it back in)
 
-\*You can now continue to **STEP 3\***
+_You can now continue to **STEP 3**_
 
 <br>
 
@@ -175,7 +175,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 
 5. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
-   - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline klipper. You can also continue **\*method 2**, point 6, and finalize writing the system to eMMC\*!
+   - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 6, and finalize writing the system to eMMC!_
 
 <br>
 
