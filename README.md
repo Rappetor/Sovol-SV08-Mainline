@@ -3,7 +3,8 @@
 Getting the Sovol SV08 onto mainline Klipper
 
 This repository will describe installing mainline/regular klipper (via KIAUH) on your Sovol SV08 with the BTT CB1 image.<br>
-<sub>Run it from either eMMC or SD card, you choose.</sub>
+
+<br>Run it from either eMMC or SD card, you choose.</br>
 
 **TL;DR**: _make a backup of klipper config, remove the eMMC from the printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put the eMMC back in the printer, install KIAUH; klipper, moonraker, and mainsail (and optional extras), create firmware(s), flash the tool head MCU and board MCU. DONE!_
 
