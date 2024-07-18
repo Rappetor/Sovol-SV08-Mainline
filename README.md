@@ -236,7 +236,9 @@ Please SSH into your printer and then do the following steps.
 
 Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
 
-1. RESTORE THE SOVOL ADDONS _(from the `/sovol-addons/` directory)_ :<br> - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)<br> - Put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.<br>
+1. RESTORE THE SOVOL ADDONS _(from the `/sovol-addons/` directory)_:<br>
+    - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
+    - Put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.<br>
 
 2. CONFIGURE PRINTER _(from the `/config/` directory)_ :<br>
 
