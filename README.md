@@ -34,7 +34,7 @@ Ok, now you can continue.
 
 - [PREREQUISITES](#prerequisites)
 - [STEP 1 - REMOVING THE EMMC FROM THE PRINTER](#step-1---removing-the-emmc-from-the-printer)
-- [STEP 2 - WRITE eMMC OS IMAGE](#step-2---write-emmc-os-image)
+- [STEP 2 - FLASHING MEDIA](#step-2---flashing-media)
   - [METHOD 1: WRITE IMAGE DIRECTLY TO eMMC](#method-1-write-image-directly-to-emmc)
   - [METHOD 2: WRITE IMAGE TO SD -> eMMC](#method-2-write-image-to-sd---emmc)
 - [STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI](#step-3---changes-to-the-boardenvtxt--setup-wi-fi)
@@ -75,9 +75,9 @@ Ok, now you can continue.
 
 <br>
 
-# STEP 2 - WRITE eMMC OS IMAGE
+# STEP 2 - FLASHING MEDIA
 
-Ok, first we need to set up our new eMMC module with the correct OS/Linux build. And for this, we are going to use the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this).
+First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases)
 
 Here we can use 3 methods:
 
@@ -111,7 +111,7 @@ _You can now continue to **STEP 3**_
 
 ## METHOD 2: WRITE IMAGE TO SD -> eMMC
 
-1. First get yourself de latest image from: https://github.com/bigtreetech/CB1/releases
+1. Write the image to the eMMC chip
 
    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz<br>
 
