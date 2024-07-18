@@ -184,20 +184,20 @@ Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker etc.
 Please SSH into your printer and then do the following steps.
 
 1. First we will update the OS:<br>
-    ```python
+    ```bash
    sudo apt update && sudo apt upgrade
     ```
 
 3. Then install git (might already be installed) and KIAUH with the following commands:
-   ```python
+   ```bash
    sudo apt-get update && sudo apt-get install git -y
    ```
-   ```python
+   ```bash
    cd ~ && git clone https://github.com/dw-0/kiauh.git
    ```
 
 4. Start KIAUH with the following command :
-   ```python
+   ```bash
    ./kiauh/kiauh.sh
    ```
 
@@ -206,7 +206,7 @@ Please SSH into your printer and then do the following steps.
     - Crowsnest install asks to reboot printer, please do so.
 
 7. Install Numpy (needed for input shaping)
-    ```python
+    ```bash
     sudo apt update
     sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-dev
     ~/klippy-env/bin/pip install -v numpy
@@ -245,7 +245,9 @@ Next we have to configure our printer and put back some addons Sovol has added (
         -> Machine<br>
         -> G-code<br>
         -> change your 'START_PRINT' line to this:<br>
-         `START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]`<br>
+         ```
+          START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
+         ```
 
     - Now you can print and use the sovol presets like before!
 
@@ -297,17 +299,17 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 To make life more easy in the future we are going to flash Katapult to our MCU's. This is a bootloader which makes it possible to flash Klipper firmware without the ST Link via regular SSH.
 1. Switch the printer on, SSH into the printer and install Katapult :
     - Run this command to install Katapult: <br>
-    ```python
+    ```bash
     cd ~ && git clone https://github.com/Arksine/katapult
     ```
 
     - Install pyserial with *(we need this later to flash the firmware)*<br>
-    ```python
+    ```bash
     pip3 install pyserial
     ```
     
 2. When it's done, do <br>
-    ```python
+    ```bash
     cd ~/katapult && make menuconfig
     ```
 And in menuconfig select the following options :<br>
@@ -315,7 +317,7 @@ And in menuconfig select the following options :<br>
 
 4. Press Q to quit and save changes.<br>
 5. Run the commands to build the firmware (*katapult.bin*):<br>
-    ```python
+    ```bash
     make clean
     make
     ```
@@ -354,7 +356,7 @@ It's time to create and flash the Klipper firmware! In the future you only have 
 ![alt text](images/haa/haa_printercfg_tty.jpg)
 
 You have to replace each id to have the same thing than above. To do that, find the correct serial name for the MCU with the command<br>
-```python
+```bash
 ls -la /dev/serial/by-id/
 ```
 You will have this :
@@ -378,7 +380,7 @@ Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the
 
 You have to replace xxxx by what you have copied at [2](#step-8---flash-klipper) for the mcu
 
-```python
+```bash
 sudo service klipper stop
 cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
 ```
@@ -391,7 +393,7 @@ You must never use the Katapult ID in any configuration file.
 
 Now, finish the process :
 
-```python
+```bash
 cd ~/klipper && make clean KCONFIG_CONFIG=host.mcu
 cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 ```
@@ -405,7 +407,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
 - Press Q to quit and save changes.<br>
 
 - And finally, to create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end by what you have at [2](#step-8---flash-klipper) for the mcu:<br>
-```python
+```bash
 cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
 ```
 
@@ -413,7 +415,7 @@ cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3
 
 You have to replace xxxx by what you have copied at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the extra mcu
 
-```python
+```bash
 sudo service klipper stop
 cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
 ```
@@ -427,7 +429,7 @@ You must never use the Katapult ID in any configuration file.
 
 Now, finish the process :
 
-```python
+```bash
 cd ~/klipper && make clean KCONFIG_CONFIG=toolhead.mcu
 cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 ```
@@ -442,12 +444,12 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 - Create the firmware and flash the toolhead MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end by what you have at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the extra mcu :<br>
 
-```python
+```bash
 cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
 ```
 
 2. Restart the printer with :
-```python
+```bash
 sudo shutdown -r now
 ```
 
@@ -459,7 +461,7 @@ Done! The Klipper firmware on the both MCU has been updated.
 ## Method 2:
 
 1. We are now going to create the klipper firmware, do
-```python
+```bash
 cd ~/klipper
 make menuconfig
 ```
@@ -472,21 +474,21 @@ and select the following options:<br>
 2. Press Q to quit and save changes.<br>
 
 3. Run the command to create the Klipper firmware (`klipper.bin`)
-```python
+```bash
 make clean
 make
 ```
 
 4. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU from SSH (without the ST Link):
     - Put the Katapult bootloader in DFU mode with this command
-```python
+```bash
 cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'
 ```
    (replace xxxxx with the serial you just copied)<br>
 
 - Now Katapult is in DFU mode, again look for the correct serial with
 
-```python
+```bash
 ls /dev/serial/by-id/*
 ```
 
@@ -495,18 +497,18 @@ ls /dev/serial/by-id/*
 and you should see one that starts with `usb-katapult_` and use that one (if you haven't flashed Klipper yet after Katapult you probably already had one started with `usb-katapult_` :thumbsup:).
 
 - Stop the klipper service with
-```python
+```bash
 sudo service klipper stop
 ```
 - Execute the flash with the following command
-```python
+```bash
 cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx
 ```
 (again replace xxxxx with the correct serial)
 
 - This will take the default klipper.bin from the `/klipper/out` folder and flash it.
 - Start the klipper service with
-```python
+```bash
 sudo service klipper start
 ```
 
