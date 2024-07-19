@@ -134,7 +134,7 @@ _You can now continue to **STEP 3**_
    - In diskpart run `clean` and it will erase everything/all partitions from the eMMC disk.
    - In diskpart run `exit` to exit
 
-![Diskpart](images/haa/diskpart.png)
+![Diskpart](images/haa/diskpart.jpg)
 
 _You can now continue to **STEP 3** and then come back here!_
 
