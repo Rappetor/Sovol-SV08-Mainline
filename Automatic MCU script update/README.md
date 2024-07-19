@@ -37,7 +37,7 @@ sudo chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 
 5. You can now use the script with :
 ```bash
-cd cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
+cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
 
 6. Follow the instructions until the end. You can find the configuration for each MCU in the chapter 8 of the main guide
