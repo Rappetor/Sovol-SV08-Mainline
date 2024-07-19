@@ -239,7 +239,7 @@ Next, we have to configure our printer and put back some addons Sovol has added 
 
 1. RESTORE THE SOVOL ADDONS _(from the `/sovol-addons/` directory)_:<br>
     - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
-    - Put the files 'probe_pressure.py' and 'z_offset_calibration.py' into the '/klipper/klippy/extras/' folder.<br>
+    - Put the files `'probe_pressure.py'` and `'z_offset_calibration.py'` into the `'/klipper/klippy/extras/'` folder.<br>
 
 2. CONFIGURE PRINTER _(from the `/config/` directory)_ :<br>
 
@@ -252,7 +252,7 @@ Next, we have to configure our printer and put back some addons Sovol has added 
 
      to the `~/printer_data/config` folder.<br>
 
-   - **IMPORTANT**: Open your backed-up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper*stm32f103xe*) to your new printer.cfg<br>
+   - **IMPORTANT**: Open your backed-up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx) to your new printer.cfg<br>
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 
@@ -426,7 +426,7 @@ Now the MCU is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, yo
 
 ![alt text](<images/haa/klipper firmware.png>)
 
-This is temporary and only during the flashing process in DFU Mode. After completing the flashing, and rebooting the MCU, it will revert to a Klipper ID.
+This is temporary and only during the flashing process in DFU Mode. After completing the flashing, and rebooting the printer, it will revert to a Klipper ID.
 You must never use the Katapult ID in any configuration file.
 
 Now, finish the process :
@@ -464,7 +464,7 @@ Now the MCU is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, yo
 
 ![alt text](<images/haa/klipper firmware.png>)
 
-This is temporary and only during the flashing process in DFU Mode. After completing the flashing, and rebooting the MCU, it will revert to a Klipper ID.
+This is temporary and only during the flashing process in DFU Mode. After completing the flashing, and rebooting the printer, it will revert to a Klipper ID.
 You must never use the Katapult ID in any configuration file.
 
 Now, finish the process :
