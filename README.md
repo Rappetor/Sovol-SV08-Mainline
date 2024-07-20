@@ -375,7 +375,7 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 > The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now, the printer starts up silently; no fans, no light, and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
 > [!TIP]
-> Create a separate text file with the commands (and your serials) for later use. So doing a firmware update is just copying/pasting those commands and you are done much faster!
+> Use the automatic update script made by @Haagel-FR! You can find it [HERE](/Automatic%20MCU%20script%20update). You can still follow the steps (method 1) below but it makes flashing the firmwares (now and in the future) much more easy.
 
 It's time to create and flash the Klipper firmware! In the future, you only have to do this step when you need to update your Klipper firmware. _This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed._
 
@@ -453,7 +453,7 @@ cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3
 
 ### For the tool head MCU:
 
-You have to replace xxxx with what you have copied at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the extra MCU
+You have to replace xxxx with what you have copied at [2](#step-8---flash-klipper) for the extra MCU
 
 ```bash
 sudo service klipper stop
@@ -483,7 +483,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 
 - Press Q to quit and save changes.<br>
 
-- Create the firmware and flash the tool head MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end with what you have at [2](https://github.com/Haagel-FR/Sovol-SV08-Mainline/blob/9a4694ee5ea671ae45c1a426ce40ee3499037206/README.md#L296) for the extra MCU:<br>
+- Create the firmware and flash the tool head MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end with what you have at [2](#step-8---flash-klipper) for the extra MCU:<br>
 
 ```bash
 cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
