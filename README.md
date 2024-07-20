@@ -267,7 +267,7 @@ Please SSH into your printer and then do the following steps.
       -> 'Before layer change G-code'<br>
       -> If not in there, add: `TIMELAPSE_TAKE_FRAME`<br>
 
-7. You have now installed mainline Klipper with the Mainsail web interface!
+7. You have now installed mainline Klipper with the Mainsail web interface (and addons)!
    - If you haven't rebooted after installing Crowsnest:<br> `sudo reboot`
    - After the board has rebooted, in your browser go to the Mainsail web interface (via the IP address or hostname) and check if it's running.
    - It will give an error since we still have to put our backed-up printer.cfg back.
