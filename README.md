@@ -180,6 +180,10 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
    - Optional: uncomment the hostname and set the hostname to e.g. "SV08"
    - Save changes to the system.cfg
 
+> [!NOTE]
+> if you are using an HDMI screen you will need to set the screen rotation to "inverted"
+
+
 5. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 6, and finalize writing the system to eMMC!_
@@ -218,6 +222,10 @@ Please SSH into your printer and then do the following steps.
    - So run KIAUH and choose: option **'1) [Install]'** and install those items (_using default options, download recommended macros; Yes_).
    - Crowsnest install asks to reboot the printer, please do so.
 
+> [!NOTE]
+> If you are using an HDMI screen, now is the time to install klipperscreen, do this BEFORE crowsnest so you dont have to reboot twice.
+
+
 5. Install Numpy (needed for input shaping)
 
    ```bash
@@ -243,16 +251,18 @@ Next, we have to configure our printer and put back some addons Sovol has added 
 
 2. CONFIGURE PRINTER _(from the `/config/` directory)_ :<br>
 
-   - Copy:<br>
+   - Copy the entire config folder to the `~/printer_data/config` folder.<br>
+
+   - this folder contains the following
+     `options\*`<br>
      `printer.cfg`<br>
      `sovol-macros.cfg`<br>
      `sovol-menu.cfg`<br>
      `saved_variables.cfg`<br>
      `crowsnest.conf`<br>
 
-     to the `~/printer_data/config` folder.<br>
 
-   - **IMPORTANT**: Open your backed-up printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx) to your new printer.cfg<br>
+   - **IMPORTANT**: Open your backup of your printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx) to your new printer.cfg<br>
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 
