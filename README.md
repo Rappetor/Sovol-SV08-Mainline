@@ -3,9 +3,10 @@
 Getting the Sovol SV08 onto mainline Klipper
 
 This repository will describe installing mainline/regular klipper (via KIAUH) on your Sovol SV08 with the BTT CB1 image.<br>
-<sub>Run it from either eMMC or SD card, you choose.</sub>
 
-**TL;DR**: _make a backup of klipper config, remove the eMMC from the printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put the eMMC back in the printer, install KIAUH; klipper, moonraker, and mainsail (and optional extras), create firmware(s), flash the tool head MCU and board MCU. DONE!_
+Run it from either eMMC or SD card, you choose.<br>
+
+**TL;DR**: _make a backup of klipper config, remove the eMMC from the printer, write CB1 image to eMMC, change BoardEnv.txt and system.txt, put the eMMC back in the printer, install KIAUH; klipper, moonraker, and mainsail (and optional extras), create firmware(s), flash the tool head MCU and board MCU. DONE!_
 
 <br>
 
@@ -33,7 +34,7 @@ Ok, now you can continue.
 
 - [PREREQUISITES](#prerequisites)
 - [STEP 1 - REMOVING THE EMMC FROM THE PRINTER](#step-1---removing-the-emmc-from-the-printer)
-- [STEP 2 - WRITE eMMC OS IMAGE](#step-2---write-emmc-os-image)
+- [STEP 2 - FLASHING MEDIA](#step-2---flashing-media)
   - [METHOD 1: WRITE IMAGE DIRECTLY TO eMMC](#method-1-write-image-directly-to-emmc)
   - [METHOD 2: WRITE IMAGE TO SD -> eMMC](#method-2-write-image-to-sd---emmc)
 - [STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI](#step-3---changes-to-the-boardenvtxt--setup-wi-fi)
@@ -74,9 +75,9 @@ Ok, now you can continue.
 
 <br>
 
-# STEP 2 - WRITE eMMC OS IMAGE
+# STEP 2 - FLASHING MEDIA
 
-Ok, first we need to set up our new eMMC module with the correct OS/Linux build. And for this, we are going to use the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this).
+First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases)
 
 Here we can use 3 methods:
 
@@ -110,7 +111,7 @@ _You can now continue to **STEP 3**_
 
 ## METHOD 2: WRITE IMAGE TO SD -> eMMC
 
-1. First get yourself de latest image from: https://github.com/bigtreetech/CB1/releases
+1. Write the image to the eMMC chip
 
    - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz<br>
 
@@ -133,7 +134,7 @@ _You can now continue to **STEP 3**_
    - In diskpart run `clean` and it will erase everything/all partitions from the eMMC disk.
    - In diskpart run `exit` to exit
 
-![Diskpart](images/haa/diskpart.png)
+![Diskpart](images/haa/diskpart.jpg)
 
 _You can now continue to **STEP 3** and then come back here!_
 
@@ -149,7 +150,7 @@ _You can now continue to **STEP 3** and then come back here!_
 
 # STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
 
-To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
+To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.txt
 
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk.
 2. Open 'BoardEnv.txt' in your favourite text editor.
@@ -174,10 +175,10 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 
 - Save your changed BoardEnv.txt!
 
-4. Change the Wi-Fi credentials in the 'system.cfg'
+4. Change the Wi-Fi credentials in the 'system.txt'
 
    - Optional: uncomment the hostname and set the hostname to e.g. "SV08"
-   - Save changes to the system.cfg
+   - Save changes to the system.txt
 
 5. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
