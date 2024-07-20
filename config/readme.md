@@ -5,6 +5,7 @@ It will restore as many as the stock Sovol functions as possible and will give y
 ## Printer cfg
 - Please make sure you add the correct serials under the [mcu] and [mcu extra_mcu] configs (check your Sovol printer.cfg backup for this!).
     - Didn't backup your Sovol printer.cfg? You can find it with this command in SSH: `ls /dev/serial/by-id/*` or use KIAUH for this.
+- Please uncomment the display import(s) you want to use at the top of the printer.cfg.
 - Run currents have been changed to more sensible values (Sovol confused max rating with RMS ratings it seems). Printer now runs more quiet and cooler.
 - `max_accel_to_decel` is deprecated, so added new `minimum_cruise_ratio` value.
 - Changed the `MCU_fan` to only run when the printer is doing something (either steppers homed or hotend/bed heating) with a 5 minute timeout.
