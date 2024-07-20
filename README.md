@@ -486,7 +486,7 @@ cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
 - Create the firmware and flash the tool head MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end with what you have at [2](#step-8---flash-klipper) for the extra MCU:<br>
 
 ```bash
-cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
+cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
 ```
 
 2. Restart the printer with :
