@@ -448,7 +448,7 @@ Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the
 
 3. Download the script  [Automatic MCU script update](<Automatic MCU script update/update_klipper_mcus_sv08.sh>) and copy it in your `~/Klipper` folder on the printer
 
-4. Edit it with nano to change the ID of each MCU with what you have copied at [2](#step-8---flash-klipper):
+4. Edit it with nano to change the ID of each MCU with what you have copied at [2](#step-8---flash-klipper-firmware-on-mcus):
 ```batch
 sudo nano ~/Klipper/update_klipper_mcus_sv08.sh
 ``` 
