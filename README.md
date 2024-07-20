@@ -6,7 +6,7 @@ This repository will describe installing mainline/regular klipper (via KIAUH) on
 
 Run it from either eMMC or SD card, you choose.<br>
 
-**TL;DR**: _make a backup of klipper config, remove the eMMC from the printer, write CB1 image to eMMC, change BoardEnv.txt and system.txt, put the eMMC back in the printer, install KIAUH; klipper, moonraker, and mainsail (and optional extras), create firmware(s), flash the tool head MCU and board MCU. DONE!_
+**TL;DR**: _make a backup of klipper config, remove the eMMC from the printer, write CB1 image to eMMC, change BoardEnv.txt and system.cfg, put the eMMC back in the printer, install KIAUH; klipper, moonraker, and mainsail (and optional extras), create firmware(s), flash the tool head MCU and board MCU. DONE!_
 
 <br>
 
@@ -150,7 +150,7 @@ _You can now continue to **STEP 3** and then come back here!_
 
 # STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
 
-To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.txt
+To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk.
 2. Open 'BoardEnv.txt' in your favourite text editor.
@@ -175,10 +175,10 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 
 - Save your changed BoardEnv.txt!
 
-4. Change the Wi-Fi credentials in the 'system.txt'
+4. Change the Wi-Fi credentials in the 'system.cfg'
 
    - Optional: uncomment the hostname and set the hostname to e.g. "SV08"
-   - Save changes to the system.txt
+   - Save changes to the system.cfg
 
 5. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
