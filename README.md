@@ -42,7 +42,7 @@ Ok, now you can continue.
 - [STEP 5 - CONFIGURE PRINTER/KLIPPER & ADDONS](#step-5---configure-printerklipper--addons)
 - [STEP 6 - STOCK FIRMWARE BACKUP](#step-6---stock-firmware-backup)
 - [STEP 7 - FLASH KATAPULT BOOTLOADER](#step-7---flash-katapult-bootloader)
-- [STEP 8 - FLASH KLIPPER](#step-8---flash-klipper)
+- [STEP 8 - FLASH KLIPPER FIRMWARE on MCUs](#step-8---flash-klipper-firmware-on-mcus)
 - [BIG THANKS & CONTRIBUTE](#big-thanks--contribute)
 - [DISCLAIMER](#disclaimer)
 
@@ -412,17 +412,18 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 
 <br>
 
-# STEP 8 - FLASH KLIPPER
+# STEP 8 - FLASH KLIPPER FIRMWARE on MCUs
 
 > [!NOTE]
 > The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now, the printer starts up silently; no fans, no light, and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
 > [!TIP]
-> Use the automatic update script made by @Haagel-FR! You can find it [HERE](/Automatic%20MCU%20script%20update). You can still follow the steps (method 1, use the Klipper firmware configuration screenshots) below but it makes flashing the firmwares (now and in the future) much more easy.
+> For future update, start at [7](#step-8---flash-klipper)
 
 It's time to create and flash the Klipper firmware! In the future, you only have to do this step when you need to update your Klipper firmware. _This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed._
 
 1. Switch on the printer and SSH into the printer.
+
 2. Open the file printer.cfg. Look at the `[mcu]` and `[extra_mcu]` sections, and copy-paste only the section circled in red for each MCU, we will need it later:
 
 ![alt text](images/haa/haa_printercfg.jpg)
@@ -445,172 +446,74 @@ Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the
 
 ![alt text](images/haa/haa_printercfg2.jpg)
 
-## Two Methods:
+3. Download the script  [Automatic MCU script update](<Automatic MCU script update/update_klipper_mcus_sv08.sh>) and copy it in your `~/Klipper` folder on the printer
 
-#### Method 1 to have the _MCU fan and light_ and _hotend fan_ enabled during boot, as it is in the original Sovol firmware
+4. Edit it with nano to change the ID of each MCU with what you have copied at [2](#step-8---flash-klipper):
+```batch
+sudo nano ~/Klipper/update_klipper_mcus_sv08.sh
+``` 
+- Replace XXXXXXX with the `[mcu]` serial ID, and YYYYYYY with the `[extra mcu]` serial ID :
 
-#### Method 2 to have nothing start at boot<br>
+*printer.cfg<br>*
+![alt text](images/haa/haa_amu_printercfg.jpg)
 
-## Method 1:
-
-<br>
-1. We are now going to make the Klipper firmware and create a profile for each MCU.<br>
-
-### For the mainboard MCU:
-
-You have to replace xxxx with what you have copied at [2](#step-8---flash-klipper) for the MCU
+*update_klipper_mcus_sv08.sh<br>*
+```bash
+#Replace each serial number with the one you find in your printer.cfg file
+#HOSTSERIAL = [mcu]
+#TOOLHEADSERIAL = [extra mcu]
+HOSTSERIAL='XXXXXXX'
+TOOLHEADSERIAL='YYYYYYY'
+```
+- You should now have this in the script :
 
 ```bash
-sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
+#Replace each serial number with the one you find in your printer.cfg file
+#HOSTSERIAL = [mcu]
+#TOOLHEADSERIAL = [extra mcu]
+HOSTSERIAL='34FFDA05334D593524680951-if00'
+TOOLHEADSERIAL='31FF700630464E3225480643-if00'
 ```
+5. Save the file with `Ctrl + X`
 
-Now the MCU is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, you will see that it appears with a Katapult ID:
-
-![alt text](<images/haa/klipper firmware.png>)
-
-This is temporary and only during the flashing process in DFU Mode. After completing the flashing, and rebooting the printer, it will revert to a Klipper ID.
-You must never use the Katapult ID in any configuration file.
-
-Now, finish the process :
-
+6. Make the script executable :
 ```bash
-cd ~/klipper && make clean KCONFIG_CONFIG=host.mcu
-cd ~/klipper && make menuconfig KCONFIG_CONFIG=host.mcu
+sudo chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 ```
 
-- Choose the following option and add `PA1,PA3` on the last line (_GPIO pins_):<br>
+7. You can now use the script with :
+```bash
+cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
+```
 
-![host_menuconfig](images/haa/haa_host_menuconfig.jpg)<br>
+8. In the first menuconfig screen for the **`HOST`**,choose the following option and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot) :<br>
+
+![alt text](images/haa/haa_host_menuconfig.jpg)
 
 > [!NOTE]
 > <sub>**NOTE 1**: Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-- Press Q to quit and save changes.<br>
+9. In the second menuconfig screen for the **`TOOLHEAD`**,choose the following option and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot) :<br>
 
-- Finally, create the firmware and flash the host MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end with what you have at [2](#step-8---flash-klipper) for the MCU:<br>
-
-```bash
-cd ~/klipper && make KCONFIG_CONFIG=host.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
-```
-
-### For the tool head MCU:
-
-You have to replace xxxx with what you have copied at [2](#step-8---flash-klipper) for the extra MCU
-
-```bash
-sudo service klipper stop
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx")'
-```
-
-Now the MCU is in DFU mode. At this step, if you do `ls /dev/serial/by-id/*`, you will see that it appears with a Katapult ID :
-
-![alt text](<images/haa/klipper firmware.png>)
-
-This is temporary and only during the flashing process in DFU Mode. After completing the flashing, and rebooting the printer, it will revert to a Klipper ID.
-You must never use the Katapult ID in any configuration file.
-
-Now, finish the process :
-
-```bash
-cd ~/klipper && make clean KCONFIG_CONFIG=toolhead.mcu
-cd ~/klipper && make menuconfig KCONFIG_CONFIG=toolhead.mcu
-```
-
-- Choose the following option and add `PA6`on the last line (_GPIO pins_):<br>
-
-![toolhead_menuconfig](images/haa/haa_toolhead_menuconfig.jpg)<br>
+![alt text](images/haa/haa_toolhead_menuconfig.jpg)
 
 > [!NOTE]
-> <sub>**NOTE 1**: Because we are using Katapult as a bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> <sub>**NOTE 1**: Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-- Press Q to quit and save changes.<br>
+10. Finally follow the instructions until the end :
 
-- Create the firmware and flash the tool head MCU (your serial should now start with `usb-katapult_`). Once again, replace the xxxx at the end with what you have at [2](#step-8---flash-klipper) for the extra MCU:<br>
+![alt text](images/haa/haa_automatic_mcu_update.jpg)
 
-```bash
-cd ~/klipper && make KCONFIG_CONFIG=toolhead.mcu && cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/usb-katapult_stm32f103xe_xxxx
-```
+11. Done! The Klipper firmware on both MCU has been updated.
 
-2. Restart the printer with :
-
+12. Restart the printer :
 ```bash
 sudo shutdown -r now
 ```
 
-3. After the restart, in case you flashed the tool head MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
+13. After the restart, in case you flashed the tool head MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
 
-Done! The Klipper firmware on both MCUs has been updated.
-<br>
-
-## Method 2:
-
-1. We are now going to create the Klipper firmware, do
-
-```bash
-cd ~/klipper
-make menuconfig
-```
-
-and select the following options:<br>
-
-![Klipper makemenu config settings](/images/klipper-firmware-settings-katapult.jpg)
-
-> <sub>**NOTE 1**: because we are using Katapult as a bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
-
-2. Press Q to quit and save changes.<br>
-
-3. Run the command to create the Klipper firmware (`klipper.bin`)
-
-```bash
-make clean
-make
-```
-
-4. Since we flashed Katapult earlier we should now be able to flash the Klipper firmware to our MCU from SSH (without the ST-Link):
-   - Put the Katapult bootloader in DFU mode with this command:
-
-```bash
-cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/xxxxx")'
-```
-
-(replace xxxxx with the serial you just copied)<br>
-
-- Now Katapult is in DFU mode, again look for the correct serial with
-
-```bash
-ls /dev/serial/by-id/*
-```
-
-![alt text](<images/haa/klipper firmware.png>)<br>
-
-You should see one that starts with `usb-katapult_` and use that one (if you haven't flashed Klipper yet after Katapult you probably already had one starting with `usb-katapult_` :thumbsup:).
-
-- Stop the Klipper service with
-
-```bash
-sudo service klipper stop
-```
-
-- Execute the flash with the following command
-
-```bash
-cd ~/katapult/scripts && python3 flashtool.py -d /dev/serial/by-id/xxxxx
-```
-
-(again replace xxxxx with the correct serial)
-
-- This will take the default klipper.bin from the `/klipper/out` folder and flash it.
-- Start the Klipper service with
-
-```bash
-sudo service klipper start
-```
-
-5. Do a firmware restart and you are ready. In case you flashed the tool head MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg<br>
-   <br>
-
-Done! The Klipper firmware on the MCU has been updated. Do this for both the tool head MCU and the mainboard MCU.
+13. Enjoy mainline Klipper ! 
 
 <br>
 
