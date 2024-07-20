@@ -233,8 +233,41 @@ Please SSH into your printer and then do the following steps.
    sudo apt install python3-numpy python3-matplotlib libatlas-base-dev libopenblas-dev
    ~/klippy-env/bin/pip install -v numpy
    ```
+6. Install _Moonraker-timelapse_
+   - See [https://github.com/mainsail-crew/moonraker-timelapse](https://github.com/mainsail-crew/moonraker-timelapse) for detailed information.
+   - First install moonraker-timelapse:
+   ```bash
+   cd ~/
+   git clone https://github.com/mainsail-crew/moonraker-timelapse.git
+   cd ~/moonraker-timelapse
+   make install
+   ```
+   - Then edit your `moonraker.conf` and add the following lines:
+   ```bash
+   [update_manager timelapse]
+   type: git_repo
+   primary_branch: main
+   path: ~/moonraker-timelapse
+   origin: https://github.com/mainsail-crew/moonraker-timelapse.git
+   managed_services: klipper moonraker
 
-6. You have now installed mainline Klipper with the Mainsail web interface!
+   [timelapse]
+   ##   Following basic configuration is default to most images and don't need
+   ##   to be changed in most scenarios. Only uncomment and change it if your
+   ##   Image differ from standart installations. In most common scenarios 
+   ##   a User only need [timelapse] in their configuration.
+   output_path: ~/timelapse/                ##   Directory where the generated video will be saved
+   frame_path: /tmp/timelapse/              ##   Directory where the temporary frames are saved
+   ffmpeg_binary_path: /usr/bin/ffmpeg      ##   Directory where ffmpeg is installed
+   ```
+   - After this you can configure the timelapse in your Mainsail Interface Settings.
+   - Check your slicer (e.g. Orca Slicer), your printer profile should have the timelapse frame g-code. You will find this under:<br>
+      -> Printer settings<br>
+      -> Machine G-Code<br>
+      -> 'Before layer change G-code'<br>
+      -> If not in there, add: `TIMELAPSE_TAKE_FRAME`<br>
+
+7. You have now installed mainline Klipper with the Mainsail web interface!
    - If you haven't rebooted after installing Crowsnest:<br> `sudo reboot`
    - After the board has rebooted, in your browser go to the Mainsail web interface (via the IP address or hostname) and check if it's running.
    - It will give an error since we still have to put our backed-up printer.cfg back.
