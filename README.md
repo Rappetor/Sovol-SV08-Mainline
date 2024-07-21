@@ -511,7 +511,7 @@ cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 sudo shutdown -r now
 ```
 
-13. After the restart, in case you flashed the tool head MCU you can now uncomment the [adxl345] and [resonance_tester] parts in your printer.cfg
+13. After the restart, you can uncomment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg
 
 13. Enjoy mainline Klipper ! 
 
