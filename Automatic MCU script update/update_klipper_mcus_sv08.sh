@@ -54,7 +54,7 @@ flash_toolhead(){
 	echo -e "${YELLOW}Step 4/4: Flashing Klipper to Toolhead MCU.${NC}"
 	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$TOOLHEADSERIAL'")'
 	sleep 3
-	~/katapult/scripts/flashtool.py -f ~/klipper/host_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_stm32f103xe_$TOOLHEADSERIAL
+	~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_stm32f103xe_$TOOLHEADSERIAL
 }
 
 #SCRIPT EXECUTION
