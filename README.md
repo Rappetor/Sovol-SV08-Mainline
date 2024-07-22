@@ -180,7 +180,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
    - Optional: uncomment the hostname and set the hostname to e.g. "SV08"
    - Save changes to the system.cfg
 
-> [!CAUTION]
+> [!IMPORTANT]
 > if you are using an HDMI screen you will need to set the screen rotation to "inverted"
 
 
@@ -222,7 +222,7 @@ Please SSH into your printer and then do the following steps.
    - So run KIAUH and choose: option **'1) [Install]'** and install those items (_using default options, download recommended macros; Yes_).
    - Crowsnest install asks to reboot the printer, please do so.
 
-> [!CAUTION]
+> [!IMPORTANT]
 > If you are using an HDMI screen, now is the time to install klipperscreen, do this BEFORE crowsnest so you dont have to reboot twice.
 
 
