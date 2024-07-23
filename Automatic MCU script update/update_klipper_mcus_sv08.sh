@@ -3,8 +3,8 @@
 #Replace each serial number with the one you find in your printer.cfg file
 #HOSTSERIAL = [mcu]
 #TOOLHEADSERIAL = [extra mcu]
-HOSTSERIAL='XXXXXXX'
-TOOLHEADSERIAL='YYYYYYY'
+HOSTSERIAL=''
+TOOLHEADSERIAL=''
 
 #COLORS
 MAGENTA=$'\e[35m\n'
