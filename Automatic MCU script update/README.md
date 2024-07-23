@@ -1,7 +1,7 @@
 # Automatic MCU update script
 
 ## Install
-Please look at [Step 8](https://github.com/Rappetor/Sovol-SV08-Mainline/tree/main?tab=readme-ov-file#step-7---flash-katapult-bootloader) how to prepare the script.<br>
+Please look at [Step 8](https://github.com/Rappetor/Sovol-SV08-Mainline/tree/main?tab=readme-ov-file#step-8---flash-klipper-firmware-on-mcus) how to prepare the script.<br>
 _Short version:_
 - Copy the `update_klipper_mcus_sv08.sh` script to your `~/klipper` folder.
 - Edit the script and enter your device serials (the serial parts after `stm32f103xe_`).
