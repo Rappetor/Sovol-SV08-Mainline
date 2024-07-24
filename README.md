@@ -335,19 +335,21 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 2. Turn the printer OFF and remove the ST-Link from your computer, next connect the ST-Link to your board (either tool head or mainboard).
 
-   - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is; 3.3v - IO - CLK - GND
-   - Refer to your ST-Link manual for the pinout on the adapter!
+   - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is (SV08 -> ST-Link Mini):
+     - 3V3 -> 3.3V
+     - IO -> SWDIO
+     - CK -> SWCLK
+     - G -> GND
+   - Refer to your ST-Link manual for the pinout on the adapter (not all ST-Links have the exact same pinout)!
 
-   ### Toolhead wiring example:
+  ### Mainboard ST-Link pins location:
+  ![mainboard st-link pins location](images/board-stlink-pins.jpg)
+  
+  ### Toolhead ST-Link pins location:
+  ![toolhead st-link pins location](images/toolhead-stlink-pins.jpg)
 
-   <p><img src="images/stlink-cables.jpg" alt="toolhead cabling" height="400" align="middle"></p>
-
-   ### Motherboard wiring example:
-
-   <p><img src="images/haa/haa-flash-mb1.jpg" alt="MB cabling" height="400" align="middle"></p><br>
-
-3. Insert the ST-Link into your computer, open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
-4. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
+4. Insert the ST-Link into your computer, open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
+5. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
 
 ![read all](images/stlink-firmware-read-all.jpg)
 
