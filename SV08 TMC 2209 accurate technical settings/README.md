@@ -7,7 +7,7 @@
 > - sense_resistor is based on the board specification. Modifying its values can lead to catastrophic failure and even burning the motors.
 > - In the [extruder] section, adjust `rotation_distance` to your own values.
 > - In the [extruder] section, be careful to uncomment these lines if you haven't done PID calibration:
-```python
+```ini
 #control : pid
 #pid_kp : 33.838
 #pid_ki : 5.223
@@ -23,7 +23,7 @@
 > - The X, Y and extruder steppers are set to SpreadCycle mode.
 > - The Z steppers are set to Stealthchop. Although slightly less accurate, stealthchop is less noisy, and there's no real advantage to setting Z to SpreadCycle mode.
 > - You can try Z steppers in Spreadcycle mode by using this configuration for the four Z steppers, instead of what is below:
-```python
+```ini
 #stealthchop_threshold: 999999 
 uart_address:3
 driver_TBL: 1
@@ -34,7 +34,7 @@ driver_HEND: 2
 
 - These are the values to copy and paste into your printer.cfg:
 
-```python
+```ini
 [stepper_x]
 step_pin: PE2
 dir_pin: !PE0
@@ -227,7 +227,7 @@ driver_HEND: 8
 
 - You can also modify these settings to get better accuracy for Z-probing and the bed mesh:
 
-```python
+```ini
 [probe]
 pin: extra_mcu:PB6    
 x_offset: -17                  
