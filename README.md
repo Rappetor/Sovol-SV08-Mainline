@@ -153,9 +153,10 @@ _You can now continue to **STEP 3** and then come back here!_
 To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk.
-2. Open 'BoardEnv.txt' in your favourite text editor.
-3. You need the following settings, and only those settings (taken from the Sovol image, please change/add/adapt where necessary):
-   ```
+2. Open 'BoardEnv.txt' in your favourite text editor. Take note of the existing `rootdev` (rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx) and `rootfstype` (rootfstype=ext4)
+3. Replace the content of the file with following code and replace the `rootdev` and `rootfstype` with what you had previously in your BoardEnv file.
+   1. If you run on eMMC
+   ```ini
    bootlogo=false
    overlay_prefix=sun50i-h616
    fdtfile=sun50i-h616-biqu-emmc
@@ -164,14 +165,24 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
    overlays=ws2812
    overlays=spidev1_1
    #------------------------------------------------#
-   rootdev=UUID=795...WHATEVER-WAS-THE-ORIGINAL-VALUE-SEE-NOTE-1...274
+   rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx
+   rootfstype=ext4
+   ```
+   2. If you run on an SD card
+   ```ini
+   bootlogo=false
+   overlay_prefix=sun50i-h616
+   fdtfile=sun50i-h616-biqu-sd
+   console=display
+   overlays=uart3
+   overlays=ws2812
+   overlays=spidev1_1
+   #------------------------------------------------#
+   rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx
    rootfstype=ext4
    ```
   > [!NOTE]
-  > <sub>**NOTE 1**: just keep the rootdev and rootfstype under the #----# line as they are in your BoardEnv.txt, don't copy the above if not the same</sub><br>
-  > <sub>**NOTE 2**: `fdtfile=sun50i-h616-biqu-emmc` is needed so your eMMC is supported and available</sub><br>
-  > <sub>**NOTE 3**: if you want to run everything from the SD card, then you can keep it like this: `fdtfile=sun50i-h616-biqu-sd`</sub><br>
-  > <sub>**NOTE 4**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
+  > <sub>**NOTE**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
 
 - Save your changed BoardEnv.txt!
 
