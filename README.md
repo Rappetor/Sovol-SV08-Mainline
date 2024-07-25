@@ -254,7 +254,7 @@ Please SSH into your printer and then do the following steps.
    make install
    ```
    - Then edit your `moonraker.conf` and add the following lines:
-   ```bash
+   ```ini
    [update_manager timelapse]
    type: git_repo
    primary_branch: main
@@ -317,7 +317,7 @@ Next, we have to configure our printer and put back some addons Sovol has added 
      -> G-code<br>
      -> Change your 'START_PRINT' line to this:<br>
 
-     ```
+     ```gcode
       START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
      ```
 
