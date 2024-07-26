@@ -505,19 +505,19 @@ sudo chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
 
-8. In the first menuconfig screen for the **`HOST`**,choose the following option and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot) :<br>
+8. In the first menuconfig screen for the **`HOST`**,choose the following option and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot), when ready press Q to quit & save :<br>
 
 ![alt text](images/haa/haa_host_menuconfig.jpg)
 
 > [!NOTE]
-> <sub>**NOTE 1**: Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-9. In the second menuconfig screen for the **`TOOLHEAD`**,choose the following option and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot) :<br>
+9. In the second menuconfig screen for the **`TOOLHEAD`**,choose the following option and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save :<br>
 
 ![alt text](images/haa/haa_toolhead_menuconfig.jpg)
 
 > [!NOTE]
-> <sub>**NOTE 1**: Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
+> <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
 10. Finally follow the instructions until the end :
 
