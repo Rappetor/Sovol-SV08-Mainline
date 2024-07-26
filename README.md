@@ -362,7 +362,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
   ### Toolhead ST-Link pins location:
   ![toolhead st-link pins location](images/toolhead-stlink-pins-v2.jpg)
 
-4. Insert the ST-Link into your computer, open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
+4. Insert the ST-Link into your computer (_printer stays off_), open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
 5. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
 
 ![read all](images/stlink-firmware-read-all.jpg)
@@ -416,7 +416,7 @@ To make life easier in the future we are going to flash Katapult to our MCUs. Th
    ```
 
 5. Grab the file `~/katapult/out/katapult.bin` (e.g. with an FTP program) and store it on the computer. You can use this Katapult firmware for both the tool head and the mainboard.
-6. Turn OFF the printer again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
+6. _Turn OFF the printer_ again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
 7. Once connected, on the left side of the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 
 ![Full chip erase](images/haa/STM32/Etape4.png)
