@@ -32,19 +32,19 @@ Ok, now you can continue.
 
 # INDEX
 
-- [PREREQUISITES](#prerequisites)
-- [STEP 1 - REMOVING THE EMMC FROM THE PRINTER](#step-1---removing-the-emmc-from-the-printer)
-- [STEP 2 - FLASHING MEDIA](#step-2---flashing-media)
-  - [METHOD 1: WRITE IMAGE DIRECTLY TO eMMC](#method-1-write-image-directly-to-emmc)
-  - [METHOD 2: WRITE IMAGE TO SD -> eMMC](#method-2-write-image-to-sd---emmc)
-- [STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI](#step-3---changes-to-the-boardenvtxt--setup-wi-fi)
-- [STEP 4 - INSTALL MAINLINE KLIPPER](#step-4---install-mainline-klipper)
-- [STEP 5 - CONFIGURE PRINTER/KLIPPER & ADDONS](#step-5---configure-printerklipper--addons)
-- [STEP 6 - STOCK FIRMWARE BACKUP](#step-6---stock-firmware-backup)
-- [STEP 7 - FLASH KATAPULT BOOTLOADER](#step-7---flash-katapult-bootloader)
-- [STEP 8 - FLASH KLIPPER FIRMWARE on MCUs](#step-8---flash-klipper-firmware-on-mcus)
-- [BIG THANKS & CONTRIBUTE](#big-thanks--contribute)
-- [DISCLAIMER](#disclaimer)
+- [Prerequisites](#prerequisites)
+- [STEP 1 - Removing The Emmc From The Printer](#step-1---removing-the-emmc-from-the-printer)
+- [STEP 2 - Flashing Media](#step-2---flashing-media)
+  - [METHOD 1: Write Image Directly To eMMC](#method-1-write-image-directly-to-emmc)
+  - [METHOD 2: Write Image To SD -> eMMC](#method-2-write-image-to-sd---emmc)
+- [STEP 3 - Changes To The BOARDENV.TXT & Setup WI-FI](#step-3---changes-to-the-boardenvtxt--setup-wi-fi)
+- [STEP 4 - Install Mainline Klipper](#step-4---install-mainline-klipper)
+- [STEP 5 - Configure Printer/Klipper & Addons](#step-5---configure-printerklipper--addons)
+- [STEP 6 - Stock Firmware Backup](#step-6---stock-firmware-backup)
+- [STEP 7 - Flash Katapult Bootloader](#step-7---flash-katapult-bootloader)
+- [STEP 8 - Flash Klipper Firmware On MCUs](#step-8---flash-klipper-firmware-on-mcus)
+- [Big Thanks & Contribute](#big-thanks--contribute)
+- [Disclaimer](#disclaimer)
 
 # PREREQUISITES
 
