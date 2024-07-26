@@ -33,7 +33,7 @@ Ok, now you can continue.
 # INDEX
 
 - [Prerequisites](#prerequisites)
-- [STEP 1 - Removing The Emmc From The Printer](#step-1---removing-the-emmc-from-the-printer)
+- [STEP 1 - Removing The eMMC From The Printer](#step-1---removing-the-emmc-from-the-printer)
 - [STEP 2 - Flashing Media](#step-2---flashing-media)
   - [METHOD 1: Write Image Directly To eMMC](#method-1-write-image-directly-to-emmc)
   - [METHOD 2: Write Image To SD -> eMMC](#method-2-write-image-to-sd---emmc)
