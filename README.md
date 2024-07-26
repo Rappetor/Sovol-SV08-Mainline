@@ -353,11 +353,14 @@ It's important to make a backup of the current (stock) firmware. This way you ca
      - G -> GND
    - Refer to your ST-Link manual for the pinout on the adapter (not all ST-Links have the exact same pinout)!
 
+> [!CAUTION]
+> Mind the orientation of the boards in pictures below, refer to the markings on the mainboard/toolhead!
+
   ### Mainboard ST-Link pins location:
-  ![mainboard st-link pins location](images/board-stlink-pins.jpg)
+  ![mainboard st-link pins location](images/board-stlink-pins-v2.jpg)
   
   ### Toolhead ST-Link pins location:
-  ![toolhead st-link pins location](images/toolhead-stlink-pins.jpg)
+  ![toolhead st-link pins location](images/toolhead-stlink-pins-v2.jpg)
 
 4. Insert the ST-Link into your computer, open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
 5. Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
