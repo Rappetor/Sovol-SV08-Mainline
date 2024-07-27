@@ -90,6 +90,9 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 > [!NOTE]
 > _Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly._
 
+> [!TIP]
+> Some people get an error while booting, or it doesn't want to boot at all, after writing the image with Balena Etcher. Some have had succes writing the image with the `Raspberry Pi Imager` instead.
+
 <br>
 
 ## METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
