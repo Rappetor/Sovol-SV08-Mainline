@@ -335,7 +335,7 @@ Next, we have to configure our printer and put back some addons Sovol has added 
 # STEP 6 - STOCK FIRMWARE BACKUP
 
 > [!IMPORTANT]
-> When connecting the ST-Link to the printer, make sure the printer is powered OFF. The MCU will be powered by the ST-Link.
+> When connecting the ST-Link to the printer, make sure the printer is powered **OFF**. The MCU will be powered by the ST-Link.
 
 It's important to make a backup of the current (stock) firmware. This way you can always revert to this stock configuration. These steps apply to both the tool head MCU and mainboard MCU.
 
@@ -383,9 +383,10 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 # STEP 7 - FLASH KATAPULT BOOTLOADER
 
 > [!IMPORTANT]
-> When connecting the ST-Link to the printer, make sure the printer is powered OFF. The MCU will be powered by the ST-Link.
+> When connecting the ST-Link to the printer, make sure the printer is powered OFF. The MCU will be powered by the ST-Link.<br>
+> Also make sure your ST-Link has the latest firmware, use the STM32CubeProgrammer application 'Firmware upgrade' button for this.
 
-To make life easier in the future we are going to flash Katapult to our MCUs. This is a bootloader that makes it possible to flash Klipper firmware without the ST-Link via CANBus, USB or UART by the Host.
+To make life easier in the future we are going to flash Katapult to our MCUs (we flash Katapult on both the mainboard MCU _and_ the toolhead MCU). This is a bootloader that makes it possible to flash Klipper firmware without the ST-Link via CANBus, USB or UART by the Host.
 
 1. Switch the printer on, SSH into the printer, and install Katapult:
 
@@ -472,7 +473,7 @@ Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the
 
 4. Edit it with nano to change the ID of each MCU with what you have copied at [2](#step-8---flash-klipper-firmware-on-mcus):
 ```batch
-sudo nano ~/Klipper/update_klipper_mcus_sv08.sh
+sudo nano ~/klipper/update_klipper_mcus_sv08.sh
 ``` 
 - Replace XXXXXXX with the `[mcu]` serial ID, and YYYYYYY with the `[extra mcu]` serial ID :
 
