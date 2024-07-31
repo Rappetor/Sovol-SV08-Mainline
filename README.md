@@ -465,9 +465,12 @@ You will have this :
 
 ![alt text](images/haa/haa_lsla.jpg)
 
-Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the end, you should have this (with your digits) :
+Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the end, you should have this (with your digits):
 
 ![alt text](images/haa/haa_printercfg2.jpg)
+
+> [!NOTE]
+> The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`**. If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>The serial _may_ only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
 
 3. Download the script  [Automatic MCU script update](<Automatic MCU script update/>) and copy it in your `~/Klipper` folder on the printer
 
