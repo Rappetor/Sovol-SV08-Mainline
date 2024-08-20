@@ -156,7 +156,7 @@ _You can now continue to **STEP 3** and then come back here!_
 To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
 1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk.
-2. Open 'BoardEnv.txt' in your favourite text editor. Take note of the existing `rootdev` (rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx) and `rootfstype` (rootfstype=ext4)
+2. Open 'BoardEnv.txt' in your favourite text editor. Take note of the existing `rootdev` (rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx) and `rootfstype` (rootfstype=ext4). _(To make this more clear: use the values from the current file, NOT your old/original Sovol eMMC image)._
 3. Replace the content of the file with following code and replace the `rootdev` and `rootfstype` with what you had previously in your BoardEnv file.
    1. If you run on eMMC
    ```ini
