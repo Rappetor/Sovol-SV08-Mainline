@@ -51,17 +51,21 @@ Ok, now you can continue.
 - First, create a **backup** of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download.
   - Optionally you can also SSH or FTP into your machine (ftp port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
 - You WILL need the printer.cfg later in this process (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
-- You need a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter to be able to read/write the eMMC.
+- You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC.
   - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
-    - 8GB eMMC has been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.
-- If you go for the '_method 2_' you need a big enough **SD card** (it's also possible to run everything from the SD card by the way).
+    - **8GB eMMC chips have been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.**
+- If you go for the '_method 2_' you need a big enough **MicroSD card** (it's also possible to run everything from the SD card by the way).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmware.
 - You can reach the sFTP server on the IP of the printer, on port 22
 
-> [!NOTE]
-> Here is one example listing for the adapter and also a 32GB eMMC module <br>https://www.aliexpress.us/item/3256807073480438.html
+### EMMC Sellers
 
+[QIDI (USA/EU/UK/CA/JP/AU)](https://qidi3d.com/products/x-max-3-x-plus-3-x-smart-3-emmc-32g)
+
+[Aliexpress (China)](https://www.aliexpress.us/item/3256807073480438.html)
 <br>
+> [!NOTE]
+> Depending on which model you purchase you may also need a MicroSD card reader, follow the guide but when we mention the USB adapter you will need to use your MicroSD card reader along with the '**MICROSD TO EMMC ADAPTER**'
 
 # STEP 1 - REMOVING THE eMMC FROM THE PRINTER
 
