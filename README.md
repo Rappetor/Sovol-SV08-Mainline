@@ -1,4 +1,5 @@
 # Sovol-SV08-Mainline
+USE THE MAIN REPO FOR STABILITY >>> [Rappetor/Sovol-SV08-Mainline](https://github.com/Rappetor/Sovol-SV08-Mainline)
 
 Getting the Sovol SV08 onto mainline Klipper
 
