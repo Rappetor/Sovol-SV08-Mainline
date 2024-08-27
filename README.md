@@ -12,6 +12,15 @@ Run it from either eMMC or SD card, you choose.<br>
 
 # READ ME FIRST!
 
+<h1> DO NOT FOLLOW VIDEO GUIDES<br>
+ THIS IS THE ONLY MAINLINE REPO<br>
+ DO NOT USE FORKS. PLEASE.</h1>
+
+ <h3>WE ARE NOT RESPONSIBLE FOR DAMAGE TO YOUR PRINTER.<br>
+ ESPECIALLY IF ITS NOT THIS GUIDE THAT YOU FOLLOW!!!</h3>
+
+<br><br>
+
 This guide uses color codes to showcase important info.
 
 > [!CAUTION]
