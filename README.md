@@ -13,12 +13,12 @@ Run it from either eMMC or SD card, you choose.<br>
 
 # READ ME FIRST!
 
-<h1> DO NOT FOLLOW VIDEO GUIDES<br>
- THIS IS THE ONLY MAINLINE REPO<br>
- DO NOT USE FORKS. PLEASE.</h1>
+<h3>DO NOT FOLLOW VIDEO GUIDES THIS IS THE ONLY MAINLINE REPO<br>
+ DO NOT USE FORKS. PLEASE.</h3>
 
  <h3>WE ARE NOT RESPONSIBLE FOR DAMAGE TO YOUR PRINTER.<br>
  ESPECIALLY IF ITS NOT THIS GUIDE THAT YOU FOLLOW!!!</h3>
+ That being said, all steps have been thoroughly tested by multiple people in the community. Please follow the steps exactly and carefully and you will have a good working printer at the end. If you get stuck at some point or have any questions please create an issue or find support on the Sovol (official and unofficial) Discord.
 
 <br><br>
 
@@ -60,19 +60,22 @@ Ok, now you can continue.
 
 - First, create a **backup** of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download.
   - Optionally you can also SSH or FTP into your machine (ftp port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
+  - For example use [PuTTY](https://www.putty.org/) for SSH and [WinSCP](https://winscp.net/) for FTP.
 - You WILL need the printer.cfg later in this process (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
 - You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC.
   - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
-    - **8GB eMMC chips have been reported not to work properly. Please get yourself a 32GB MKS eMMC to avoid issues.**
-- If you go for the '_method 2_' you need a big enough **MicroSD card** (it's also possible to run everything from the SD card by the way).
+- If you go for the '_method 2_' you need a big enough **MicroSD card** (it's also possible to run everything from the SD card).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmware.
 - You can reach the sFTP server on the IP of the printer, on port 22
+- The files used for this guide can now be found together in the GitHub folder `/files-used/` [HERE](files-used/dtb-files/)
 
 ### EMMC Sellers
 
 [QIDI (USA/EU/UK/CA/JP/AU)](https://qidi3d.com/products/x-max-3-x-plus-3-x-smart-3-emmc-32g)
 
 [Aliexpress (China)](https://www.aliexpress.us/item/3256807073480438.html)
+
+[Kingroon (China)](https://kingroon.com/products/upgrade-32gb-emmc-module-for-kingroon-kp3s-pro-v2-and-klp1)
 <br>
 > [!NOTE]
 > Depending on which model you purchase you may also need a MicroSD card reader, follow the guide but when we mention the USB adapter you will need to use your MicroSD card reader along with the '**MICROSD TO EMMC ADAPTER**'
@@ -101,9 +104,6 @@ Here we can use 3 methods:
 
 _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
-> [!NOTE]
-> _Reason: it appears some people have boot issues when writing the CB1 image directly to the eMMC (board/eMMC does boot), the second method has been proven to be more successful in getting a booting eMMC. So method 1 does not work for you? Give method 2 a try, or start with method 2 directly._
-
 > [!TIP]
 > Some people get an error while booting, or it doesn't want to boot at all, after writing the image with Balena Etcher. Some have had succes writing the image with the `Raspberry Pi Imager` instead.
 
@@ -112,9 +112,9 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 ## METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
 
 1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases
-   - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz
+   - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
-3. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the eMMC
+3. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
    - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
    - Open Balena Etcher<br>
      -> Choose "Flash from file", browse and choose the downloaded CB1 image<br>
@@ -129,10 +129,9 @@ _You can now continue to **STEP 3**_
 ## METHOD 2: WRITE IMAGE TO SD -> eMMC
 
 1. Write the image to the eMMC chip
+   - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
 
-   - Used in this example 'CB1_Debian11_minimal_kernel5.16_20240319.img.xz': https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz<br>
-
-2. Use BalenaEtcher (https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
+2. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
    - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
    - Open Balena Etcher<br>
      -> Choose "Flash from file", browse and choose the downloaded CB1 image<br>
@@ -153,7 +152,7 @@ _You can now continue to **STEP 3**_
 
 ![Diskpart](images/haa/diskpart.jpg)
 
-_You can now continue to **STEP 3** and then come back here!_
+_Please continue to **STEP 3** and then come back here!_
 
 5. If everything is ok you should have booted from the SD card, and it's time to copy all the contents to the eMMC and make it bootable.
    - First, check if the eMMC is recognized and available:
@@ -167,43 +166,31 @@ _You can now continue to **STEP 3** and then come back here!_
 
 # STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
 
-To make the CB1 image setup correctly we need to make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
+To make the CB1 image setup correctly we need to copy a file and make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
-1. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk.
-2. Open 'BoardEnv.txt' in your favourite text editor. Take note of the existing `rootdev` (rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx) and `rootfstype` (rootfstype=ext4). _(To make this more clear: use the values from the current file, NOT your old/original Sovol eMMC image)._
-3. Replace the content of the file with following code and replace the `rootdev` and `rootfstype` with what you had previously in your BoardEnv file.
-   1. If you run on eMMC
+1. Please copy the `sun50i-h616-sovol-emmc.dtb` file from the `/files-used/dtb-files/` GitHub folder [HERE](files-used/dtb-files/) to your 'BOOT' drive `/dtb/allwinner/` folder.
+2. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk just in case.
+3. Open 'BoardEnv.txt' in your favourite text editor.
+4. Replace the content ABOVE the `#--------#` line (we KEEP what is under there) with the following items _(see picture below, green = copy/pasted, red = don't touch and keep as it is)_:
    ```ini
    bootlogo=false
    overlay_prefix=sun50i-h616
-   fdtfile=sun50i-h616-biqu-emmc
+   fdtfile=sun50i-h616-sovol-emmc
    console=display
    overlays=uart3
    overlays=ws2812
    overlays=spidev1_1
-   #------------------------------------------------#
-   rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx
-   rootfstype=ext4
    ```
-   2. If you run on an SD card
-   ```ini
-   bootlogo=false
-   overlay_prefix=sun50i-h616
-   fdtfile=sun50i-h616-biqu-sd
-   console=display
-   overlays=uart3
-   overlays=ws2812
-   overlays=spidev1_1
-   #------------------------------------------------#
-   rootdev=UUID=xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx
-   rootfstype=ext4
-   ```
+   It will now look like this:<br>
+   ![BoardEnv.txt contents](images/BoardEnv.txt.jpg)
   > [!NOTE]
-  > <sub>**NOTE**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
+  > <sub>**NOTE 1**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
+  <sub>**NOTE 2**: `fdtfile=sun50i-h616-sovol-emmc` supports both eMMC and SD cards but will, obviously, only boot from one (according to the BTT CB1 docs the SD card has priority over eMMC but there have been reports of it being the other way around; if it boots from eMMC and not the SD card please make sure the eMMC is empty or non-bootable or just remove it from the printer).</sub><br>
+  
 
 - Save your changed BoardEnv.txt!
 
-4. Change the Wi-Fi credentials in the 'system.cfg'
+5. Change the Wi-Fi credentials in the 'system.cfg'
 
    - Optional: uncomment the hostname and set the hostname to e.g. "SV08"
    - Save changes to the system.cfg
@@ -212,7 +199,7 @@ To make the CB1 image setup correctly we need to make a few changes to the Board
 > if you are using an HDMI screen you will need to set the screen rotation to "inverted"
 
 
-5. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
+6. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 6, and finalize writing the system to eMMC!_
 
@@ -295,7 +282,7 @@ Please SSH into your printer and then do the following steps.
       -> 'Before layer change G-code'<br>
       -> If not in there, add: `TIMELAPSE_TAKE_FRAME`<br>
 
-7. You have now installed mainline Klipper with the Mainsail web interface (and addons)!
+7. You have now installed mainline Klipper with the Mainsail web interface (and addons)! But there is more to be done to get it all working properly..
    - If you haven't rebooted after installing Crowsnest:<br> `sudo reboot`
    - After the board has rebooted, in your browser go to the Mainsail web interface (via the IP address or hostname) and check if it's running.
    - It will give an error since we still have to put our backed-up printer.cfg back.
@@ -306,11 +293,11 @@ Please SSH into your printer and then do the following steps.
 
 Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
 
-1. RESTORE THE SOVOL ADDONS _(from the `/sovol-addons/` github directory)_ [HERE](sovol-addons/):<br>
+1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
     - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
     - Put the files `'probe_pressure.py'` and `'z_offset_calibration.py'` into the `'/klipper/klippy/extras/'` folder.<br>
 
-2. GRAB BASE PRINTER CONFIGURATION _(from the `/config/` github directory)_ [HERE](config/):<br>
+2. GRAB BASE PRINTER CONFIGURATION _(from the `/files-used/config/` github directory)_ [HERE](files-used/config/):<br>
 
    - Copy the entire config folder to the printer `~/printer_data/config` folder.<br>
 
