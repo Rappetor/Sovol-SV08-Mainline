@@ -181,7 +181,7 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
    overlays=ws2812
    overlays=spidev1_1
    ```
-   It will now look like this:<br>
+   It will now look something like this:<br>
    ![BoardEnv.txt contents](images/BoardEnv.txt.jpg)
   > [!NOTE]
   > <sub>**NOTE 1**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
@@ -291,7 +291,9 @@ Please SSH into your printer and then do the following steps.
 
 # STEP 5 - CONFIGURE PRINTER/KLIPPER & ADDONS
 
-Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working.
+Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working. 
+
+Please use the files provided here in the `/files-used/` folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved for a more silent and cooler (motor) running printer.
 
 1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
     - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
