@@ -293,7 +293,7 @@ Please SSH into your printer and then do the following steps.
 
 Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working. 
 
-Please use the files provided here in the `/files-used/` folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved for a more silent and cooler (motor) running printer.
+Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved for a more silent and cooler (motor) running printer.
 
 1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
     - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
