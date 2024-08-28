@@ -67,7 +67,7 @@ Ok, now you can continue.
 - If you go for the '_method 2_' you need a big enough **MicroSD card** (it's also possible to run everything from the SD card).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmware.
 - You can reach the sFTP server on the IP of the printer, on port 22
-- The files used for this guide can now be found together in the GitHub folder `/files-used/` [HERE](files-used/dtb-files/)
+- The files used for this guide can now be found together in the GitHub folder `/files-used/` [HERE](files-used/)
 
 ### EMMC Sellers
 
