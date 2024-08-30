@@ -293,7 +293,7 @@ Please SSH into your printer and then do the following steps.
 
 Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working. 
 
-Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved for a more silent and cooler (motor) running printer.
+Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved e.g. for a more silent and cooler (motor) running printer.
 
 1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
     - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
@@ -457,7 +457,7 @@ It's time to create and flash the Klipper firmware! In the future, you only have
 
 ![alt text](images/haa/haa_printercfg_tty.jpg)
 
-You have to replace each ID to have the same pattern as above. To do that, find the correct serial name for the MCU with the command<br>
+You have to replace each ID to have the same pattern as above. To do that, find the correct serial name for the MCU with the command. **AND READ THE WARNING BELOW!**<br>
 
 ```bash
 ls -la /dev/serial/by-id/
@@ -470,6 +470,13 @@ You will have this :
 Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the end, you should have this (with your digits):
 
 ![alt text](images/haa/haa_printercfg2.jpg)
+
+> [!WARNING]
+> **WARNING**: When you accidently switch the `mcu` and `extra_mcu` serials bad things can happen. _**THE HEATER WILL TURN ON FULL BLAST!**_ This is bad, you don't want this.
+<br><br>
+To be 100% sure you have the correct serial linked to the correct MCU please check your serials with `ls /dev/serial/by-id/` and **disconnect** the USB plug from the **toolhead** (_see image below_). Do a `ls /dev/serial/by-id/` again and see what serial is still there (this is your `mcu` serial) and what serial disappeared (this is your `extra_mcu` serial). Plug the connector back in and do another `ls /dev/serial/by-id/` to confirm you have indeed the correct `mcu` and `extra_mcu` serials.
+
+![Toolhead disconnect USB](images/toolhead-disconnect-usb.jpg)
 
 > [!NOTE]
 > The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`**. If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>It is possible your serials only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
