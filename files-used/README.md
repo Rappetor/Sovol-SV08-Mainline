@@ -12,3 +12,6 @@ To install these addons you need to copy them (e.g. with an FTP client) to your 
 
 ### /config
 Here you will find the files that will go into your `~/printer_data/config` folder on the printer. Please make sure you add the correct serials to your printer.cfg at the `[mcu]` and `[mcu extra_mcu]` entries. _This will be done and explained in the guide at **Step 8**._
+
+### Automatic MCU update script
+This is the exception! You can still find and download this script here: [Automatic MCU update script](https://github.com/Rappetor/Sovol-SV08-Mainline/blob/main/Automatic%20MCU%20script%20update)
