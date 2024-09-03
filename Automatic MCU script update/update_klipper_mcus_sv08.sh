@@ -1,10 +1,15 @@
 #!/usr/bin/env bash
 
-#Replace each serial number with the one you find in your printer.cfg file
-#HOSTSERIAL = [mcu]
-#TOOLHEADSERIAL = [extra mcu]
-HOSTSERIAL='XXXXXXX'
-TOOLHEADSERIAL='YYYYYYY'
+#Replace each XXXXXXXX serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#HOSTSERIAL is found under [mcu]
+#TOOLHEADSERIAL is found under [extra mcu]
+
+# I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
+HOSTSERIAL='XXXXXXXX'
+
+# I'm an array so I look like: TOOLHEADSERIALS=('XXXXXXXX')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIALS=('XXXXXXXX1' 'XXXXXXXX2' 'XXXXXXXX3')
+TOOLHEADSERIALS=('XXXXXXXX')
 
 #COLORS
 MAGENTA=$'\e[35m\n'
@@ -51,10 +56,16 @@ flash_toolhead(){
 	make KCONFIG_CONFIG=toolhead.mcu -j4
 	mv ~/klipper/out/klipper.bin toolhead_mcu_klipper.bin
 	read -p "${CYAN}Toolhead MCU firmware building complete. Please check above for any errors. Press [Enter] to continue, or [Ctrl+C] to abort.${NC}"
-	echo -e "${YELLOW}Step 4/4: Flashing Klipper to Toolhead MCU.${NC}"
-	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$TOOLHEADSERIAL'")'
-	sleep 3
-	~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_stm32f103xe_$TOOLHEADSERIAL
+	echo -e "${YELLOW}Step 4/4: Flashing Klipper to Toolhead(s) MCU.${NC}"
+	
+	for serial in ${TOOLHEADSERIALS[@]}
+	do
+		read -p "${MAGENTA}Going to flash Klipper on Toolhead: ${serial}. Press [Enter] to continue, or [Ctrl+C] to abort.${NC}"
+		cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$serial'")'
+		sleep 3
+		~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_stm32f103xe_$serial
+		echo -e "${CYAN}Flashing Klipper on ${serial} complete.${NC}"
+	done
 }
 
 #SCRIPT EXECUTION
@@ -64,7 +75,7 @@ flash_host
 
 flash_toolhead
 
-read -p "${CYAN}Toolhead MCU firmwares flashed, please check above for any errors. Press [Enter] to continue, or [Ctrl+C] to abort.${NC}"
+read -p "${CYAN}MCU firmwares flashed, please check above for any errors. Press [Enter] to continue, or [Ctrl+C] to abort.${NC}"
 
 start_klipper
 
