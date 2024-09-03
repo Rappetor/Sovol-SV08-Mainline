@@ -7,9 +7,9 @@
 # I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
 HOSTSERIAL='XXXXXXXX'
 
-# I'm an array so I look like: TOOLHEADSERIALS=('XXXXXXXX')
-# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIALS=('XXXXXXXX1' 'XXXXXXXX2' 'XXXXXXXX3')
-TOOLHEADSERIALS=('XXXXXXXX')
+# I'm an array so I look like: TOOLHEADSERIAL=('XXXXXXXX')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('XXXXXXXX1' 'XXXXXXXX2' 'XXXXXXXX3')
+TOOLHEADSERIAL=('XXXXXXXX')
 
 #COLORS
 MAGENTA=$'\e[35m\n'
@@ -58,7 +58,7 @@ flash_toolhead(){
 	read -p "${CYAN}Toolhead MCU firmware building complete. Please check above for any errors. Press [Enter] to continue, or [Ctrl+C] to abort.${NC}"
 	echo -e "${YELLOW}Step 4/4: Flashing Klipper to Toolhead(s) MCU.${NC}"
 	
-	for serial in ${TOOLHEADSERIALS[@]}
+	for serial in ${TOOLHEADSERIAL[@]}
 	do
 		read -p "${MAGENTA}Going to flash Klipper on Toolhead: ${serial}. Press [Enter] to continue, or [Ctrl+C] to abort.${NC}"
 		cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$serial'")'
