@@ -59,14 +59,13 @@ Ok, now you can continue.
 # PREREQUISITES
 
 - First, create a **backup** of all the config files on your original Sovol SV08. You can do this in the web/mainsail interface -> Machine -> Select all files/folders -> Download.
-  - Optionally you can also SSH or FTP into your machine (ftp port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
-  - For example use [PuTTY](https://www.putty.org/) for SSH and [WinSCP](https://winscp.net/) for FTP.
+  - Optionally you can also SSH or SFTP into your machine (port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
+  - For example use [PuTTY](https://www.putty.org/) for SSH and [WinSCP](https://winscp.net/) for SFTP (_SSH File Transfer Protocol_).
 - You WILL need the printer.cfg later in this process (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
 - You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC.
   - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
 - If you go for the '_method 2_' you need a big enough **MicroSD card** (it's also possible to run everything from the SD card).
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmware.
-- You can reach the sFTP server on the IP of the printer, on port 22
 - The files used for this guide can now be found together in the GitHub folder `/files-used/` [HERE](files-used/)
 
 ### EMMC Sellers
@@ -296,7 +295,7 @@ Next, we have to configure our printer and put back some addons Sovol has added 
 Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved e.g. for a more silent and cooler (motor) running printer.
 
 1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
-    - Use an FTP program to connect to the printer (IP address or hostname, ftp port: 22, username/password: biqu/biqu)
+    - Use an SFTP program (like WinSCP) to connect to the printer (IP address or hostname, port: 22, username/password: biqu/biqu)
     - Put the files `'probe_pressure.py'` and `'z_offset_calibration.py'` into the `'/klipper/klippy/extras/'` folder.<br>
 
 2. GRAB BASE PRINTER CONFIGURATION _(from the `/files-used/config/` github directory)_ [HERE](files-used/config/):<br>
@@ -421,7 +420,7 @@ To make life easier in the future we are going to flash Katapult to our MCUs (we
    make
    ```
 
-5. Grab the file `~/katapult/out/katapult.bin` (e.g. with an FTP program) and store it on the computer. You can use this Katapult firmware for both the tool head and the mainboard.
+5. Grab the file `~/katapult/out/katapult.bin` (e.g. with an SFTP program like WinSCP) and store it on the computer. You can use this Katapult firmware for both the tool head and the mainboard.
 6. _Turn OFF the printer_ again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
 7. Once connected, on the left side of the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
 
