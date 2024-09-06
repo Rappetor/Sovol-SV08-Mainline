@@ -13,12 +13,10 @@ Run it from either eMMC or SD card, you choose.<br>
 
 # READ ME FIRST!
 
-<h3>DO NOT FOLLOW VIDEO GUIDES THIS IS THE ONLY MAINLINE REPO<br>
- DO NOT USE FORKS. PLEASE.</h3>
+<h3>Video Guides can be out of date. Please always refer to this repo as the main source for up to date information.</h3>
+<h3>WE ARE NOT RESPONSIBLE FOR DAMAGE TO YOUR PRINTER.</h3>
 
- <h3>WE ARE NOT RESPONSIBLE FOR DAMAGE TO YOUR PRINTER.<br>
- ESPECIALLY IF ITS NOT THIS GUIDE THAT YOU FOLLOW!!!</h3>
- That being said, all steps have been thoroughly tested by multiple people in the community. Please follow the steps exactly and carefully and you will have a good working printer at the end. If you get stuck at some point or have any questions please create an issue or find support on the Sovol (official and unofficial) Discord.
+<p>That being said, all steps have been thoroughly tested by multiple people in the community. Please follow the steps exactly and carefully and you will have a good working printer at the end. If you get stuck at some point or have any questions please create an issue or find support on the Sovol (official and unofficial) Discord.</p>
 
 <br><br>
 
