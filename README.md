@@ -326,8 +326,8 @@ Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub f
    - Now you can print and use the sovol presets like before!
 
 > [!NOTE]
-> <sub>**NOTE 1**: all the .sh scripts in the macros have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.</sub><br>
-> <sub>**NOTE 2**: the [adxl345] and [resonance_tester] configs have been commented out at this point, the tool head MCU needs a new firmware for this, do the next steps and you can use it again.</sub>
+> **NOTE 1**: all the .sh scripts in the macros have been commented out and there is a basic but reduced version of the sovol menu. It has all the basics to get you going.<br>
+> **NOTE 2**: the **[adxl345]** and **[resonance_tester]** configs have been commented out at this point, the tool head MCU needs a new firmware for this. You uncomment/enable them again after **Step 8**.
 
 <br>
 
