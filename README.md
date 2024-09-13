@@ -102,7 +102,7 @@ Here we can use 3 methods:
 _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
 > [!TIP]
-> Some people get an error while booting, or it doesn't want to boot at all, after writing the image with Balena Etcher. Some have had succes writing the image with the `Raspberry Pi Imager` instead.
+> Some people get an error while booting, or it doesn't want to boot at all, after writing the image with Balena Etcher. Some have had success writing the image with the `Raspberry Pi Imager` instead.
 
 <br>
 
