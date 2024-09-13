@@ -294,7 +294,7 @@ Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub f
 
 1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
     - Use an SFTP program (like WinSCP) to connect to the printer (IP address or hostname, port: 22, username/password: biqu/biqu)
-    - Put the files `'probe_pressure.py'` and `'z_offset_calibration.py'` into the `'/klipper/klippy/extras/'` folder.<br>
+    - Put the files `'probe_pressure.py'` and `'z_offset_calibration.py'` into the `'~/klipper/klippy/extras/'` folder.<br>
 
 2. GRAB BASE PRINTER CONFIGURATION _(from the `/files-used/config/` github directory)_ [HERE](files-used/config/):<br>
 
