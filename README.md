@@ -254,7 +254,7 @@ Please SSH into your printer and then do the following steps.
    cd ~/moonraker-timelapse
    make install
    ```
-   - Then edit your `moonraker.conf` and add the following lines:
+   - Then edit your `~/printer_data/config/moonraker.conf` and add the following lines:
    ```ini
    [update_manager timelapse]
    type: git_repo
