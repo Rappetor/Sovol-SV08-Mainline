@@ -491,20 +491,32 @@ sudo nano ~/klipper/update_klipper_mcus_sv08.sh
 
 *update_klipper_mcus_sv08.sh<br>*
 ```bash
-#Replace each serial number with the one you find in your printer.cfg file
-#HOSTSERIAL = [mcu]
-#TOOLHEADSERIAL = [extra mcu]
-HOSTSERIAL='XXXXXXX'
-TOOLHEADSERIAL='YYYYYYY'
+#Replace each XXXXXXXX and YYYYYYYY serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#HOSTSERIAL is found under [mcu]
+#TOOLHEADSERIAL is found under [extra mcu]
+
+# I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
+HOSTSERIAL='XXXXXXXX'
+
+# I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYYY1' 'YYYYYYYY2' 'YYYYYYY3')
+TOOLHEADSERIAL=('YYYYYYY')
 ```
 - You should now have this in the script :
 
 ```bash
-#Replace each serial number with the one you find in your printer.cfg file
-#HOSTSERIAL = [mcu]
-#TOOLHEADSERIAL = [extra mcu]
-HOSTSERIAL='34FFDA05334D593524680951-if00'
-TOOLHEADSERIAL='31FF700630464E3225480643-if00'
+#Replace each XXXXXXXX and YYYYYYYY serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#HOSTSERIAL is found under [mcu]
+#TOOLHEADSERIAL is found under [extra mcu]
+
+# I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
+HOSTSERIAL='32FFD9054747363035861857-if00'
+
+# I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYYY1' 'YYYYYYYY2' 'YYYYYYY3')
+TOOLHEADSERIAL=('50FF6C068367515511180667-if00')
+
+
 ```
 5. Save the file with `Ctrl + X`
 
