@@ -11,7 +11,6 @@ HOSTSERIAL='XXXXXXXX'
 # For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYY1' 'YYYYYYY2' 'YYYYYYY3')
 TOOLHEADSERIAL=('YYYYYYY')
 
-
 #COLORS
 MAGENTA=$'\e[35m\n'
 YELLOW=$'\e[33m\n'
