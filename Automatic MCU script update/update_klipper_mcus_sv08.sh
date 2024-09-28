@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#Replace each XXXXXXXX serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#Replace each XXXXXXXX and YYYYYYY serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
 #HOSTSERIAL is found under [mcu]
 #TOOLHEADSERIAL is found under [extra mcu]
 
