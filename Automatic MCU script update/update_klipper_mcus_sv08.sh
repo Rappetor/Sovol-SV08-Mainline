@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-#Replace each XXXXXXXX serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#Replace each XXXXXXXX and YYYYYYY serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
 #HOSTSERIAL is found under [mcu]
 #TOOLHEADSERIAL is found under [extra mcu]
 
 # I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
 HOSTSERIAL='XXXXXXXX'
 
-# I'm an array so I look like: TOOLHEADSERIAL=('XXXXXXXX')
-# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('XXXXXXXX1' 'XXXXXXXX2' 'XXXXXXXX3')
-TOOLHEADSERIAL=('XXXXXXXX')
+# I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYY1' 'YYYYYYY2' 'YYYYYYY3')
+TOOLHEADSERIAL=('YYYYYYY')
+
 
 #COLORS
 MAGENTA=$'\e[35m\n'
