@@ -471,6 +471,8 @@ Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the
 > [!WARNING]
 > **WARNING**: When you accidently switch the `mcu` and `extra_mcu` serials bad things can happen. _**THE HEATER WILL TURN ON FULL BLAST!**_ This is bad, you don't want this.
 <br><br>
+Also **DON'T** use *ttyACM0* and *ttyACM1* as serials, they are not fixed and can switch and give this dangerous effect as well. There is a reason we want you to use the long (and fixed/static) serial.
+<br><br>
 To be 100% sure you have the correct serial linked to the correct MCU please check your serials with `ls /dev/serial/by-id/` and **disconnect** the USB plug from the **toolhead** (_see image below_). Do a `ls /dev/serial/by-id/` again and see what serial is still there (this is your `mcu` serial) and what serial disappeared (this is your `extra_mcu` serial). Plug the connector back in and do another `ls /dev/serial/by-id/` to confirm you have indeed the correct `mcu` and `extra_mcu` serials.
 
 ![Toolhead disconnect USB](images/toolhead-disconnect-usb.jpg)
