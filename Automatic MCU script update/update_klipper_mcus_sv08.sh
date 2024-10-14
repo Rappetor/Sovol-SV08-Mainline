@@ -23,6 +23,7 @@ RED=$'\e[31m\n'
 CYAN=$'\e[36m\n'
 NC=$'\e[0m\n'
 NC0=$'\e'
+NC1=$'\e[0m'
 
 #SCRIPT COMMAND DEFINITION
 cd "$HOME/klipper"
