@@ -532,32 +532,30 @@ sudo chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
 
-8. In the first menuconfig screen for the **`HOST`**,choose the following option and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot), when ready press Q to quit & save :<br>
+8. In the MCU updater menu choose option 1 'HOST MCU'. In the menuconfig screen for the **`HOST`**,choose the following option(s) and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot), when ready press Q to quit & save. Continue to follow instructions and flash the HOST MCU.<br>
 
 ![alt text](images/haa/haa_host_menuconfig.jpg)
 
 > [!NOTE]
 > <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-9. In the second menuconfig screen for the **`TOOLHEAD`**,choose the following option and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save :<br>
+9. In the MCU updater menu choose option 2 'HOST MCU'. In the menuconfig screen for the **`TOOLHEAD`**,choose the following option(s) and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save. Continue to follow instructions and flash the TOOLHEAD MCU.<br>
 
 ![alt text](images/haa/haa_toolhead_menuconfig.jpg)
 
 > [!NOTE]
 > <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-10. Finally follow the instructions until the end :
-
 ![alt text](images/haa/haa_automatic_mcu_update.jpg)
 
-11. Done! The Klipper firmware on both MCU has been updated.
+10. Done! The Klipper firmware on both MCU has been updated.
 
-12. Restart the printer :
+11. Restart the printer :
 ```bash
 sudo shutdown -r now
 ```
 
-13. After the restart, you can uncomment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg
+12. After the restart, you can *un*comment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg to have those functional again
 
 13. Enjoy mainline Klipper ! 
 
