@@ -14,7 +14,8 @@ HOSTSERIAL='XXXXXXXX'
 TOOLHEADSERIALS=('YYYYYYY') # For multiple serials use: TOOLHEADSERIALS=('SERIAL_1' 'SERIAL_2' 'SERIAL_3')
 
 # I'm a string, so I look like: EDDYSERIAL='XXXXXXXX'
-# OPTIONAL, only useful when you have a BTT Eddy otherwise ignore
+# This assumes your Eddy has the Katapult bootloader!
+# OPTIONAL, only useful when you have a BTT Eddy otherwise ignore.
 EDDYSERIAL='XXXXXXXX'
 
 #COLORS
