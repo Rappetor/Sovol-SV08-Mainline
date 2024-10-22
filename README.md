@@ -424,7 +424,7 @@ To make life easier in the future we are going to flash Katapult to our MCUs (we
 
 ![Full chip erase](images/haa/STM32/Etape4.png)
 
-8. Time to flash! Go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Download' button to write the firmware.
+8. Time to flash! Go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Start Programming' button to write the firmware.
 
 ![Open file](images/haa/STM32/Etape5.png)<br>
 
