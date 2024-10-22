@@ -198,7 +198,7 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 
 6. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
-   - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 6, and finalize writing the system to eMMC!_
+   - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 5, and finalize writing the system to eMMC!_
 
 <br>
 
@@ -480,7 +480,7 @@ To be 100% sure you have the correct serial linked to the correct MCU please che
 > [!NOTE]
 > The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`**. If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>It is possible your serials only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
 
-3. Download the script  [Automatic MCU script update](<Automatic MCU script update/>) and copy it in your `~/Klipper` folder on the printer.
+3. Download the script  [Automatic MCU script update](<Automatic MCU script update/>) and copy it in your `~/klipper` folder on the printer.
 
 4. Edit it with nano to change the ID of each MCU with what you have copied at [2](#step-8---flash-klipper-firmware-on-mcus):
 ```batch
