@@ -340,17 +340,19 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 1. First, ensure you have the software required for flashing the firmware.  There are 2 options we can use:
 
-**Option 1**: Windows with the STM32CubeProgrammer software.
+**Option 1**: Windows, with the STM32CubeProgrammer software.
 
-**Option 2**: Linux with the Open Source st-link software.
+**Option 2**: Linux, with the Open Source st-link software.
 
 
-## Option 1: First, make sure you have a properly installed ST-Link with the STM32CubeProgrammer software.
+## Option 1 (Windows)
+First, make sure you have a properly installed ST-Link with the STM32CubeProgrammer software.
 
    - Download the STM32CubeProgrammer software here: https://www.st.com/en/development-tools/stm32cubeprog.html#st-get-software
    - Install the software and make sure the ST-Link is also properly installed; the software should show the serial of your ST-Link just below the CONNECT button (if not you can click on the little refresh button)
 
-## Option 2: Follow the installation instructions at https://github.com/stlink-org/stlink to get the software installed.
+## Option 2 (Linux)
+Follow the installation instructions at https://github.com/stlink-org/stlink to get the software installed.
 
 > [!TIP]
 > Does your (clone) ST-Link not work with STM32CubeProgrammer and e.g. only has a single digit serial number? Try the older version of the flashing program instead, you can find it here: https://www.st.com/en/development-tools/stsw-link004.html. The steps below explain the STM32CubeProgrammer but it should be mostly the same for the old program but with a different interface.
@@ -375,13 +377,19 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 4. Insert the ST-Link into your computer (_printer stays off_).
 
-## Option 1: open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
+## Option 1 (Windows)
 
-## Option 2: Run `st-info --probe`.  It should show some details of your ST-Link programmer and the MCU.
+Open the STM32CubeProgrammer software, and press CONNECT. It should now connect and populate the middle screen with memory stuff.
+
+## Option 2 (Linux)
+
+Run `st-info --probe`.  It should show some details of your ST-Link programmer and the MCU.
 
 5. Read and save the firmware contents.
 
-## Option 1: Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
+## Option 1 (Windows)
+
+Please select `Read all` from the `Read` menu, this will read everything and set the correct size (to save).
 
 ![read all](images/stlink-firmware-read-all.jpg)
 
@@ -389,7 +397,9 @@ Please select `Save As ..` from the `Read` menu and save the current firmware (e
 
 ![save as](images/stlink-firmware-save-as.jpg)
 
-## Option 2: Run the following `st-flash read _toolhead_original_firmware.bin 0x8000000 128k` (for the tool head) or `st-flash read _mainboard_original_firmware.bin 0x8000000 128k` (for the mainboard) to read the MCU firmware contents and save to the named file.
+## Option 2 (Linux)
+
+Run the following `st-flash read _toolhead_original_firmware.bin 0x8000000 128k` (for the tool head) or `st-flash read _mainboard_original_firmware.bin 0x8000000 128k` (for the mainboard) to read the MCU firmware contents and save to the named file.
 
 > [!CAUTION]
 > Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
