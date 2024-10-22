@@ -383,7 +383,11 @@ Open the STM32CubeProgrammer software, and press CONNECT. It should now connect 
 
 ## Option 2 (Linux)
 
-Run `st-info --probe`.  It should show some details of your ST-Link programmer and the MCU.
+Run
+```bash
+st-info --probe
+```
+It should show some details of your ST-Link programmer and the MCU.
 
 5. Read and save the firmware contents.
 
@@ -399,7 +403,16 @@ Please select `Save As ..` from the `Read` menu and save the current firmware (e
 
 ## Option 2 (Linux)
 
-Run the following `st-flash read _toolhead_original_firmware.bin 0x8000000 128k` (for the tool head) or `st-flash read _mainboard_original_firmware.bin 0x8000000 128k` (for the mainboard) to read the MCU firmware contents and save to the named file.
+Run the following
+
+```bash
+st-flash read _toolhead_original_firmware.bin 0x8000000 128k
+```
+(for the tool head) or
+```bash
+st-flash read _mainboard_original_firmware.bin 0x8000000 128k
+```
+(for the mainboard) to read the MCU firmware contents and save to the named file.
 
 > [!CAUTION]
 > Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
@@ -452,7 +465,11 @@ To make life easier in the future we are going to flash Katapult to our MCUs (we
 
 ![Full chip erase](images/haa/STM32/Etape4.png)
 
-If using Linux, run `st-flash erase`.
+If using Linux, run
+
+```bash
+st-flash erase
+```
 
 8. Time to flash!  If using Windows, go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Start Programming' button to write the firmware.
 
@@ -460,7 +477,11 @@ If using Linux, run `st-flash erase`.
 
 ![Download](images/haa/STM32/Etape6.png)<br>
 
-If using Linux, run `st-flash write katapult.bin 0x8000000`.
+If using Linux, run
+
+```bash
+st-flash write katapult.bin 0x8000000
+```
 
 Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and then remove the ST-Link from the computer and the board. Do this for both the tool head MCU and the mainboard MCU.
 
