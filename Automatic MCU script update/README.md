@@ -1,5 +1,9 @@
 # Automatic MCU update script
 
+## Dependencies
+For this script to work it assumes [Katapult](https://github.com/Arksine/katapult) is flashed on each MCU because this script uses Katapult to flash the newest Klipper firmware onto the MCU.
+Read *Step 7 - Flash Katapult Bootloader* of the guide on how to get Katapult on the SV08 MCU's. And read [this guide](https://github.com/Rappetor/katapult-on-btt-eddy) on how to flash Katapult on the BTT Eddy (if you happen to use Eddy).
+
 ## Install
 Please look at [Step 8](https://github.com/Rappetor/Sovol-SV08-Mainline/tree/main?tab=readme-ov-file#step-8---flash-klipper-firmware-on-mcus) how to prepare the script.<br>
 _Short version:_
