@@ -10,7 +10,7 @@
 HOSTSERIAL='XXXXXXXX'
 
 # I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
-# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYY1' 'YYYYYYY2' 'YYYYYYY3')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIALS=('YYYYYYY1' 'YYYYYYY2' 'YYYYYYY3')
 TOOLHEADSERIALS=('YYYYYYY') # For multiple serials use: TOOLHEADSERIALS=('SERIAL_1' 'SERIAL_2' 'SERIAL_3')
 
 # I'm a string, so I look like: EDDYSERIAL='XXXXXXXX'
