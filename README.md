@@ -539,7 +539,7 @@ cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 > [!NOTE]
 > <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-9. In the MCU updater menu choose option 2 'HOST MCU'. In the menuconfig screen for the **`TOOLHEAD`**,choose the following option(s) and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save. Continue to follow instructions and flash the TOOLHEAD MCU.<br>
+9. In the MCU updater menu choose option 2 'TOOLHEAD MCU(S)'. In the menuconfig screen for the **`TOOLHEAD`**,choose the following option(s) and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save. Continue to follow instructions and flash the TOOLHEAD MCU.<br>
 
 ![alt text](images/haa/haa_toolhead_menuconfig.jpg)
 
