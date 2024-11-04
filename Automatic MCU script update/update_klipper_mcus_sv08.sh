@@ -44,7 +44,7 @@ flash_host(){
 	cd "$HOME/klipper"
 	echo -e "${YELLOW}Cleaning and building Klipper firmware for HOST MCU.${NC}"
 	make clean KCONFIG_CONFIG=host.mcu
-	read -p "${CYAN}Check on the following screen that the parameters are correct for the ${RED}HOST${NC0}${CYAN}firmware. Press [Enter] to continue..${NC}"
+	read -p "${CYAN}Check on the following screen that the parameters are correct for the ${RED}HOST${CYAN}firmware. Press [Enter] to continue..${NC}"
 	make menuconfig KCONFIG_CONFIG=host.mcu
 	make KCONFIG_CONFIG=host.mcu -j4
 	mv ~/klipper/out/klipper.bin host_mcu_klipper.bin
@@ -60,7 +60,7 @@ flash_toolhead(){
 	cd "$HOME/klipper"
 	echo -e "${YELLOW}Cleaning and building Klipper firmware for TOOLHEAD MCU.${NC}"
 	make clean KCONFIG_CONFIG=toolhead.mcu
-	read -p "${CYAN}Check on the following screen that the parameters are correct for the ${RED}TOOLHEAD${NC0}${CYAN}firmware. Press [Enter] to continue..${NC}"
+	read -p "${CYAN}Check on the following screen that the parameters are correct for the ${RED}TOOLHEAD${CYAN}firmware. Press [Enter] to continue..${NC}"
 	make menuconfig KCONFIG_CONFIG=toolhead.mcu
 	make KCONFIG_CONFIG=toolhead.mcu -j4
 	mv ~/klipper/out/klipper.bin toolhead_mcu_klipper.bin
@@ -82,7 +82,7 @@ flash_eddy(){
 	cd "$HOME/klipper"
 	echo -e "${YELLOW}Cleaning and building Klipper firmware for BTT EDDY MCU.${NC}"
 	make clean KCONFIG_CONFIG=eddy.mcu
-	read -p "${CYAN}Check on the following screen that the parameters are correct for the ${RED}EDDY${NC0}${CYAN}firmware. Press [Enter] to continue..${NC}"
+	read -p "${CYAN}Check on the following screen that the parameters are correct for the ${RED}EDDY${CYAN}firmware. Press [Enter] to continue..${NC}"
 	make menuconfig KCONFIG_CONFIG=eddy.mcu
 	make KCONFIG_CONFIG=eddy.mcu -j4
 	mv ~/klipper/out/klipper.bin eddy_mcu_klipper.bin
