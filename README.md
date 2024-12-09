@@ -421,11 +421,12 @@ To make life easier in the future we are going to flash Katapult to our MCUs (we
 
 5. Grab the file `~/katapult/out/katapult.bin` (e.g. with an SFTP program like WinSCP) and store it on the computer. You can use this Katapult firmware for both the tool head and the mainboard.
 6. _Turn OFF the printer_ again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
-7. Once connected, on the left side of the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
+7. Once connected, on the left side of the software go to the tab 'Erasing & Programming' and execute a _manual (**not** only automatic mode)_ `Full chip erase`
 
 ![Full chip erase](images/haa/STM32/Etape4.png)
 
-8. Time to flash! Go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Start Programming' button to write the firmware.
+8. Time to flash! Go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Download' button to write the firmware.<br>
+<sub>Alternatively you can write the firmware from the 'Erasing & Programming' tab by using 'Browse' to select the `katapult.bin` file and then press 'Start Programming' to write the firmware.</sub>
 
 ![Open file](images/haa/STM32/Etape5.png)<br>
 
