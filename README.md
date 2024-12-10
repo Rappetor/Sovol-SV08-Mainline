@@ -229,12 +229,12 @@ Please SSH into your printer and then do the following steps.
    ./kiauh/kiauh.sh
    ```
 
-4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order) via KIAUH.
+4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order, _but check tip below_) via KIAUH.
 
    - So run KIAUH and choose: option **'1) [Install]'** and install those items (_using default options, download recommended macros; Yes_).
    - Crowsnest install asks to reboot the printer, please do so.
 
-> [!IMPORTANT]
+> [!TIP]
 > If you are using an HDMI screen, now is the time to install klipperscreen, do this BEFORE crowsnest so you dont have to reboot twice.
 
 
