@@ -31,7 +31,7 @@ sudo mount -t auto -o uid=$user_id -o gid=$user_id $dev $mediadir
 
 prefix="USB-"
 
-# symbol link all gcode file in USB stick to /home/biqu/printer_data/gcodes/ with USB- prefix
+# copy all gcode files in USB stick to /home/biqu/printer_data/gcodes/ with USB- prefix
 
 for file in "$mediadir"/*.gcode; do
     filename=$(basename "$file")
