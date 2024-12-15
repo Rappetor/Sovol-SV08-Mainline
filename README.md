@@ -92,7 +92,9 @@ Ok, now you can continue.
 # STEP 2 - FLASHING MEDIA
 
 First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases)
-
+>[!NOTE]
+>Regardless of the medium (SD card or eMMC) or the size the BIGTREETECH CB1 Linux image will expand the size of the image to the full size of the card being used.
+>
 Here we can use 3 methods:
 
 **Method 1**: Write the CB1 image directly to the eMMC and use it that way
