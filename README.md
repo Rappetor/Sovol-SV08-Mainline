@@ -200,12 +200,15 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 5, and finalize writing the system to eMMC!_
 
+> [!NOTE]
+> The 'system booting..' message on the LCD is just a splashscreen/image, not an actual status the system is still booting. _Only when the LCD screen is properly initialized by Klipper this message/image will go away._ But since we just put a fresh image _without Klipper_ on there, let alone the LCD config, this will never happen and the screen keeps showing it's booting. Check your router to see if an ip-address is assigned to the printer or use an hdmi screen to check the output and see if it has indeed booted.
+
 <br>
 
 # STEP 4 - INSTALL MAINLINE KLIPPER
 
-Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc.
-Please SSH into your printer and then do the following steps.
+Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Please SSH into your printer and then do the steps below.<br>
+<sub>Please note this needs a stable connection since it will be downloading everything.</sub>
 
 1. First, we will update the OS:<br>
 
@@ -229,7 +232,7 @@ Please SSH into your printer and then do the following steps.
    ./kiauh/kiauh.sh
    ```
 
-4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order, _but check tip below_) via KIAUH.
+4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order, _also check tip below_) via KIAUH.
 
    - So run KIAUH and choose: option **'1) [Install]'** and install those items (_using default options, download recommended macros; Yes_).
    - Crowsnest install asks to reboot the printer, please do so.
@@ -375,8 +378,8 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 ![save as](images/stlink-firmware-save-as.jpg)
 
 > [!CAUTION]
-> Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
-> In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 tool head, printer delivered to the EU on 2024-06-28.
+> Make sure the firmware backup file is at least 128k for the toolhead, 512k for the mainboard. If it is just 1 Kilobyte it is too small, and you won't be able to return to your old firmware.
+> In case that already happened here are some provided <a href="firmware-backups">firmware backups</a> of both the toolhead and mainboard (printer delivered to the EU on 2024-06-28). Use on your own risk.
 
 <br>
 
@@ -385,6 +388,9 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 > [!IMPORTANT]
 > When connecting the ST-Link to the printer, make sure the printer is powered OFF. The MCU will be powered by the ST-Link.<br>
 > Also make sure your ST-Link has the latest firmware, use the STM32CubeProgrammer application 'Firmware upgrade' button for this.
+
+> [!NOTE]
+> After flashing the Katapult firmware the printer will start up silently; no fans, no light, and no display during boot. Don't be alarmed, this is normal. We will enable these functions again in step 8.
 
 To make life easier in the future we are going to flash Katapult to our MCUs (we flash Katapult on both the mainboard MCU _and_ the toolhead MCU). This is a bootloader that makes it possible to flash Klipper firmware without the ST-Link via CANBus, USB or UART by the Host.
 
@@ -439,7 +445,7 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 # STEP 8 - FLASH KLIPPER FIRMWARE on MCUs
 
 > [!NOTE]
-> The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now, the printer starts up silently; no fans, no light, and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
+> The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. **Only now, the printer starts up silently; no fans, no light, and no display during boot.** You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
 > [!TIP]
 > For future Klipper firmware updates, after completing the steps below, you only have to run the script at step `8.7`.
