@@ -447,6 +447,9 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 > [!NOTE]
 > The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. **Only now, the printer starts up silently; no fans, no light, and no display during boot.** You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
+> [!NOTE]
+> Some users have reported to make sure nothing is keeping Klipper busy (like an open web session to Mainsail/Fluidd or some app using Klipper) or it might get stuck on 'Attempting to connect to bootloader' when flashing.
+
 > [!TIP]
 > For future Klipper firmware updates, after completing the steps below, you only have to run the script at step `8.7`.
 
@@ -472,7 +475,7 @@ You will have this :
 
 ![alt text](images/haa/haa_lsla.jpg)
 
-Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the end, you should have this (with your digits):
+Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg (_case sensitive_). At the end, you should have this (with your digits):
 
 ![alt text](images/haa/haa_printercfg2.jpg)
 
@@ -486,7 +489,7 @@ To be 100% sure you have the correct serial linked to the correct MCU please che
 ![Toolhead disconnect USB](images/toolhead-disconnect-usb.jpg)
 
 > [!NOTE]
-> The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`**. If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>It is possible your serials only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
+> The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`** (note: case sensitive). If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>It is possible your serials only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
 
 3. Download the script  [Automatic MCU script update](<Automatic MCU script update/>) and copy it in your `~/klipper` folder on the printer.
 
