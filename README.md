@@ -91,7 +91,12 @@ Ok, now you can continue.
 
 # STEP 2 - FLASHING MEDIA
 
-First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases)
+> [!CAUTION]
+> DO NOT USE V3.0.0 OR HIGHER. PLEASE USE V2.3.4 <br>
+> WE ARE STILL TESTING V3.0.0... <br>
+> DO NOT ASK FOR HELP IF YOU ARE USING V3.0.0
+
+First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases/tag/V2.3.4)
 >[!NOTE]
 >Regardless of the medium (SD card or eMMC) or the size the BIGTREETECH CB1 Linux image will expand the size of the image to the full size of the card being used.
 >
@@ -110,7 +115,7 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
 ## METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
 
-1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases
+1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V2.3.4
    - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
 3. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
