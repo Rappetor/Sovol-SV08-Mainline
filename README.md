@@ -215,11 +215,8 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 
 6. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: root/root
-
-<!-- MAKE SURE THAT THIS IS EMPHASIZED!!!-->
-   - On first boot. you will need to create a user account. you can either use biqu/biqu or choose a custom username/password. for the Github tutorial we will be using biqu/biqu
-
-
+   - On first boot. you will need to create a user account. you can either use biqu/biqu or choose a custom username/password. For the Github tutorial we will be using biqu/biqu.
+   - For best security it is best to change the password for both root and biqu.
    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 5, and finalize writing the system to eMMC!_
 
 > [!NOTE]
