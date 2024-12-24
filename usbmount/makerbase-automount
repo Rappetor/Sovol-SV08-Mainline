@@ -1,0 +1,74 @@
+#!/bin/sh
+
+user_id="biqu"
+
+mediadir="/mnt/USB"
+
+target_dir="/home/$user_id/printer_data/gcodes"
+
+dev=/dev/${1##*/}
+
+if ! [ -b $dev ]
+then
+	if grep /etc/mtab -qe "^$dev"
+	then
+	    rm -f /home/$user_id/printer_data/gcodes/USB-*.gcode
+		umount "$dev"
+		echo "umount $dev success" >> /tmp/usbmount.log
+		rmdir $mediadir
+	fi
+	exit 0
+fi
+
+echo "exec mount $1" >> /tmp/usbmount.log
+mkdir -p $mediadir
+#if [ $? -ne 0 ]; then
+#	echo "mkdir failed" >> /tmp/usbmount.log
+#else
+#	echo "mkdir successed" >> /tmp/usbmount.log
+#fi
+sudo mount -t auto -o uid=$user_id -o gid=$user_id $dev $mediadir
+
+prefix="USB-"
+
+# copy all gcode files in USB stick to /home/biqu/printer_data/gcodes/ with USB- prefix
+
+for file in "$mediadir"/*.gcode; do
+    filename=$(basename "$file")
+    target_file="$target_dir/$prefix$filename"
+    cp "$file" "$target_file" 2>> /tmp/usbmount.log
+done
+
+# Path to the wifi.cfg file
+CONFIG_FILE="$mediadir/wifi.cfg"
+
+# Check if the config file exists
+if [ -f "$CONFIG_FILE" ]; then
+    # Extract ssid and password from the config file
+    SSID=$(grep 'ssid' $CONFIG_FILE | cut -d'=' -f2 | tr -d '\r\n')
+    PASSWORD=$(grep 'password' $CONFIG_FILE | cut -d'=' -f2 | tr -d '\r\n')
+
+    # Check if you're already connected to the specified SSID
+    CURRENT_SSID=$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d':' -f2)
+    
+    if [ "$CURRENT_SSID" == "$SSID" ]; then
+        echo "Already connected to $SSID." | sudo tee /dev/kmsg
+        mv $CONFIG_FILE "$CONFIG_FILE.unchanged"
+    else
+        # Connect to the WiFi network
+        nmcli dev wifi connect "$SSID" password "$PASSWORD"
+
+        # Check if the connection was successful
+        if [ $? -eq 0 ]; then
+            echo "Connected to $SSID successfully." | sudo tee /dev/kmsg
+            mv $CONFIG_FILE "$CONFIG_FILE.setup"
+        else
+            echo "Failed to connect to $SSID." | sudo tee /dev/kmsg
+            mv $CONFIG_FILE "$CONFIG_FILE.invalid"
+        fi
+    fi
+else
+    echo "Wifi config file not found: $CONFIG_FILE" | sudo tee /dev/kmsg
+    # Exit with a non-zero status to indicate failure
+    # exit 1
+fi

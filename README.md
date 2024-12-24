@@ -91,8 +91,15 @@ Ok, now you can continue.
 
 # STEP 2 - FLASHING MEDIA
 
-First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases)
+> [!CAUTION]
+> DO NOT USE V3.0.0 OR HIGHER. PLEASE USE V2.3.4 <br>
+> WE ARE STILL TESTING V3.0.0... <br>
+> DO NOT ASK FOR HELP IF YOU ARE USING V3.0.0
 
+First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases/tag/V2.3.4)
+>[!NOTE]
+>Regardless of the medium (SD card or eMMC) or the size the BIGTREETECH CB1 Linux image will expand the size of the image to the full size of the card being used.
+>
 Here we can use 3 methods:
 
 **Method 1**: Write the CB1 image directly to the eMMC and use it that way
@@ -108,7 +115,7 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
 ## METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
 
-1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases
+1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V2.3.4
    - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
 3. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
@@ -198,14 +205,17 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 
 6. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
    - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
-   - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 6, and finalize writing the system to eMMC!_
+   - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 5, and finalize writing the system to eMMC!_
+
+> [!NOTE]
+> The 'system booting..' message on the LCD is just a splashscreen/image, not an actual status the system is still booting. _Only when the LCD screen is properly initialized by Klipper this message/image will go away._ But since we just put a fresh image _without Klipper_ on there, let alone the LCD config, this will never happen and the screen keeps showing it's booting. Check your router to see if an ip-address is assigned to the printer or use an hdmi screen to check the output and see if it has indeed booted.
 
 <br>
 
 # STEP 4 - INSTALL MAINLINE KLIPPER
 
-Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc.
-Please SSH into your printer and then do the following steps.
+Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Please SSH into your printer and then do the steps below.<br>
+<sub>Please note this needs a stable connection since it will be downloading everything.</sub>
 
 1. First, we will update the OS:<br>
 
@@ -229,12 +239,12 @@ Please SSH into your printer and then do the following steps.
    ./kiauh/kiauh.sh
    ```
 
-4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order) via KIAUH.
+4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order, _also check tip below_) via KIAUH.
 
    - So run KIAUH and choose: option **'1) [Install]'** and install those items (_using default options, download recommended macros; Yes_).
    - Crowsnest install asks to reboot the printer, please do so.
 
-> [!IMPORTANT]
+> [!TIP]
 > If you are using an HDMI screen, now is the time to install klipperscreen, do this BEFORE crowsnest so you dont have to reboot twice.
 
 
@@ -312,16 +322,17 @@ Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub f
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 
-4. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc., does a QGL with home Z, and does a Z_OFFSET_CALIBRATION before each print.
+4. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc., does a QGL with home Z, and can do a Z_OFFSET_CALIBRATION before each print.
 
    - Go to OrcaSlicer and edit the printer settings :<br>
-     -> Machine<br>
-     -> G-code<br>
+     -> Machine G-code<br>
+     -> Machine start G-code<br>
      -> Change your 'START_PRINT' line to this:<br>
 
      ```gcode
       START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
      ```
+  5. Want to use some **heatsoak time** before each print (heatsoaking in itself is enabled but the time set to 0 by default), please change the global variable `variable_heat_soak_time: 0` (to e.g. `variable_heat_soak_time: 10` for a 10 minute heatsoak) under `[gcode_macro _global_var]` in the 'sovol-macros.cfg'. If you want to skip heatsoaking for a print just add `HEATSOAK=0` to the START_PRINT gcode as shown in the previous point (and use `HEATSOAK=1` to enable it again from the slicer).
 
    - Now you can print and use the sovol presets like before!
 
@@ -374,8 +385,8 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 ![save as](images/stlink-firmware-save-as.jpg)
 
 > [!CAUTION]
-> Make sure the firmware backup file is 128k. If it is 1 Kilobyte it is too small, and you won't be able to return to the old firmware.
-> In case that already happened here is a <a href="firmware-backups/toolhead-0x80000000-sv08-20040628.bin">firmware backup</a> of a SV08 tool head, printer delivered to the EU on 2024-06-28.
+> Make sure the firmware backup file is at least 128k for the toolhead, 512k for the mainboard. If it is just 1 Kilobyte it is too small, and you won't be able to return to your old firmware.
+> In case that already happened here are some provided <a href="firmware-backups">firmware backups</a> of both the toolhead and mainboard (printer delivered to the EU on 2024-06-28). Use on your own risk.
 
 <br>
 
@@ -384,6 +395,9 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 > [!IMPORTANT]
 > When connecting the ST-Link to the printer, make sure the printer is powered OFF. The MCU will be powered by the ST-Link.<br>
 > Also make sure your ST-Link has the latest firmware, use the STM32CubeProgrammer application 'Firmware upgrade' button for this.
+
+> [!NOTE]
+> After flashing the Katapult firmware the printer will start up silently; no fans, no light, and no display during boot. Don't be alarmed, this is normal. We will enable these functions again in step 8.
 
 To make life easier in the future we are going to flash Katapult to our MCUs (we flash Katapult on both the mainboard MCU _and_ the toolhead MCU). This is a bootloader that makes it possible to flash Klipper firmware without the ST-Link via CANBus, USB or UART by the Host.
 
@@ -420,11 +434,12 @@ To make life easier in the future we are going to flash Katapult to our MCUs (we
 
 5. Grab the file `~/katapult/out/katapult.bin` (e.g. with an SFTP program like WinSCP) and store it on the computer. You can use this Katapult firmware for both the tool head and the mainboard.
 6. _Turn OFF the printer_ again and after it's off insert the ST Link again into the computer and start the STM32CubeProgrammer software and CONNECT.
-7. Once connected, on the left side of the software go to the tab 'Erasing & Programming' and execute a `Full chip erase`
+7. Once connected, on the left side of the software go to the tab 'Erasing & Programming' and execute a _manual (**not** only automatic mode)_ `Full chip erase`
 
 ![Full chip erase](images/haa/STM32/Etape4.png)
 
-8. Time to flash! Go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Download' button to write the firmware.
+8. Time to flash! Go back to the 'Memory & File editing' tab, click 'Open file', and select the `katapult.bin`, then press the 'Download' button to write the firmware.<br>
+<sub>Alternatively you can write the firmware from the 'Erasing & Programming' tab by using 'Browse' to select the `katapult.bin` file and then press 'Start Programming' to write the firmware.</sub>
 
 ![Open file](images/haa/STM32/Etape5.png)<br>
 
@@ -437,7 +452,10 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 # STEP 8 - FLASH KLIPPER FIRMWARE on MCUs
 
 > [!NOTE]
-> The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. Only now, the printer starts up silently; no fans, no light, and no display during boot. You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
+> The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. **Only now, the printer starts up silently; no fans, no light, and no display during boot.** You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
+
+> [!NOTE]
+> Some users have reported to make sure nothing is keeping Klipper busy (like an open web session to Mainsail/Fluidd or some app using Klipper) or it might get stuck on 'Attempting to connect to bootloader' when flashing.
 
 > [!TIP]
 > For future Klipper firmware updates, after completing the steps below, you only have to run the script at step `8.7`.
@@ -464,21 +482,23 @@ You will have this :
 
 ![alt text](images/haa/haa_lsla.jpg)
 
-Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg. At the end, you should have this (with your digits):
+Copy the blue part to replace `ttyACM0` or `ttyACM1` in your printer.cfg (_case sensitive_). At the end, you should have this (with your digits):
 
 ![alt text](images/haa/haa_printercfg2.jpg)
 
 > [!WARNING]
 > **WARNING**: When you accidently switch the `mcu` and `extra_mcu` serials bad things can happen. _**THE HEATER WILL TURN ON FULL BLAST!**_ This is bad, you don't want this.
 <br><br>
+Also **DON'T** use *ttyACM0* and *ttyACM1* as serials, they are not fixed and can switch and give this dangerous effect as well. There is a reason we want you to use the long (and fixed/static) serial.
+<br><br>
 To be 100% sure you have the correct serial linked to the correct MCU please check your serials with `ls /dev/serial/by-id/` and **disconnect** the USB plug from the **toolhead** (_see image below_). Do a `ls /dev/serial/by-id/` again and see what serial is still there (this is your `mcu` serial) and what serial disappeared (this is your `extra_mcu` serial). Plug the connector back in and do another `ls /dev/serial/by-id/` to confirm you have indeed the correct `mcu` and `extra_mcu` serials.
 
 ![Toolhead disconnect USB](images/toolhead-disconnect-usb.jpg)
 
 > [!NOTE]
-> The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`**. If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>It is possible your serials only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
+> The correct serial for our MCU's in the printer.cfg always begins with **`usb-Klipper_stm32f103xe_`** (note: case sensitive). If you only found serials that start with `usb-Katapult_stm32f103xe_` when doing _`ls /dev/serial/by-id/`_ please replace `Katapult` with `Klipper` for the serials in your printer.cfg. <sub>It is possible your serials only contain `usb-Katapult_stm32f103xe_` at the moment because the MCU is already in DFU mode, ready to receive the Klipper firmware. After flashing the Klipper firmware it will become `usb-Klipper_stm32f103xe_`.</sub>
 
-3. Download the script  [Automatic MCU script update](<Automatic MCU script update/>) and copy it in your `~/Klipper` folder on the printer.
+3. Download the script  [Automatic MCU script update](<Automatic MCU script update/>) and copy it in your `~/klipper` folder on the printer.
 
 4. Edit it with nano to change the ID of each MCU with what you have copied at [2](#step-8---flash-klipper-firmware-on-mcus):
 ```batch
@@ -491,20 +511,32 @@ sudo nano ~/klipper/update_klipper_mcus_sv08.sh
 
 *update_klipper_mcus_sv08.sh<br>*
 ```bash
-#Replace each serial number with the one you find in your printer.cfg file
-#HOSTSERIAL = [mcu]
-#TOOLHEADSERIAL = [extra mcu]
-HOSTSERIAL='XXXXXXX'
-TOOLHEADSERIAL='YYYYYYY'
+#Replace each XXXXXXXX and YYYYYYYY serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#HOSTSERIAL is found under [mcu]
+#TOOLHEADSERIAL is found under [extra mcu]
+
+# I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
+HOSTSERIAL='XXXXXXXX'
+
+# I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYYY1' 'YYYYYYYY2' 'YYYYYYY3')
+TOOLHEADSERIAL=('YYYYYYY')
 ```
 - You should now have this in the script :
 
 ```bash
-#Replace each serial number with the one you find in your printer.cfg file
-#HOSTSERIAL = [mcu]
-#TOOLHEADSERIAL = [extra mcu]
-HOSTSERIAL='34FFDA05334D593524680951-if00'
-TOOLHEADSERIAL='31FF700630464E3225480643-if00'
+#Replace each XXXXXXXX and YYYYYYYY serial number with the one you find in your printer.cfg file (we only need the part after 'usb-Klipper_stm32f103xe_')
+#HOSTSERIAL is found under [mcu]
+#TOOLHEADSERIAL is found under [extra mcu]
+
+# I'm a string, so I look like: HOSTSERIAL='XXXXXXXX'
+HOSTSERIAL='32FFD9054747363035861857-if00'
+
+# I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
+# For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYYY1' 'YYYYYYYY2' 'YYYYYYY3')
+TOOLHEADSERIAL=('50FF6C068367515511180667-if00')
+
+
 ```
 5. Save the file with `Ctrl + X`
 
@@ -518,32 +550,30 @@ sudo chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
 
-8. In the first menuconfig screen for the **`HOST`**,choose the following option and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot), when ready press Q to quit & save :<br>
+8. In the MCU updater menu choose option 1 'HOST MCU'. In the menuconfig screen for the **`HOST`**,choose the following option(s) and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot), when ready press Q to quit & save. Continue to follow instructions and flash the HOST MCU.<br>
 
 ![alt text](images/haa/haa_host_menuconfig.jpg)
 
 > [!NOTE]
 > <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-9. In the second menuconfig screen for the **`TOOLHEAD`**,choose the following option and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save :<br>
+9. In the MCU updater menu choose option 2 'TOOLHEAD MCU(S)'. In the menuconfig screen for the **`TOOLHEAD`**,choose the following option(s) and add `PA6` on the last line (_GPIO pins_ , if you want _hotend fan_ enabled during boot), when ready press Q to quit & save. Continue to follow instructions and flash the TOOLHEAD MCU.<br>
 
 ![alt text](images/haa/haa_toolhead_menuconfig.jpg)
 
 > [!NOTE]
 > <sub>Because we are using Katapult as the bootloader, make sure you set the 8 KiB bootloader offset.</sub><br>
 
-10. Finally follow the instructions until the end :
-
 ![alt text](images/haa/haa_automatic_mcu_update.jpg)
 
-11. Done! The Klipper firmware on both MCU has been updated.
+10. Done! The Klipper firmware on both MCU has been updated.
 
-12. Restart the printer :
+11. Restart the printer :
 ```bash
 sudo shutdown -r now
 ```
 
-13. After the restart, you can uncomment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg
+12. After the restart, you can *un*comment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg to have those functional again
 
 13. Enjoy mainline Klipper ! 
 
