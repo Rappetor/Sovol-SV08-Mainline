@@ -60,11 +60,12 @@ Ok, now you can continue.
   - Optionally you can also SSH or SFTP into your machine (port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
   - For example use [PuTTY](https://www.putty.org/) for SSH and [WinSCP](https://winscp.net/) for SFTP (_SSH File Transfer Protocol_).
 - You WILL need the printer.cfg later in this process (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
-- You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC.
-  - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a working printer.
-- If you go for the '_method 2_' you need a big enough **MicroSD card** (it's also possible to run everything from the SD card).
+- You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC. <sub>*(Do note it's also possible without an eMMC adapter, but this involves writing the image to the SD card and then writing from the SD card to the eMMC, see 'method 2'. But you need to know how to clear the eMMC partitions from ssh/Linux).*</sub>
+  - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a stock/working printer.
+- If you go for the '_method 2_' you need a big enough **MicroSD card**, it's *also* possible to run everything from the SD card and not use an eMMC.
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmware.
 - The files used for this guide can now be found together in the GitHub folder `/files-used/` [HERE](files-used/)
+- To edit the different files during this guide please use a text editor like [Notepad++](https://notepad-plus-plus.org/) (or use `nano` from ssh). This way we can make sure the files stay in a proper format with proper (Linux style) line endings and work as intended. *When using the default Windows Notepad this is not always the case!*
 
 ### EMMC Sellers
 
