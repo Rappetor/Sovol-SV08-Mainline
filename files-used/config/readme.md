@@ -23,3 +23,6 @@ The menu has been changed in such a way it's a reduced and somewhat more basic m
 
 ## Crowsnest
 Default Sovol crowsnest .conf is added as well. Please add the webcam in Mainsail -> Interface Settings -> Webcams.
+
+##Pico
+Adding a pico to the SV08 for a chamber thermistor
