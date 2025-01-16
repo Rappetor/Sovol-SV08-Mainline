@@ -16,24 +16,80 @@
 
    <img src="bmp280.jpg" width="250"></a>
 
-4. Flash Pico
+3. Flash Pico
+
   <img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/klipper_menuconfig.png">
 
 5. Mount & plug in Pico
 
   <img src="pico-mounted.jpg" width="250"></a>
 
-5. Find device ID for Pico
+6. Find device ID for Pico
+* SSH into the SV08, compile the firmware for the Pico
 
-<img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/rp2040_id.png">
+   ```properties
+   cd ~/klipper
+   make clean
+   make menuconfig
+   ```
+* Now, while holding down the `BOOTSEL` button on the Pico, connect the Pico to the SV08 via USB. Compile and flash the firmware.
 
-6. Edit the Pico.cfg with your proper device ID
+   `make flash FLASH_DEVICE=first`
 
-```py
-[mcu pico]
-serial: /dev/serial/by-id/usb-Klipper_rp2040_E6635C08CB096C2C-if00
-restart_method: command
-```
+   If that fails, you will be told which `FLASH_DEVICE` to use. In this example, that's make flash `FLASH_DEVICE=2e8a:0003`.
 
-7. Save and restart firmware
+   <img src="https://www.klipper3d.org/img/flash_rp2040_FLASH_DEVICE.png">
+
+   The Pico will now reboot with the new firmware and should show up as a serial device. Find the pico serial device with `ls /dev/serial/by-id/*`. You can now add an `pico.cfg` file with the following settings:
+
+   <img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/rp2040_id.png">
+
+7. Edit the Pico.cfg with your proper device ID
+
+   ```properties
+   [mcu pico]
+   serial: /dev/serial/by-id/usb-Klipper_rp2040_<YOUR-PICO-ID-HERE>   #example: serial: /dev/serial/by-id/usb-Klipper_rp2040_E6635C08CB096C2C-if00
+   restart_method: command
+
+   [temperature_sensor chamber]
+   sensor_type: BME280
+   min_temp: 0
+   max_temp: 65
+   i2c_address: 119
+   #   Default is 118 (0x76). The BMP180, #BMP388 and some BME280 sensors
+   #   have an address of 119 (0x77).
+   i2c_mcu: pico
+   #   The name of the micro-controller that the chip is connected to.
+   #   The default is "mcu".
+   i2c_bus: i2c0a
+   #   If the micro-controller supports multiple I2C busses then one may
+   #   specify the micro-controller bus name here. The default depends on
+   #   the type of micro-controller.
+   #i2c_software_scl_pin:
+   #i2c_software_sda_pin:
+   #   Specify these parameters to use micro-controller software based
+   #   I2C "bit-banging" support. The two parameters should the two pins
+   #   on the micro-controller to use for the scl and sda wires. The
+   #   default is to use hardware based I2C support as specified by the
+   #   i2c_bus parameter.
+   #i2c_speed:
+   #   The I2C speed (in Hz) to use when communicating with the device.
+   #   The Klipper implementation on most micro-controllers is hard-coded
+   #   to 100000 and changing this value has no effect. The default is
+   #   100000. Linux, RP2040 and ATmega support 400000.
+   gcode_id:
+
+   [gcode_macro _QUERY_BME280]
+   gcode:
+       {% set sensor = printer["bme280 chamber"] %}
+       {action_respond_info(
+           "Temperature: %.2f C\n"
+           "Pressure: %.2f hPa\n"
+           "Humidity: %.2f%%" % (
+               sensor.temperature,
+               sensor.pressure,
+               sensor.humidity))}
+   ```
+
+8. Save and restart firmware
 
