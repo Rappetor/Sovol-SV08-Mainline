@@ -14,9 +14,11 @@
 
 2. While printing, prep Pico cables, and thermistor
 
+   <img src="https://cdn-shop.adafruit.com/970x728/2651-08.jpg" width="250"></a>
    <img src="bmp280.jpg" width="250"></a>
+   <img src="pico-mounted2.jpg" width="250"></a>
 
-3. Flash Pico
+4. Flash Pico
 
   <img src="https://www.klipper3d.org/img/klipper_pico_menuconfig.png">
 
