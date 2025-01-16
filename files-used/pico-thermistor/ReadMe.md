@@ -15,17 +15,17 @@
 2. While printing, prep Pico cables, and thermistor
 
    <img src="https://cdn-shop.adafruit.com/970x728/2651-08.jpg" width="250"></a>
-   <img src="pico-bpm-wiring.jpg" width="250"></a>
+   <img src="img/pico-bpm-wiring.jpg" width="250"></a>
    
-   <img src="bmp280.jpg" width="250"></a>
-   <img src="pico-mounted2.jpg" width="250"></a>
+   <img src="img/bmp280.jpg" width="250"></a>
+   <img src="img/pico-mounted2.jpg" width="250"></a>
 
 3. Mount pico to extrusion under the printer & plug in Pico into any open USB port on SV08 mainboard.
    
      *Any open USB port will work on the SV08
 
-   <img src="pico-mounted.jpg" width="250"></a>
-   <img src="SV08-USB.jpg" width="250"></a>   
+   <img src="img/pico-mounted.jpg" width="250"></a>
+   <img src="img/SV08-USB.jpg" width="250"></a>   
 
 4. Flash Pico
 
