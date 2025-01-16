@@ -21,9 +21,11 @@
    <img src="pico-mounted2.jpg" width="250"></a>
 
 3. Mount pico to extrusion under the printer & plug in Pico into any open USB port on SV08 mainboard.
+   
+     *Any open USB port will work on the SV08
 
    <img src="pico-mounted.jpg" width="250"></a>
-   
+   <img src="SV08-USB.jpg" width="250"></a>   
 
 4. Flash Pico
 
