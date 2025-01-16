@@ -15,18 +15,21 @@
 2. While printing, prep Pico cables, and thermistor
 
    <img src="https://cdn-shop.adafruit.com/970x728/2651-08.jpg" width="250"></a>
+   <img src="pico-bpm-wiring.jpg" width="250"></a>
+   
    <img src="bmp280.jpg" width="250"></a>
    <img src="pico-mounted2.jpg" width="250"></a>
 
+3. Mount pico to extrusion under the printer & plug in Pico into any open USB port on SV08 mainboard.
+
+   <img src="pico-mounted.jpg" width="250"></a>
+   
+
 4. Flash Pico
 
-  <img src="https://www.klipper3d.org/img/klipper_pico_menuconfig.png">
+   <img src="https://www.klipper3d.org/img/klipper_pico_menuconfig.png">
 
-5. Mount & plug in Pico
-
-  <img src="pico-mounted.jpg" width="250"></a>
-
-6. Find device ID for Pico
+5. Find device ID for Pico
 * SSH into the SV08, compile the firmware for the Pico
 
    ```properties
@@ -46,7 +49,7 @@
 
    <img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/rp2040_id.png">
 
-7. Edit the Pico.cfg with your proper device ID
+6. Edit the Pico.cfg with your proper device ID
 
    ```properties
    [mcu pico]
@@ -93,5 +96,5 @@
                sensor.humidity))}
    ```
 
-8. Save and restart firmware
+7. Save and restart firmware
 
