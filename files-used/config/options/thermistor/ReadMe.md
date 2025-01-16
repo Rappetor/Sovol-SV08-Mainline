@@ -18,7 +18,7 @@
 
 3. Flash Pico
 
-  <img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/klipper_menuconfig.png">
+  <img src="https://www.klipper3d.org/img/klipper_pico_menuconfig.png">
 
 5. Mount & plug in Pico
 
