@@ -5,21 +5,35 @@
 - [BMP 280 thermistor](https://www.adafruit.com/product/2651)
 - [22-26 awg wiring](https://www.amazon.com/dp/B089D29FHC/?coliid=IBSXSVAK8GF72&colid=2P726BLZ31XZF&psc=1&ref_=list_c_wl_lv_ov_lig_dp_it)
 - [pico mount](https://www.printables.com/model/835820-raspberry-pi-pico-mount)
+- [no t-nut pico mount](https://www.printables.com/model/513850-pico-caddy-no-screw-2020-connect)
 - solder, soldering iron, and light soldering skills
 
 # STEPS
 
-- Print Pico mount
+1. Print Pico mount
 
-- While printing, prep Pico cables, and thermistor
+2. While printing, prep Pico cables, and thermistor
 
-- Flash Pico
+   <img src="bmp280.jpg" width="250"></a>
 
-- Mount & plug in Pico
+4. Flash Pico
+  <img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/klipper_menuconfig.png">
 
-- Find device ID for Pico
+5. Mount & plug in Pico
 
-- Configure Pico.cfg with proper device ID
+  <img src="pico-mounted.jpg" width="250"></a>
 
-- Save and restart firmware
+5. Find device ID for Pico
+
+<img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/rp2040_id.png">
+
+6. Edit the Pico.cfg with your proper device ID
+
+```py
+[mcu pico]
+serial: /dev/serial/by-id/usb-Klipper_rp2040_E6635C08CB096C2C-if00
+restart_method: command
+```
+
+7. Save and restart firmware
 
