@@ -20,6 +20,9 @@
    <img src="img/bmp280-wiring.jpg" width="250"></a>
    <img src="img/pico-mounted2.jpg" width="250"></a>
 
+   <img src="img/bmpmount.jpg" width="250"></a>
+   <img src="img/bmpmount2.jpg" width="250"></a>
+
    ### Note: you might notice my physcial wiring pictures have blue/green backwards. This was a mistake on my end. The wirng still goes to their proper connections.
 
 3. Mount pico to extrusion under the printer & plug in Pico into any open USB port on SV08 mainboard.
