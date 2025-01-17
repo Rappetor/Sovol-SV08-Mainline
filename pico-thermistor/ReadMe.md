@@ -10,41 +10,43 @@
 
 # STEPS
 
-1. Print Pico mount
+### 1. Print any Pico mount that suites your needs. See prerequisites are above for examples.
 
-2. While printing, prep Pico cables, and thermistor
+### 2. While printing pico mount, prep Pico cables, and thermistor
 
    <img src="https://cdn-shop.adafruit.com/970x728/2651-08.jpg" width="250"></a>
    <img src="img/pico-bpm-wiring-diagram.jpg" width="250"></a>
    
    <img src="img/bmp280-wiring.jpg" width="250"></a>
-   <img src="img/pico-mounted2.jpg" width="250"></a>
-
-   <img src="img/bmpmount.jpg" width="250"></a>
-   <img src="img/bmpmount2.jpg" width="250"></a>
-
-   ### Note: you might notice my physcial wiring pictures have blue/green backwards. This was a mistake on my end. The wirng still goes to their proper connections.
-
-3. Mount pico to extrusion under the printer & plug in Pico into any open USB port on SV08 mainboard.
+   <img src="img/pico-wiring.jpg" width="250"></a>
    
-     *Any open USB port will work on the SV08
+* Note: you might notice my physcial wiring pictures have blue/green backwards. This was a mistake on my end. The wirng still goes to their proper connections.
+
+<img src="img/bmpmount.jpg" width="250"></a>
+<img src="img/bmpmount2.jpg" width="250"></a>
+   
+* Cabling is routed through the cable chain. Roughly 525mm of 22-26 awg wiring to go from the pico to the BMP280.
+
+### 3. Mount pico to extrusion under the printer & plug in Pico into any open USB port on SV08 mainboard.
+   
+* Any open USB port will work on the SV08
 
    <img src="img/pico-mounted.jpg" width="250"></a>
    <img src="img/SV08-USB.jpg" width="250"></a>   
 
-4. Flash Pico
+### 4. Flash Pico
 
-   <img src="https://www.klipper3d.org/img/klipper_pico_menuconfig.png">
-
-5. Find device ID for Pico
-* SSH into the SV08, compile the firmware for the Pico
+* SSH into the SV08 and compile the firmware for the Pico by running the command below
 
    ```properties
    cd ~/klipper
    make clean
    make menuconfig
    ```
-* Now, while holding down the `BOOTSEL` button on the Pico, connect the Pico to the SV08 via USB. Compile and flash the firmware.
+   <img src="https://www.klipper3d.org/img/klipper_pico_menuconfig.png">
+* Once the appropriate "menuconfig" settings have been configured (see above), press "Q" to exit, and then "Y" to save
+   
+* Now, disconnect the USB from the pico and while holding down the `BOOTSEL` button on the Pico, connect the Pico to the SV08 via USB. Compile and flash the firmware.
 
    `make flash FLASH_DEVICE=first`
 
@@ -52,11 +54,11 @@
 
    <img src="https://www.klipper3d.org/img/flash_rp2040_FLASH_DEVICE.png">
 
-   The Pico will now reboot with the new firmware and should show up as a serial device. Find the pico serial device with `ls /dev/serial/by-id/*`. You can now add an `pico.cfg` file with the following settings:
+* The Pico will now reboot with the new firmware and should show up as a serial device. Find the pico serial device with `ls /dev/serial/by-id/*`. You can now add an `pico.cfg` file with the following settings:
 
    <img src="https://github.com/bigtreetech/SKR-Pico/raw/master/Klipper/Images/rp2040_id.png">
 
-6. Edit the Pico.cfg with your proper device ID
+### 5. Edit the Pico.cfg with your proper device ID
 
    ```properties
    [mcu pico]
@@ -103,5 +105,8 @@
                sensor.humidity))}
    ```
 
-7. Save and restart firmware
+### 6. Edit your printer.cfg 
+* Type in `[include_pico.cfg]` (preferably towards the top of the config) 
+
+### 7. Save and restart firmware
 
