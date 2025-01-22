@@ -1,3 +1,7 @@
+# WHAT IS THIS?
+This is a small guide on how to use a RPi Pico with a BMP 280 to get a thermistor/temperature readout for your enclosure. The SV08 stock motherboard does not have a connector for an additional (enclosure) thermistor, that is why we need something like this to make it possible.
+This can be used, for example, to wait until a certain temperature is reached before printing, or to control the exhaust fan based on the enclosure temperature.
+
 # PREREQUISITES
 
 - [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
