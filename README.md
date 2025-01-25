@@ -198,7 +198,7 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 5. Change the Wi-Fi credentials in the 'system.cfg'
 
 > [!NOTE]
-> If you have the special character '$' in you wifi password, it is recommended that you escape ('\') the character.  The bash process of reading the system.cfg reads the in '$' and converts it.  For example, a WIFI_PASSWD of '1$234' should be saved in the system.cfg as '1\$234'.
+> If you have the special character `$` in you wifi password, it is recommended that you escape the character (with a `\` in front).  The bash process of reading the system.cfg reads the `$` and converts it. For example, a WIFI_PASSWD of `1$234` should be saved in the system.cfg as `1\$234`.
 
    - Optional: uncomment the hostname and set the hostname to e.g. "SV08"
    - Save changes to the system.cfg
