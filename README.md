@@ -323,7 +323,8 @@ Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub f
      `crowsnest.conf`<br>
 
 
-   - **IMPORTANT**: Open your backup of your printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx) to your new printer.cfg<br>
+   - **OPTIONAL**: Open your backup of your printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (**only** when your serial looks like `/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx`) to your new printer.cfg, this might save you some time later..<br>
+   _Do your serials look like `/dev/serial/by-id/ttyACM0` or `/dev/serial/by-id/ttyACM1` then you can also skip this, we will find the correct full serials in **STEP 8**_.
 
 3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 
