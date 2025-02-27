@@ -87,6 +87,8 @@ Ok, now you can continue.
 2. Remove the metal plate by removing the 6 screws.
 3. You can now see the eMMC module on the board, remove the 2 screws that are holding it in, and carefully remove the eMMC module.
    - Take note of the direction of the eMMC module (_hint; you can also see an arrow on the board which way the module goes_)
+   
+   ![Diskpart](images/mainboard-emmc-location.jpg)
 
 <br>
 
