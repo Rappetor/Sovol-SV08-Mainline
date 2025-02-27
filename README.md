@@ -474,9 +474,6 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 > [!NOTE]
 > The standard Klipper firmware works on both the toolhead MCU and the mainboard MCU. Originally Sovol made multiple changes to the `stm32f1.c` source for the firmware but they are not mandatory. **Only now, the printer starts up silently; no fans, no light, and no display during boot.** You CAN get some of this functionality back by enabling GPIO pins during startup, see notes below make menuconfig.
 
-> [!NOTE]
-> Some users have reported to make sure nothing is keeping Klipper busy (like an open web session to Mainsail/Fluidd or some app using Klipper) or it might get stuck on 'Attempting to connect to bootloader' when flashing.
-
 > [!TIP]
 > For future Klipper firmware updates, after completing the steps below, you only have to run the script at step `8.7`.
 
@@ -567,6 +564,9 @@ chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 ```bash
 cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
+> [!NOTE]
+> Some users have reported to make sure nothing is keeping Klipper busy (like an open web session to Mainsail/Fluidd or some app using Klipper) or it might get stuck on 'Attempting to connect to bootloader' when flashing.
+> So if you want the best chance of success; close mainsail or any other things that might keep the printer/Klipper busy, maybe even reboot before you want to flash and run the automatic update script.
 
 8. In the MCU updater menu choose option 1 'HOST MCU'. In the menuconfig screen for the **`HOST`**,choose the following option(s) and add `PA1,PA3` on the last line (_GPIO pins_ , if you want _MCU fan and light_ during boot), when ready press Q to quit & save. Continue to follow instructions and flash the HOST MCU.<br>
 
