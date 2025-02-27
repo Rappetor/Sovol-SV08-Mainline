@@ -363,6 +363,9 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 > [!TIP]
 > Does your (clone) ST-Link not work with STM32CubeProgrammer and e.g. only has a single digit serial number? Try the older version of the flashing program instead, you can find it here: https://www.st.com/en/development-tools/stsw-link004.html. The steps below explain the STM32CubeProgrammer but it should be mostly the same for the old program but with a different interface.
 
+> [!TIP]
+> Are you using STM32CubeProgrammer on Linux? If you can't connect to your ST-Link, you may have to manually fix a common installation bug following these [instructions](https://stackoverflow.com/a/69414727/6910451).
+
 2. _Turn the printer OFF_ and remove the ST-Link from your computer, next connect the ST-Link to your board (either tool head or mainboard).
 
    - MAKE SURE YOU WIRE THIS CORRECTLY, the pinout on the boards is (SV08 -> ST-Link Mini):
