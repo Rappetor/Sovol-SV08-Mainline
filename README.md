@@ -335,14 +335,20 @@ Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub f
 
 4. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc., does a QGL with home Z, and can do a Z_OFFSET_CALIBRATION before each print.
 
-   - Go to OrcaSlicer and edit the printer settings :<br>
+   - Go to OrcaSlicer/PrusaSlicer and edit the printer settings :<br>
      -> Machine G-code<br>
      -> Machine start G-code<br>
-     -> Change your 'START_PRINT' line to this:<br>
+     -> For OrcaSlicer, change your 'START_PRINT' line to this:<br>
 
      ```gcode
       START_PRINT EXTRUDER_TEMP=[nozzle_temperature_initial_layer] BED_TEMP=[bed_temperature_initial_layer_single]
      ```
+     
+     -> For PrusaSlicer, change your 'START_PRINT' line to this:<br>
+     ```gcode
+      START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
+     ```
+     
   5. Want to use some **heatsoak time** before each print (heatsoaking in itself is enabled but the time set to 0 by default), please change the global variable `variable_heat_soak_time: 0` (to e.g. `variable_heat_soak_time: 10` for a 10 minute heatsoak) under `[gcode_macro _global_var]` in the 'sovol-macros.cfg'. If you want to skip heatsoaking for a print just add `HEATSOAK=0` to the START_PRINT gcode as shown in the previous point (and use `HEATSOAK=1` to enable it again from the slicer).
 
    - Now you can print and use the sovol presets like before!
