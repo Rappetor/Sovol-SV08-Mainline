@@ -119,13 +119,14 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V2.3.4
    - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
-3. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
+3. Back-up ~/home/sovol/klipper_config/printer.cfg~ for later (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
+4. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
    - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
    - Open Balena Etcher<br>
      -> Choose "Flash from file", browse and choose the downloaded CB1 image<br>
      -> Select the eMMC drive (e.g. Generic USB STORAGE DEVICE USB device)<br>
      -> Flash! (this will erase everything on the eMMC!)
-4. After the flash is complete you can close BalenaEtcher. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB adapter and put it back in)
+5. After the flash is complete you can close BalenaEtcher. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB adapter and put it back in)
 
 _You can now continue to **STEP 3**_
 
@@ -147,6 +148,8 @@ _You can now continue to **STEP 3**_
 > _Sidenote here: you could, if you choose here, run the printer from the SD card and skip the whole eMMC. Just so you know ;-)_
 
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.<br>
+
+4. Double-check that you have backed-up ~/home/sovol/klipper_config/printer.cfg~ (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials to be used later).
 
 4. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!) :
    - In Windows open the command prompt (Win-R -> cmd) and run `diskpart` (be careful with diskpart, we don't want to erase the wrong disk here!)
