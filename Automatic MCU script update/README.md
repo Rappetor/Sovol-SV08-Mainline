@@ -16,6 +16,7 @@ cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
 
 ## Troubleshooting
+**- Error: 'No such file or directory'**<br>
 You might get the following error after executing the script: 
 ```bash
 /usr/bin/env: ‘bash\r’: No such file or directory
@@ -32,3 +33,5 @@ We have now converted the wrong line endings to the correct ones and you can onc
 ```bash
 cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 ```
+**- Issue: Script hangs when trying to flash**<br>
+Some users have reported to make sure nothing is keeping Klipper busy (like an open web session to Mainsail/Fluidd or some app using Klipper) or it might get stuck on 'Attempting to connect to bootloader' when flashing. So if you want the best chance of success; close mainsail or any other things that might keep the printer/Klipper busy, maybe even reboot before you want to flash and run the automatic update script.
