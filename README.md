@@ -121,7 +121,7 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V2.3.4
    - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
-3. Back-up `/home/sovol/klipper_config/printer.cfg` for later (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
+3. _You can use this moment to back-up `/home/sovol/printer_data/config/` for later. (For example the `printer.cfg` for the `/dev/serial/by-id/usb-Klipper_stm32f103xe` serials, do you have a serial like `/dev/ttyACM1` here no worries, we will find the full serial in **Step 8**)_.
 4. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
    - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
    - Open Balena Etcher<br>
@@ -151,9 +151,9 @@ _You can now continue to **STEP 3**_
 
 3. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.<br>
 
-4. Double-check that you have backed-up `/home/sovol/klipper_config/printer.cfg` (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials to be used later).
+4. _You can use this moment to back-up `/home/sovol/printer_data/config/` for later. (For example the `printer.cfg` for the `/dev/serial/by-id/usb-Klipper_stm32f103xe` serials, do you have a serial like `/dev/ttyACM1` here no worries, we will find the full serial in **Step 8**)_
 
-4. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!) :
+5. We need to clear all the partitions from the eMMC (this will erase everything on the eMMC!) :
    - In Windows open the command prompt (Win-R -> cmd) and run `diskpart` (be careful with diskpart, we don't want to erase the wrong disk here!)
    - In diskpart do `list disk` and see what disk is your eMMC
    - In diskpart run `select disk <nr>` where <nr> is the number of your eMMC. Please make sure this is the correct disk before you continue!
@@ -164,7 +164,7 @@ _You can now continue to **STEP 3**_
 
 _Please continue to **STEP 3** and then come back here!_
 
-5. If everything is ok you should have booted from the SD card, and it's time to copy all the contents to the eMMC and make it bootable.
+6. If everything is ok you should have booted from the SD card, and it's time to copy all the contents to the eMMC and make it bootable.
    - First, check if the eMMC is recognized and available:
      - Run the command `fdisk -l` and you should see some storage devices including the eMMC (_e.g. /dev/mmcblk1 for the SD card and /dev/mmcblk2 for the eMMC_).
    - Run the command `sudo nand-sata-install`:
