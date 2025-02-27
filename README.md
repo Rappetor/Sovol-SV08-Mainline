@@ -555,14 +555,12 @@ HOSTSERIAL='32FFD9054747363035861857-if00'
 # I'm an array so I look like: TOOLHEADSERIAL=('YYYYYYY')
 # For multiple serials/toolheads use (mind the space in between items!): TOOLHEADSERIAL=('YYYYYYYY1' 'YYYYYYYY2' 'YYYYYYY3')
 TOOLHEADSERIAL=('50FF6C068367515511180667-if00')
-
-
 ```
 5. Save the file with `Ctrl + X`
 
 6. Make the script executable :
 ```bash
-sudo chmod +x ~/klipper/update_klipper_mcus_sv08.sh
+chmod +x ~/klipper/update_klipper_mcus_sv08.sh
 ```
 
 7. You can now use the script with :
