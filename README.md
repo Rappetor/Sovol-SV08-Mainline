@@ -93,13 +93,17 @@ Ok, now you can continue.
 <br>
 
 # STEP 2 - FLASHING MEDIA
-
+<!-- 
 > [!CAUTION]
 > DO NOT USE V3.0.0 OR HIGHER. PLEASE USE V2.3.4 <br>
 > WE ARE STILL TESTING V3.0.0... <br>
 > DO NOT ASK FOR HELP IF YOU ARE USING V3.0.0
 
-First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases/tag/V2.3.4)
+First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases/tag/V2.3.4) -->
+
+First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases/tag/V3.0.0)
+
+
 >[!NOTE]
 >Regardless of the medium (SD card or eMMC) or the size the BIGTREETECH CB1 Linux image will expand the size of the image to the full size of the card being used.
 >
@@ -118,8 +122,8 @@ _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
 
 ## METHOD 1: WRITE IMAGE DIRECTLY TO eMMC
 
-1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V2.3.4
-   - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
+1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V3.0.0
+   - Used in this example: [CB1_Debian12_minimal_kernel6.6_20241219.img.xz](https://github.com/bigtreetech/CB1/releases/download/V3.0.0/CB1_Debian12_minimal_kernel6.6_20241219.img.xz)
 2. Put the eMMC module in the USB adapter (again, mind the direction of the module, there is an arrow on the adapter) and put the USB adapter in your computer.
 3. _You can use this moment to back-up `/home/sovol/printer_data/config/` for later. (For example the `printer.cfg` for the `/dev/serial/by-id/usb-Klipper_stm32f103xe` serials, do you have a serial like `/dev/ttyACM1` here no worries, we will find the full serial in **Step 8**)_.
 4. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
@@ -137,7 +141,7 @@ _You can now continue to **STEP 3**_
 ## METHOD 2: WRITE IMAGE TO SD -> eMMC
 
 1. Write the image to the eMMC chip
-   - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
+   - Used in this example: [CB1_Debian12_minimal_kernel6.6_20241219.img.xz](https://github.com/bigtreetech/CB1/releases/download/V3.0.0/CB1_Debian12_minimal_kernel6.6_20241219.img.xz)
 
 2. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the **SD card**
    - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
@@ -174,14 +178,20 @@ _Please continue to **STEP 3** and then come back here!_
 
 <br>
 
-# STEP 3 - CHANGES TO THE BOARDENV.TXT & SETUP WI-FI
+# STEP 3 - CHANGES TO THE ARMBIANENV.TXT & SETUP WI-FI
 
-To make the CB1 image setup correctly we need to copy a file and make a few changes to the BoardEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
+To make the CB1 image setup correctly we need to copy a file and make a few changes to the armbianEnv.txt. Also, we need to set up Wi-Fi credentials (if not connected via ethernet) in the system.cfg
 
-1. Please copy the `sun50i-h616-sovol-emmc.dtb` file from the `/files-used/dtb-files/` GitHub folder [HERE](files-used/dtb-files/) to your 'BOOT' drive `/dtb/allwinner/` folder.
+<!-- 1. Please copy the `sun50i-h616-sovol-emmc.dtb` file from the `/files-used/dtb-files/` GitHub folder [HERE](files-used/dtb-files/) to your 'BOOT' drive `/dtb/allwinner/` folder.
 2. Go to the 'BOOT' drive and make a **BACKUP** of 'BoardEnv.txt' on your hard disk just in case.
 3. Open 'BoardEnv.txt' in your favourite text editor.
-4. Replace the content ABOVE the `#--------#` line (we KEEP what is under there) with the following items _(see picture below, green = copy/pasted, red = don't touch and keep as it is)_:
+4. Replace the content ABOVE the `#--------#` line (we KEEP what is under there) with the following items _(see picture below, green = copy/pasted, red = don't touch and keep as it is)_: -->
+
+1. Go to the 'BOOT' drive and make a **BACKUP** of 'armbianEnv.txt' on your hard disk just in case.
+2. Open 'armbianEnv.txt' in your favourite text editor.
+3. Replace the content ABOVE the `#--------#` line (we KEEP what is under there) with the following items _(see picture below, green = copy/pasted, red = don't touch and keep as it is)_:
+
+
    ```ini
    bootlogo=false
    overlay_prefix=sun50i-h616
@@ -192,13 +202,13 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
    overlays=spidev1_1
    ```
    It will now look something like this:<br>
-   ![BoardEnv.txt contents](images/BoardEnv.txt.jpg)
+   ![armbianEnv.txt contents](images/BoardEnv.txt.jpg) <!-- Dont change image -->
   > [!NOTE]
   > <sub>**NOTE 1**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
-  <sub>**NOTE 2**: `fdtfile=sun50i-h616-sovol-emmc` supports both eMMC and SD cards but will, obviously, only boot from one (according to the BTT CB1 docs the SD card has priority over eMMC but there have been reports of it being the other way around; if it boots from eMMC and not the SD card please make sure the eMMC is empty or non-bootable or just remove it from the printer).</sub><br>
-  
+  <!-- <sub>**NOTE 2**: `fdtfile=sun50i-h616-sovol-emmc` supports both eMMC and SD cards but will, obviously, only boot from one (according to the BTT CB1 docs the SD card has priority over eMMC but there have been reports of it being the other way around; if it boots from eMMC and not the SD card please make sure the eMMC is empty or non-bootable or just remove it from the printer).</sub><br>
+   -->
 
-- Save your changed BoardEnv.txt!
+- Save your changed armbianEnv.txt!
 
 5. Change the Wi-Fi credentials in the 'system.cfg'
 
@@ -214,7 +224,9 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 
 
 6. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
-   - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
+   - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: root/root
+   - On first boot. you will need to create a user account. you can either use biqu/biqu or choose a custom username/password. For the Github tutorial we will be using biqu/biqu.
+   - For best security it is best to change the password for both root and biqu.
    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 5, and finalize writing the system to eMMC!_
 
 > [!NOTE]
