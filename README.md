@@ -591,9 +591,9 @@ cd "$HOME/klipper" && ./update_klipper_mcus_sv08.sh
 sudo shutdown -r now
 ```
 
-12. After the restart, you can *un*comment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg to have those functional again
+12. After the restart, you can *un*comment the `[adxl345]` and `[resonance_tester]` parts in your printer.cfg to have those functional again; you can also initialize the webcam through the Mainsail settings (Settings > Webcams > Add Webcam).
 
-13. Enjoy mainline Klipper ! 
+13. Enjoy mainline Klipper! 
 
 <br>
 
