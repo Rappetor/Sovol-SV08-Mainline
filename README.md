@@ -195,7 +195,8 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
    ![BoardEnv.txt contents](images/BoardEnv.txt.jpg)
   > [!NOTE]
   > <sub>**NOTE 1**: by setting bootlogo=false you get the Linux boot messages on the HDMI display, if you set bootlogo=true you only see them when connecting a keyboard and pressing a key.</sub><br>
-  <sub>**NOTE 2**: `fdtfile=sun50i-h616-sovol-emmc` supports both eMMC and SD cards but will, obviously, only boot from one (according to the BTT CB1 docs the SD card has priority over eMMC but there have been reports of it being the other way around; if it boots from eMMC and not the SD card please make sure the eMMC is empty or non-bootable or just remove it from the printer).</sub><br>
+  <sub>**NOTE 2**: `fdtfile=sun50i-h616-sovol-emmc` supports both eMMC and SD cards but will, obviously, only boot from one (according to the BTT CB1 docs the SD card has priority over eMMC but there have been reports of it being the other way around; if it boots from eMMC and not the SD card please check note 3 below or make sure the eMMC is empty or non-bootable or just remove it from the printer).</sub><br>
+  <sub>**NOTE 3**: When using `fdtfile=sun50i-h616-sovol-emmc` with an SD card it seems to always boot from the SD card but (seemingly randomly) either use the data partition from the eMMC or the SD card. You can check this by looking at `lsblk` and see if both `/boot` and  `/` are used from the SD card or not. Otherwise poweroff and restart and check again. You can also use `fdtfile= sun50i-h616-biqu-sd` to force the use of the SD card, but you will lose eMMC support.</sub><br>
   
 
 - Save your changed BoardEnv.txt!
