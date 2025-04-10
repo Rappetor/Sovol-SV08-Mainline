@@ -259,7 +259,7 @@ Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Ple
 > If you are using an HDMI screen, now is the time to install klipperscreen, do this BEFORE crowsnest so you dont have to reboot twice.
 
 
-5. Install Numpy (needed for input shaping)
+5. Install Numpy (needed for input shaping) _(OR new! With KIAUH v6 (alpha) instead of installing it manually as below do this and continue to 6; KIAUH main menu -> Advanced -> Extra Dependencies: -> [Input Shaper])_
 
    ```bash
    sudo apt update
