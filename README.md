@@ -253,16 +253,18 @@ Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Ple
 4. Install Klipper, Moonraker, Mainsail, and Crowsnest (in this order, _also check tip below_) via KIAUH.
 
    - So run KIAUH and choose: option **'1) [Install]'** and install those items (_using default options, download recommended macros; Yes_).
-   - Crowsnest install asks to reboot the printer, please do so.
+   - Crowsnest install asks to reboot the printer, please do so now (unless you have an HDMI screen and want to use KlipperScreen, you can install that first too before rebooting).
 
 > [!IMPORTANT]
 > At the time of **2025-04-28** there appears to be a dependency error when installing Klipper. Does your Klipper installation fail with a `[ERROR] Error installing Python requirements: Installing Python requirements failed! [ERROR] Klipper installation failed!` please follow the next steps as a workaround and continue like normal:
-> 1. Start and do the Klipper installation like normal with KIAUH (new v6 beta 2 used in this example) until it exits with the above error. Quit KIAUH.
-> 2. Edit the requirements file with: `nano ~/klipper/scripts/klippy-requirements.txt` and change `python-can==3.3.4` to **`python-can~=4.3`** (Save: CTRL-X, **Y**es)
-> 3. Start KIAUH again and (re)install Klipper (which is probably marked as 'incomplete' in the main screen by KIAUH). When asked to clone the repository and overwrite `/home/biqu/klipper` (already exists) say **No**, when asked to `Virtualenv already exists. Re-create?` say **Yes**.
-
-> [!TIP]
-> If you are using an HDMI screen, now is the time to install klipperscreen, do this BEFORE crowsnest so you dont have to reboot twice.
+> 1. Install Klipper like normal with KIAUH and let it finish with the above error.
+> 2. Quit KIAUH and run the following commands:
+> ```
+> rm -rf ~/.cache 
+> ~/klippy-env/bin/pip3 install pyserial aenum wrapt pycparser markupsafe greenlet python-can Jinja2 cffi
+> ```
+> 3. Then (re)install Klipper with KIAUH; when asked to clone the repository and overwrite choose **Yes**, when asked to `Virtualenv already exists. Re-create?` choose **No**. It should now install without errors..
+> 4. After this when installing Moonraker and you get a DEPRECATED error and incomplete Moonraker install; just re-install it again with KIAUH (overwrite everything) and it should succeed the second time.
 
 
 5. Install Numpy (needed for input shaping) _(OR new! With KIAUH v6 (alpha) instead of installing it manually as below do this and continue to 6; KIAUH main menu -> Advanced -> Extra Dependencies: -> [Input Shaper])_
