@@ -96,8 +96,7 @@ Ok, now you can continue.
 
 > [!CAUTION]
 > DO NOT USE V3.0.0 OR HIGHER. PLEASE USE V2.3.4 <br>
-> WE ARE STILL TESTING V3.0.0... <br>
-> DO NOT ASK FOR HELP IF YOU ARE USING V3.0.0
+> WE ARE STILL TESTING V3.0.0.. <br>
 
 First, download the BIGTREETECH CB1 Linux image (the original Sovol SV08 image was also based on this): [https://github.com/bigtreetech/CB1](https://github.com/bigtreetech/CB1/releases/tag/V2.3.4)
 >[!NOTE]
@@ -215,7 +214,7 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 
 
 6. Eject the USB adapter from your computer then put the eMMC (and **SD card** in case of _method 2_) back into the printer and boot it, then:
-   - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: biqu/biqu
+   - SSH into the printer (find the IP address on your router or use the configured hostname), username/password: **biqu/biqu**
    - If everything is ok your printer will boot nicely, you can SSH into the printer, and you are done with this step and ready to install mainline Klipper. You can also continue _**Method 2**, point 5, and finalize writing the system to eMMC!_
 
 > [!NOTE]
@@ -225,8 +224,33 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 
 # STEP 4 - INSTALL MAINLINE KLIPPER
 
-Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Please SSH into your printer and then do the steps below.<br>
+Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Please SSH (biqu/biqu) into your printer and then do the steps below.<br>
 <sub>Please note this needs a stable connection since it will be downloading everything.</sub>
+> [!IMPORTANT]
+> Since the CB1 image is already quite old we need to change the APT (Advanced Package Tool) *sources.list* to allow for the latest updates, please do:
+> ```bash
+> sudo nano /etc/apt/sources.list
+> ```
+> Replace the contents with the following:
+> ```
+> deb http://archive.debian.org/debian bullseye-backports main contrib non-free
+> #deb http://deb.debian.org/debian bullseye main contrib non-free
+> #deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
+> 
+> deb http://deb.debian.org/debian bullseye main contrib non-free
+> #deb-src http://deb.debian.org/debian bullseye main contrib non-free
+> 
+> deb http://deb.debian.org/debian bullseye-updates main contrib non-free
+> #deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
+>
+> deb http://archive.debian.org/debian bullseye-backports main contrib non-free
+> #deb http://deb.debian.org/debian bullseye-backports main contrib non-free
+> #deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
+> 
+> deb http://deb.debian.org/debian-security bullseye-security main contrib non-free
+> #deb-src http://deb.debian.org/debian-security bullseye-security main contrib non-free
+> ```
+> CTRL-X (`Yes, <enter>`) to save. Now continue with the steps below.
 
 1. First, we will update the OS:<br>
 
@@ -430,7 +454,7 @@ It's important to make a backup of the current (stock) firmware. This way you ca
 
 To make life easier in the future we are going to flash Katapult to our MCUs (we flash Katapult on both the mainboard MCU _and_ the toolhead MCU). This is a bootloader that makes it possible to flash Klipper firmware without the ST-Link via CANBus, USB or UART by the Host.
 
-1. Switch the printer on, SSH into the printer, and install Katapult:
+1. Switch the printer on, SSH (biqu/biqu) into the printer, and install Katapult:
 
    - Run this command to install Katapult: <br>
 
@@ -488,7 +512,7 @@ Done! The Katapult bootloader is on the MCU! Please click on 'Disconnect' and th
 
 It's time to create and flash the Klipper firmware! In the future, you only have to do this step when you need to update your Klipper firmware. _This section assumes you already have **Katapult** flashed and **pyserial** (step 7.1) installed._
 
-1. Switch on the printer and SSH into the printer.
+1. Switch on the printer and SSH (biqu/biqu) into the printer.
 
 2. Open the file printer.cfg. Look at the `[mcu]` and `[extra_mcu]` sections, and copy-paste only the section circled in red for each MCU, we will need it later:
 
