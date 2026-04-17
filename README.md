@@ -60,9 +60,10 @@ Ok, now you can continue.
   - Optionally you can also SSH or SFTP into your machine (port: 22, username/password: sovol/sovol) and backup additional .sh scripts in the /home/sovol/ folder.
   - For example use [PuTTY](https://www.putty.org/) for SSH and [WinSCP](https://winscp.net/) for SFTP (_SSH File Transfer Protocol_).
 - You WILL need the printer.cfg later in this process (for the /dev/serial/by-id/usb-Klipper*stm32f103xe* serials).
-- You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC. <sub>*(Do note it's also possible without an eMMC adapter, but this involves writing the image to the SD card and then writing from the SD card to the eMMC, see 'method 2'. But you need to know how to clear the eMMC partitions from ssh/Linux).*</sub>
+- You need either a '**Makerbase MKS EMMC-ADAPTER V2 USB 3.0**' USB adapter or '**Makerbase MKS MICROSD TO EMMC ADAPTER**' to be able to read/write the eMMC. <sub>*(Do note it's also possible without an eMMC adapter, but this involves either writing the image to the SD card and then writing from the SD card to the eMMC, see 'method 2', or connecting the mainboard via USB Type C to your computer, see 'method 4'. But you need to know how to clear the eMMC partitions from ssh/Linux).*</sub>
   - It is recommended to get yourself a separate **eMMC module** (MKS eMMC Module) on which you install the new OS Image and mainline klipper. This way you always have a backup (eMMC) of a stock/working printer.
 - If you go for the '_method 2_' you need a big enough **MicroSD card**, it's *also* possible to run everything from the SD card and not use an eMMC.
+- If you go for the '_method 4_' you will need a long enough **Right angle USB C cable**, or alternative, in order to connect the board to your computer
 - You will need an ST-Link V2 (Mini) with the **STM32CubeProgrammer** software installed to be able to update/flash the MCU firmware.
 - The files used for this guide can now be found together in the GitHub folder `/files-used/` [HERE](files-used/)
 - To edit the different files during this guide please use a text editor like [Notepad++](https://notepad-plus-plus.org/) (or use `nano` from ssh). This way we can make sure the files stay in a proper format with proper (Linux style) line endings and work as intended. *When using the default Windows Notepad this is not always the case!*
@@ -109,6 +110,8 @@ Here we can use 3 methods:
 **Method 2**: Write the CB1 image to an SD card and use that to get the CB1 image on the eMMC.
 
 _**Method 3**: Choose to run everything from the SD card and stop at Method 2.2_
+
+_**Method 4**: Write the CB1 image directly to the eMMC by connecting the mainboard to a computer via USB C cable
 
 > [!TIP]
 > Some people get an error while booting, or it doesn't want to boot at all, after writing the image with Balena Etcher. Some have had success writing the image with the `Raspberry Pi Imager` instead.
@@ -170,6 +173,40 @@ _Please continue to **STEP 3** and then come back here!_
      - Choose the option 'Boot from eMMC - system on eMMC'.
    - It will now create and format a partition (ext4) on the eMMC, and it will copy all its contents from the SD card to the eMMC.
    - When it's done power off the SV08, remove the SD card, and boot from the eMMC. If everything has gone correctly you should now boot from the eMMC and can continue with **STEP 4**.
+
+<br>
+
+## METHOD 4: WRITE IMAGE DIRECTLY TO eMMC VIA USB C CABLE
+
+1. Download the **MINIMAL** BIGTREETECH image. Careful, there's also a full image that has an unknown version of Klipper already installed. Go to: https://github.com/bigtreetech/CB1/releases/tag/V2.3.4
+   - Used in this example: [CB1_Debian11_minimal_kernel5.16_20240319.img.xz](https://github.com/bigtreetech/CB1/releases/download/V2.3.4/CB1_Debian11_minimal_kernel5.16_20240319.img.xz)
+2. Put eMMC into the mainboard
+3. Locate SW1 DIP switches on the mainboard, and move the DIP switch on the board to FEL position (ie move from 1 to ON)
+4. Connect a right angled USB C cable into the USB0 port on the mainboard
+5. Connect the other end of the USB cable into your computer
+
+> [!NOTE]
+> _Sidenote here: you can use a USB hub with a dedicated power adapter in between for added realiability_
+
+6. Use [Zadig](https://zadig.akeo.ie/) to install a universal USB driver for your mainboard :
+   - Open Zadig software<br>
+     -> Enable "List All Devices" under "Options" tab<br>
+     -> Locate your mainboard, which will likely appear as an unknown device with USB ID `1F3A EFE8`<br>
+     -> Install driver<br>
+7. Use [Sunxi-tools](https://github.com/bigtreetech/sunxi-tools) to switch the mainboard into USB device mode :
+   - Download/clone the repository, and unzip contents into sunxi-tools folder
+   - In Windows open the command prompt (Win-R -> cmd) and run `cd <path>` where path is downloaded sunxi-tools folder
+   - In command prompt, run `sunxi-fel.exe uboot u-boot-sunxi-cb1-emmc.bin` , this should switch the mainboard into USB storage mode 
+8.    _You can use this moment to back-up `/home/sovol/printer_data/config/` for later. (For example the `printer.cfg` for the `/dev/serial/by-id/usb-Klipper_stm32f103xe` serials, do you have a serial like `/dev/ttyACM1` here no worries, we will find the full serial in **Step 8**)_.
+9. Use [BalenaEtcher](https://github.com/balena-io/etcher/releases) to write the image to the eMMC
+   - Used in this example: balenaEtcher-win32-x64-1.19.21.zip (portable, so doesn't need an installer)
+   - Open Balena Etcher<br>
+     -> Choose "Flash from file", browse and choose the downloaded CB1 image<br>
+     -> Select the eMMC drive (e.g. Generic USB STORAGE DEVICE USB device)<br>
+     -> Flash! (this will erase everything on the eMMC!)
+10. After the flash is complete you can close BalenaEtcher. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB storage repeat steps 4, 5, and 7)
+
+_You can now continue to **STEP 3**_
 
 <br>
 
