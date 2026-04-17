@@ -214,7 +214,7 @@ _Please continue to **STEP 3** and then come back here!_
      -> Choose "Flash from file", browse and choose the downloaded CB1 image<br>
      -> Select the eMMC drive (e.g. Generic USB STORAGE DEVICE USB device)<br>
      -> Flash! (this will erase everything on the eMMC!)
-10. After the flash is complete you can close BalenaEtcher. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB storage repeat steps 4, 5, and 7)
+10. After the flash is complete you can close BalenaEtcher, and flip DIP switch back. If everything is alright you now see a FAT drive called 'BOOT' (if not, eject the USB storage repeat steps 4, 5, and 7)
 
 _You can now continue to **STEP 3**_
 
