@@ -183,11 +183,11 @@ _Please continue to **STEP 3** and then come back here!_
 2. Put eMMC into the mainboard
 3. Locate SW1 DIP switches on the mainboard, and move the DIP switch on the mainboard to FEL position (ie move from 1 to ON)
 
-   ![The location of the DIP switches on the board](images/notatechguy/mainboard-dip-switches-location.png)
+   ![The location of the DIP switches on the board](images/notatechguy3d/mainboard-dip-switches-location.png)
 
 4. Connect a right angled USB C cable into the USB0 port on the mainboard
 
-   ![The location of the USB0 port on board](images/notatechguy/mainboard-USB0-location.png)
+   ![The location of the USB0 port on board](images/notatechguy3d/mainboard-USB0-location.png)
 
 5. Connect the other end of the USB cable into your computer
 
@@ -197,10 +197,10 @@ _Please continue to **STEP 3** and then come back here!_
 6. Use [Zadig](https://zadig.akeo.ie/) to install a universal USB driver for your mainboard :
    - Open Zadig software<br>
      -> Enable "List All Devices" under "Options" tab<br>
-     [!List All Devices](images/notatechguy/zadig-list-all-devices.png)
+     ![List All Devices](images/notatechguy3d/zadig-list-all-devices.png)
 
      -> Locate your mainboard, which will likely appear as an unknown device with USB ID `1F3A EFE8`<br>
-     [!Locate Mainboard](images/notatechguy/zadig-find-your-mainboard.png)
+     ![Locate Mainboard](images/notatechguy3d/zadig-find-your-mainboard.png)
      
      -> Install driver<br>
 7. Use [Sunxi-tools](https://github.com/bigtreetech/sunxi-tools) to switch the mainboard into USB device mode :
