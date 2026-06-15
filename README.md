@@ -388,15 +388,11 @@ Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Ple
 
 # STEP 5 - CONFIGURE PRINTER/KLIPPER & ADDONS
 
-Next, we have to configure our printer and put back some addons Sovol has added (probe_pressure and z_offset_calibration) and get the basics working. 
+Next, we have to configure our printer to get the basics working. Native automated Z-offset calibration is achieved entirely using stock Klipper configuration and macros without needing any custom Python scripts (addons) on the printer.
 
-Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub folder. Some items (like the 'z_offset_calibration' script) have been fixed to work with the newest version of Klipper and other items in the printer.cfg have been changed/improved e.g. for a more silent and cooler (motor) running printer.
+Please use the config files provided [HERE](files-used/config/) in the `/files-used/config/` GitHub folder. Some items (like the printer.cfg) have been changed/improved e.g. for a more silent and cooler (motor) running printer.
 
-1. RESTORE THE SOVOL ADDONS _(from the `/files-used/sovol-addons/` github directory)_ [HERE](files-used/sovol-addons/):<br>
-    - Use an SFTP program (like WinSCP) to connect to the printer (IP address or hostname, port: 22, username/password: biqu/biqu)
-    - Put the files `'probe_pressure.py'` and `'z_offset_calibration.py'` into the `'~/klipper/klippy/extras/'` folder.<br>
-
-2. GRAB BASE PRINTER CONFIGURATION _(from the `/files-used/config/` github directory)_ [HERE](files-used/config/):<br>
+1. GRAB BASE PRINTER CONFIGURATION _(from the `/files-used/config/` github directory)_ [HERE](files-used/config/):<br>
 
    - Copy the entire config folder to the printer `~/printer_data/config` folder.<br>
 
@@ -411,9 +407,9 @@ Please use the files provided [HERE](files-used/) in the `/files-used/` GitHub f
    - **OPTIONAL**: Open your backup of your printer.cfg and copy the correct serials under [mcu] and [mcu extra_mcu] (**only** when your serial looks like `/dev/serial/by-id/usb-Klipper_stm32f103xe_xxxx`) to your new printer.cfg, this might save you some time later..<br>
    _Do your serials look like `/dev/serial/by-id/ttyACM0` or `/dev/serial/by-id/ttyACM1` then you can also skip this, we will find the correct full serials in **STEP 8**_.
 
-3. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
+2. Do a firmware_restart (or reboot the whole printer) and you should have a working SV08.
 
-4. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc., does a QGL with home Z, and can do a Z_OFFSET_CALIBRATION before each print.
+3. Update the slicer start g-code. The START_PRINT macro has been updated/improved: uses your actual bed temperature for meshing etc., does a QGL with home Z, and can do a CALIBRATE_Z_OFFSET before each print.
 
    - Go to OrcaSlicer/PrusaSlicer and edit the printer settings :<br>
      -> Machine G-code<br>
