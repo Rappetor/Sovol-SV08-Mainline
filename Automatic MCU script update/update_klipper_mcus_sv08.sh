@@ -40,6 +40,23 @@ start_klipper(){
 	sudo service klipper start
 }
 
+# Waits for a katapult by-id symlink to appear (the board can take longer than a fixed
+# sleep to re-enumerate after enter_bootloader()) and prints its resolved real device path.
+# readlink -f on a not-yet-existing path just echoes the input back unresolved, so calling
+# it too early silently defeats the by-id-symlink workaround below.
+wait_for_katapult_dev(){
+	local by_id="$1"
+	local waited=0
+	while [ ! -e "$by_id" ] && [ "$waited" -lt 20 ]; do
+		sleep 0.5
+		waited=$((waited + 1))
+	done
+	if [ ! -e "$by_id" ]; then
+		echo -e "${RED}Timed out waiting for ${by_id} to appear.${NC}" >&2
+	fi
+	readlink -f "$by_id"
+}
+
 flash_host(){
 	cd "$HOME/klipper"
 	echo -e "${YELLOW}Cleaning and building Klipper firmware for HOST MCU.${NC}"
@@ -51,11 +68,10 @@ flash_host(){
 	read -p "${CYAN}Host MCU firmware building complete. Press [Enter] to flash..${NC}"
 	echo -e "${YELLOW}Flashing Klipper to HOST MCU.${NC}"
 	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$HOSTSERIAL'")'
-	sleep 3
 	# katapult's flashtool.py validate_device() can spuriously fail ("No Serial Device found")
 	# against the by-id symlink path even though it exists; resolve to the real /dev/ttyACMx
 	# device node first to avoid it.
-	HOST_REAL_DEV=$(readlink -f /dev/serial/by-id/usb-katapult_stm32f103xe_$HOSTSERIAL)
+	HOST_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_stm32f103xe_$HOSTSERIAL)
 	~/katapult/scripts/flashtool.py -f ~/klipper/host_mcu_klipper.bin -d "$HOST_REAL_DEV"
 	read -p "${CYAN}HOST MCU flashed. Check for errors and press [Enter] to continue..${NC}"
 }
@@ -75,10 +91,9 @@ flash_toolhead(){
 	do
 		read -p "${CYAN}Going to flash Klipper on: ${serial}. Press [Enter] to continue..${NC}"
 		cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$serial'")'
-		sleep 3
 		# see comment in flash_host() - resolve the by-id symlink to avoid flashtool.py's
 		# validate_device() spuriously failing with "No Serial Device found".
-		TOOLHEAD_REAL_DEV=$(readlink -f /dev/serial/by-id/usb-katapult_stm32f103xe_$serial)
+		TOOLHEAD_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_stm32f103xe_$serial)
 		~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d "$TOOLHEAD_REAL_DEV"
 		echo -e "${CYAN}Flashing Klipper on ${serial} complete.${NC}"
 	done
@@ -96,10 +111,9 @@ flash_eddy(){
 	read -p "${CYAN}Eddy MCU firmware building complete. Press [Enter] to flash..${NC}"
 	echo -e "${YELLOW}Flashing Klipper to BTT EDDY MCU.${NC}"
 	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_rp2040_'$EDDYSERIAL'")'
-	sleep 3
 	# see comment in flash_host() - resolve the by-id symlink to avoid flashtool.py's
 	# validate_device() spuriously failing with "No Serial Device found".
-	EDDY_REAL_DEV=$(readlink -f /dev/serial/by-id/usb-katapult_rp2040_$EDDYSERIAL)
+	EDDY_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_rp2040_$EDDYSERIAL)
 	~/katapult/scripts/flashtool.py -f ~/klipper/eddy_mcu_klipper.bin -d "$EDDY_REAL_DEV"
 	read -p "${CYAN}BTT EDDY MCU flashed. Check for errors and press [Enter] to continue..${NC}"
 }
