@@ -52,7 +52,11 @@ flash_host(){
 	echo -e "${YELLOW}Flashing Klipper to HOST MCU.${NC}"
 	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$HOSTSERIAL'")'
 	sleep 3
-	~/katapult/scripts/flashtool.py -f ~/klipper/host_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_stm32f103xe_$HOSTSERIAL
+	# katapult's flashtool.py validate_device() can spuriously fail ("No Serial Device found")
+	# against the by-id symlink path even though it exists; resolve to the real /dev/ttyACMx
+	# device node first to avoid it.
+	HOST_REAL_DEV=$(readlink -f /dev/serial/by-id/usb-katapult_stm32f103xe_$HOSTSERIAL)
+	~/katapult/scripts/flashtool.py -f ~/klipper/host_mcu_klipper.bin -d "$HOST_REAL_DEV"
 	read -p "${CYAN}HOST MCU flashed. Check for errors and press [Enter] to continue..${NC}"
 }
 
@@ -72,7 +76,10 @@ flash_toolhead(){
 		read -p "${CYAN}Going to flash Klipper on: ${serial}. Press [Enter] to continue..${NC}"
 		cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$serial'")'
 		sleep 3
-		~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_stm32f103xe_$serial
+		# see comment in flash_host() - resolve the by-id symlink to avoid flashtool.py's
+		# validate_device() spuriously failing with "No Serial Device found".
+		TOOLHEAD_REAL_DEV=$(readlink -f /dev/serial/by-id/usb-katapult_stm32f103xe_$serial)
+		~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d "$TOOLHEAD_REAL_DEV"
 		echo -e "${CYAN}Flashing Klipper on ${serial} complete.${NC}"
 	done
 	read -p "${CYAN}TOOLHEAD MCU(S) flashed. Check for errors and press [Enter] to continue..${NC}"
@@ -90,7 +97,10 @@ flash_eddy(){
 	echo -e "${YELLOW}Flashing Klipper to BTT EDDY MCU.${NC}"
 	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_rp2040_'$EDDYSERIAL'")'
 	sleep 3
-	~/katapult/scripts/flashtool.py -f ~/klipper/eddy_mcu_klipper.bin -d /dev/serial/by-id/usb-katapult_rp2040_$EDDYSERIAL
+	# see comment in flash_host() - resolve the by-id symlink to avoid flashtool.py's
+	# validate_device() spuriously failing with "No Serial Device found".
+	EDDY_REAL_DEV=$(readlink -f /dev/serial/by-id/usb-katapult_rp2040_$EDDYSERIAL)
+	~/katapult/scripts/flashtool.py -f ~/klipper/eddy_mcu_klipper.bin -d "$EDDY_REAL_DEV"
 	read -p "${CYAN}BTT EDDY MCU flashed. Check for errors and press [Enter] to continue..${NC}"
 }
 
