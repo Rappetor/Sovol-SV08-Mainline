@@ -67,11 +67,13 @@ flash_host(){
 	mv ~/klipper/out/klipper.bin host_mcu_klipper.bin
 	read -p "${CYAN}Host MCU firmware building complete. Press [Enter] to flash..${NC}"
 	echo -e "${YELLOW}Flashing Klipper to HOST MCU.${NC}"
-	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$HOSTSERIAL'")'
+	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$HOSTSERIAL'-if00")'
 	# katapult's flashtool.py validate_device() can spuriously fail ("No Serial Device found")
 	# against the by-id symlink path even though it exists; resolve to the real /dev/ttyACMx
 	# device node first to avoid it.
-	HOST_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_stm32f103xe_$HOSTSERIAL)
+	# NOTE: udev names these with a "-if00" interface suffix - without it the path never exists, so
+	# enter_bootloader()'s open() silently fails (it swallows IOError/OSError) and no DTR touch is sent.
+	HOST_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_stm32f103xe_$HOSTSERIAL-if00)
 	~/katapult/scripts/flashtool.py -f ~/klipper/host_mcu_klipper.bin -d "$HOST_REAL_DEV"
 	read -p "${CYAN}HOST MCU flashed. Check for errors and press [Enter] to continue..${NC}"
 }
@@ -90,10 +92,11 @@ flash_toolhead(){
 	for serial in ${TOOLHEADSERIALS[@]}
 	do
 		read -p "${CYAN}Going to flash Klipper on: ${serial}. Press [Enter] to continue..${NC}"
-		cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$serial'")'
+		cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_stm32f103xe_'$serial'-if00")'
 		# see comment in flash_host() - resolve the by-id symlink to avoid flashtool.py's
-		# validate_device() spuriously failing with "No Serial Device found".
-		TOOLHEAD_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_stm32f103xe_$serial)
+		# validate_device() spuriously failing with "No Serial Device found", and the -if00
+		# interface suffix without which the path never exists.
+		TOOLHEAD_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_stm32f103xe_$serial-if00)
 		~/katapult/scripts/flashtool.py -f ~/klipper/toolhead_mcu_klipper.bin -d "$TOOLHEAD_REAL_DEV"
 		echo -e "${CYAN}Flashing Klipper on ${serial} complete.${NC}"
 	done
@@ -110,10 +113,11 @@ flash_eddy(){
 	mv ~/klipper/out/klipper.bin eddy_mcu_klipper.bin
 	read -p "${CYAN}Eddy MCU firmware building complete. Press [Enter] to flash..${NC}"
 	echo -e "${YELLOW}Flashing Klipper to BTT EDDY MCU.${NC}"
-	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_rp2040_'$EDDYSERIAL'")'
+	cd ~/klipper/scripts/ && python3 -c 'import flash_usb as u; u.enter_bootloader("/dev/serial/by-id/usb-Klipper_rp2040_'$EDDYSERIAL'-if00")'
 	# see comment in flash_host() - resolve the by-id symlink to avoid flashtool.py's
-	# validate_device() spuriously failing with "No Serial Device found".
-	EDDY_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_rp2040_$EDDYSERIAL)
+	# validate_device() spuriously failing with "No Serial Device found", and the -if00
+	# interface suffix without which the path never exists.
+	EDDY_REAL_DEV=$(wait_for_katapult_dev /dev/serial/by-id/usb-katapult_rp2040_$EDDYSERIAL-if00)
 	~/katapult/scripts/flashtool.py -f ~/klipper/eddy_mcu_klipper.bin -d "$EDDY_REAL_DEV"
 	read -p "${CYAN}BTT EDDY MCU flashed. Check for errors and press [Enter] to continue..${NC}"
 }
