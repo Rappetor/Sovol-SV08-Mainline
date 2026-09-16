@@ -274,28 +274,16 @@ To make the CB1 image setup correctly we need to copy a file and make a few chan
 Time for the fun stuff! Now we shall install KIAUH, Klipper, Moonraker, etc. Please SSH (biqu/biqu) into your printer and then do the steps below.<br>
 <sub>Please note this needs a stable connection since it will be downloading everything.</sub>
 > [!IMPORTANT]
-> Since the CB1 image is already quite old we need to change the APT (Advanced Package Tool) *sources.list* to allow for the latest updates, please do:
+> Debian 11 (bullseye) is end-of-life, so the stock CB1 APT mirrors no longer work. Replace `/etc/apt/sources.list` with the archived Debian mirrors below before continuing:
 > ```bash
 > sudo nano /etc/apt/sources.list
 > ```
 > Replace the contents with the following:
 > ```
-> deb http://archive.debian.org/debian bullseye-backports main contrib non-free
-> #deb http://deb.debian.org/debian bullseye main contrib non-free
-> #deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
-> 
-> deb http://deb.debian.org/debian bullseye main contrib non-free
-> #deb-src http://deb.debian.org/debian bullseye main contrib non-free
-> 
-> deb http://deb.debian.org/debian bullseye-updates main contrib non-free
-> #deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
->
-> deb http://archive.debian.org/debian bullseye-backports main contrib non-free
-> #deb http://deb.debian.org/debian bullseye-backports main contrib non-free
-> #deb-src http://deb.debian.org/debian bullseye-backports main contrib non-free
-> 
-> deb http://deb.debian.org/debian-security bullseye-security main contrib non-free
-> #deb-src http://deb.debian.org/debian-security bullseye-security main contrib non-free
+> deb [check-valid-until=no] http://archive.debian.org/debian bullseye main contrib non-free
+> deb [check-valid-until=no] http://archive.debian.org/debian bullseye-updates main contrib non-free
+> deb [check-valid-until=no] http://archive.debian.org/debian bullseye-backports main contrib non-free
+> deb [check-valid-until=no] http://archive.debian.org/debian-security bullseye-security main contrib non-free
 > ```
 > CTRL-X (`Yes, <enter>`) to save. Now continue with the steps below.
 
